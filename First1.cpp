@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 typedef unsigned long long int ll;
 using namespace std;
-//Pass by value
+//Pass by reference
 void dosomething(string s){
  s[0]='k';
  cout<<s<<endl;
