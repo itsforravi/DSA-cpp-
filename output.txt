@@ -1,2 +1,2 @@
-kavi
-Ravi
+Out side of the main=>> 65
+Print inside main function=>> 65
