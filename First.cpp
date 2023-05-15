@@ -1,12 +1,13 @@
 #include<bits/stdc++.h>
 typedef unsigned long long int ll;
 using namespace std;
-
-int max(int num1,int num2){
-  if(num1>=num2){
-    return num1;
-  }
-  // else return num2;
+//Pass by value
+void dosomething(int num){
+  cout<<num<<endl;
+  num+=5;
+cout<<num<<endl;
+num+=5;
+cout<<num<<endl;
 }
 
 int main(){
@@ -16,13 +17,8 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-   int num1,num2;
-   cin>>num1>>num2;
-   int minimum=max(num1,num2);
-
-
-   cout<< minimum;
-
+ int num=10;
+ dosomething(num);
  return 0;
 
 }
