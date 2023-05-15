@@ -2,12 +2,9 @@
 typedef unsigned long long int ll;
 using namespace std;
 //Pass by value
-void dosomething(int num){
-  cout<<num<<endl;
-  num+=5;
-cout<<num<<endl;
-num+=5;
-cout<<num<<endl;
+void dosomething(string s){
+ s[0]='k';
+ cout<<s<<endl;
 }
 
 int main(){
@@ -17,8 +14,9 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
- int num=10;
- dosomething(num);
+ string s="Ravi";
+ dosomething(s);
+ cout<<s<<endl;
  return 0;
 
 }
