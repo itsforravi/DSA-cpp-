@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "ostream": "cpp",
         "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -58,7 +59,6 @@
         "limits": "cpp",
         "mutex": "cpp",
         "new": "cpp",
-        "ostream": "cpp",
         "scoped_allocator": "cpp",
         "shared_mutex": "cpp",
         "sstream": "cpp",

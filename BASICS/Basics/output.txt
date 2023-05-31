@@ -1,0 +1,2 @@
+Out side of the main=>> 10
+Print inside main function=>> 10
