@@ -1,2 +1,4 @@
 Before Sorting array
-9 3 4 8 5 7 2 9 10 1330531660 -1374092352 
+9 3 4 8 5 7 2 9 10 
+After  Sorting Array
+2 3 4 5 7 8 9 9 10 
