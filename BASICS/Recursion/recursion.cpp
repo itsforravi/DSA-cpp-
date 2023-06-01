@@ -217,6 +217,35 @@ vector<int> quicksort(vector<int> arr){
     return arr;
 }
 
+// Combination Sum – 1
+class Solution {
+ public:
+    void findCombination(int ind, int target, vector < int > & arr, vector < vector < int >> & ans, vector < int > & ds) {
+      if (ind == arr.size()) {
+        if (target == 0) {
+          ans.push_back(ds);
+        }
+        return;
+      }
+      // pick up the element 
+      if (arr[ind] <= target) {
+        ds.push_back(arr[ind]);
+        findCombination(ind, target - arr[ind], arr, ans, ds);
+        ds.pop_back();
+      }
+
+      findCombination(ind + 1, target, arr, ans, ds);
+
+    }
+  public:
+    vector < vector < int >> combinationSum(vector < int > & candidates, int target) {
+      vector < vector < int >> ans;
+      vector < int > ds;
+      findCombination(0, target, candidates, ans, ds);
+      return ans;
+    }
+};
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -307,19 +336,33 @@ int main(){
 // }
 
 // Quick Sort
-    vector<int> arr={9,3,4,8,5,7,2,9,10};
-    int n=arr.size();
-    cout<<"Before Sorting array"<<endl;
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-       arr=quicksort(arr);
-cout<<"After  Sorting Array"<<endl;
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<"\n";
+//     vector<int> arr={9,3,4,8,5,7,2,9,10};
+//     int n=arr.size();
+//     cout<<"Before Sorting array"<<endl;
+//     for(int i=0;i<n;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<endl;
+//        arr=quicksort(arr);
+// cout<<"After  Sorting Array"<<endl;
+//     for(int i=0;i<n;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     cout<<"\n";
        
-    return 0;
+//     return 0;
+
+
+// Combination Sum – 1
+  Solution obj;
+  vector < int > v {2,3,6,7};
+  int target = 7;
+
+  vector < vector < int >> ans = obj.combinationSum(v, target);
+  cout << "Combinations are: " << endl;
+  for (int i = 0; i < ans.size(); i++) {
+    for (int j = 0; j < ans[i].size(); j++)
+      cout << ans[i][j] << " ";
+    cout << endl;
+  }
 }
