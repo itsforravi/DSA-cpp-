@@ -1,4 +1,6 @@
 Before selection sort: 
-14 9 15 12 6 8 13 
+3 2 1 5 2 
 After selection sort: 
-6 8 9 12 13 14 15 
+1 2 2 3 5 
+After sort the largest element : 
+5

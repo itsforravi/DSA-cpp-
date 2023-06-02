@@ -414,7 +414,7 @@ int main(){
 
 // Selection_Sort
 
- int arr[] = {14,9,15,12,6,8,13};
+ int arr[] = {3,2,1,5,2};
   int n = sizeof(arr) / sizeof(arr[0]);
  cout << "Before selection sort: " << "\n";
    for (int i = 0; i < n; i++) {
@@ -428,6 +428,9 @@ int main(){
   for (int i = 0; i < n; i++) {
     cout << arr[i] << " ";
   }
+  cout<< endl;
+   cout << "After sort the largest element : " << endl;
+  cout<<arr[n-1];
   cout << endl;
 return 0;
 }
