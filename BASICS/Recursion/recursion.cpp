@@ -397,7 +397,7 @@ int main(){
 
 // Selection_Sort
 
- int arr[] = {13,46,24,52,20,3};
+ int arr[] = {32,31,3,2,43,65,75,34,56,44};
   int n = sizeof(arr) / sizeof(arr[0]);
  cout << "Before selection sort: " << "\n";
    for (int i = 0; i < n; i++) {

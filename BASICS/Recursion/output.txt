@@ -1,4 +1,4 @@
 Before selection sort: 
-13 46 24 52 20 3 
+32 31 3 2 43 65 75 34 56 44 
 After selection sort: 
-3 13 20 24 46 52 
+2 3 31 32 34 43 44 56 65 75 
