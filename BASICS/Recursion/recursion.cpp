@@ -147,44 +147,44 @@ using namespace std;
 // }
 
 // // Merge Sorting
-// void Merge(vector<int> &arr,int low ,int mid,int high){
-//     vector<int> temp;
-//     int left=low;
-//     int right=mid+1;
-//     while (left<=mid && right <=high)
-//     {
-//         if(arr[left]<=arr[right]){
-//             temp.push_back(arr[left]);
-//             left++;
-//         }
-//         else{
-//             temp.push_back(arr[right]);
-//             right++;
-//         }
-//     }
-//     while(left<=mid){
-//        temp.push_back(arr[left]);
-//             left++; 
-//     }
-//     while (right<=high)
-//     {
-//      temp.push_back(arr[right]);
-//             right++;   
-//     }
-//     for(int i=low;i<=high;i++){
-//         arr[i]=temp[i-low];
-//     }
+void Merge(vector<int> &arr,int low ,int mid,int high){
+    vector<int> temp;
+    int left=low;
+    int right=mid+1;
+    while (left<=mid && right <=high)
+    {
+        if(arr[left]<=arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    while(left<=mid){
+       temp.push_back(arr[left]);
+            left++; 
+    }
+    while (right<=high)
+    {
+     temp.push_back(arr[right]);
+            right++;   
+    }
+    for(int i=low;i<=high;i++){
+        arr[i]=temp[i-low];
+    }
     
     
-// }
+}
 
-// void MergeSort(vector<int> &arr,int low,int high){
-//     if(low>=high) return;
-//     int mid=(low+high)/2;
-//     MergeSort(arr,low,mid);
-//     MergeSort(arr,mid+1,high);
-//     Merge(arr,low,mid,high);
-// }
+void MergeSort(vector<int> &arr,int low,int high){
+    if(low>=high) return;
+    int mid=(low+high)/2;
+    MergeSort(arr,low,mid);
+    MergeSort(arr,mid+1,high);
+    Merge(arr,low,mid,high);
+}
 
 int fs(vector<int> &arr,int low,int high){
     int pivot=arr[low];
@@ -245,6 +245,22 @@ class Solution {
       return ans;
     }
 };
+
+// Selection Sort
+
+void Selection_Sort(int arr[], int n) {
+  // selection sort
+  for (int i = 0; i <= n - 2; i++) {
+    int mini = i;
+    for (int j = i; j <= n-1; j++) {
+      if (arr[j] < arr[mini]) {
+        mini = j;
+      }
+    }
+    int temp = arr[mini];
+    arr[mini] = arr[i];
+    arr[i] = temp;
+  }}
 
 
 int main(){
@@ -318,14 +334,15 @@ int main(){
 
 
 //     // MergeSort Algorithm
-//     vector<int> arr={9,3,4,8,5,7,2,9,10};
-//     int n=11;
+  
+//      vector<int> arr={9,3,4,8,5,7,2,9,10};
+//       int n=arr.size();
 //     cout<<"Before Sorting array"<<endl;
 //     for(int i=0;i<n;i++){
 //         cout<<arr[i]<<" ";
 //     }
 //     cout<<endl;
-//        MergeSort(arr,0,n-1);
+//       arr=MergeSort(arr,0,n-1);
 // cout<<"After  Sorting Array"<<endl;
 //     for(int i=0;i<n;i++){
 //         cout<<arr[i]<<" ";
@@ -354,15 +371,33 @@ int main(){
 
 
 // Combination Sum – 1
-  Solution obj;
-  vector < int > v {2,3,6,7};
-  int target = 7;
+  // Solution obj;
+  // vector < int > v {2,3,6,7};
+  // int target = 7;
 
-  vector < vector < int >> ans = obj.combinationSum(v, target);
-  cout << "Combinations are: " << endl;
-  for (int i = 0; i < ans.size(); i++) {
-    for (int j = 0; j < ans[i].size(); j++)
-      cout << ans[i][j] << " ";
-    cout << endl;
+  // vector < vector < int >> ans = obj.combinationSum(v, target);
+  // cout << "Combinations are: " << endl;
+  // for (int i = 0; i < ans.size(); i++) {
+  //   for (int j = 0; j < ans[i].size(); j++)
+  //     cout << ans[i][j] << " ";
+  //   cout << endl;
+  // }
+
+
+// Selection_Sort
+
+ int arr[] = {13,46,24,52,20,9};
+  int n = sizeof(arr) / sizeof(arr[0]);
+ cout << "Before selection sort: " << "\n";
+   for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
   }
+  cout << endl;
+  Selection_Sort(arr, n);
+    cout << "After selection sort: " << endl;
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+return 0;
 }
