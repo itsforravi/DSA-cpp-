@@ -264,16 +264,20 @@ void Selection_Sort(int arr[], int n) {
 //Buble Sort
 void bubble_sort(int arr[], int n){
   for (int i = n-1 ; i >= 0; i-- ){
+    int didswap=0;
      for ( int j = 0 ; j<= i-1 ; j++){
       if (arr[j] > arr[j+1]){
         int temp = arr[j+1];
         arr[j+1] = arr[j];
         arr[j] = temp;
+        didswap=1;
       }
      }
+     if(didswap==0)
+     break;
   }
+  cout<< "runs\n";
 }
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -397,7 +401,7 @@ int main(){
 
 // Selection_Sort
 
- int arr[] = {32,31,3,2,43,65,75,34,56,44};
+ int arr[] = {9,8,7,6,5,4,3,2,1};
   int n = sizeof(arr) / sizeof(arr[0]);
  cout << "Before selection sort: " << "\n";
    for (int i = 0; i < n; i++) {
