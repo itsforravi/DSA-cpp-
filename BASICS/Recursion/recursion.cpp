@@ -278,6 +278,19 @@ void bubble_sort(int arr[], int n){
   }
   cout<< "runs\n";
 }
+
+// Insertion Sort
+void insertion_sort(int arr[], int n){
+  for ( int i=0 ; i<=n-1; i++){
+    int j=i;
+    while(j>0 && arr[j-1]> arr[j]){
+      int temp=arr[j-1];
+      arr[j-1] = arr[j];
+      arr[j] = temp;
+      j--;
+    }
+  }
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -401,7 +414,7 @@ int main(){
 
 // Selection_Sort
 
- int arr[] = {9,8,7,6,5,4,3,2,1};
+ int arr[] = {14,9,15,12,6,8,13};
   int n = sizeof(arr) / sizeof(arr[0]);
  cout << "Before selection sort: " << "\n";
    for (int i = 0; i < n; i++) {
@@ -409,7 +422,8 @@ int main(){
   }
   cout << endl;
   // Selection_Sort(arr, n);
-  bubble_sort(arr,n);
+  // bubble_sort(arr,n);
+  insertion_sort(arr,n);
     cout << "After selection sort: " << endl;
   for (int i = 0; i < n; i++) {
     cout << arr[i] << " ";
