@@ -13,6 +13,62 @@ int largestElement(vector<int> &arr, int n) {
    return largest;
 }
 
+// Second Smallest and Second Largest Element in an array
+int secondlargest(vector<int> &a, int n){
+    int largest = a[0];
+     int slargest = -1;
+    for(int i=1 ; i < n ; i++){
+        if(a[i] > largest){
+            slargest = largest;
+            largest = a[i];
+        }
+        else if(a[i] < largest && a[i] > slargest){
+            slargest = a[i];
+            
+        }
+
+    }
+    return slargest;
+}
+int secondsmallest(vector <int> &a,int n){
+     int smallest = a[0];
+     int ssmallest = INT_MAX;
+     for(int i = 1 ;i < n ; i++){
+         if(a[i] < smallest){
+             ssmallest = smallest;
+             smallest = a[i];
+         }
+         else if(a[i] != smallest && a[i] < ssmallest){
+             ssmallest = a[i];
+         }
+     }
+     return ssmallest;
+ }
+
+
+//  Sorted Element
+int  sort1(int arr[],int n ){
+    for(int i= 1; i<n; i++){
+     if(arr[i] >= arr[i-1]){
+
+     }
+     else return false;
+    }
+    return true;
+    
+}
+
+// Remove Duplicates in-place from Sorted Array
+int removeDuplicates(int arr[], int n) {
+	int i=0;
+	for(int j=1;j<n; j++){
+		if(arr[j]!=arr[i]){
+			arr[i+1]=arr[j];
+			i++;
+		}
+	}
+	return (i+1);
+}
 
 
 int main(){
@@ -23,10 +79,35 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
     // Largest Element 
-    vector<int> arr={3,2,4,52,67,17};
-    int n=6;
-    int max=largestElement(arr,n);
-    cout<<"Largest element in the arr " <<max<<" ";
+   //  vector<int> arr={3,2,4,52,67,17};
+   //  int n=6;
+   //  int max=largestElement(arr,n);
+   //  cout<<"Largest element in the arr " <<max<<" ";
+//   vector <int> arr={2,3,1,4,5,6,7};
+//    int n=sizeof(arr)/sizeof(arr[0]);
+//    int sS=secondsmallest(arr,n);
+//    int sL=secondlargest(arr,n);
+//    cout<< sS<<"";
+//    cout<<endl;
+//    cout<< sL<<"";
+//    cout<<endl;
+
+//  Sorted Element
+//   int arr1[] = {1, 2, 3, 4 ,66,5};
+//  int n1=sizeof(arr1)/sizeof(arr1[0]);
+//     int k= sort1(arr1,n1);
+// //   printf("%s",sort(arr, n) ? "True" : "False");
+// cout<<k<<" ";
+
+// // Remove Duplicates in-place from Sorted Array
+int arr1[] = {1,1,2,2,2,3,3,4,4,4,5,5};
+ int n1=sizeof(arr1)/sizeof(arr1[0]);
+    int k=removeDuplicates(arr1,n1);
+   for(int i=0;i<k;i++){
+    cout<< arr1[i]<<" ";
+   }
+   cout<<endl;
+cout<<" Number of element that is after remove dublicate "<<k<<" ";
 
     return 0;
 }

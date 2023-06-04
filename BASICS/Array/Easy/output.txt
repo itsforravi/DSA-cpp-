@@ -1,1 +1,2 @@
-Largest element in the arr 67 
+1 2 3 4 5 
+ Number of element that is after remove dublicate 5 
