@@ -1,1 +1,4 @@
+Before Left Rotation 
+3 4 2 5 6 1 7 
+Before Left Rotation 
 5 6 1 7 3 4 2 
