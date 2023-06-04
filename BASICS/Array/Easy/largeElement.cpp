@@ -105,7 +105,24 @@ void leftd(int arr[], int n, int d){
   reverse(arr,arr+n);
 
 }
-
+void zero(int a[],int n)
+{
+    int j=-1;
+for(int i=0;i<n;i++){
+    if(a[i]==0){
+        j=i;
+        break;
+    }
+}
+// if(j==-1) return a;
+for(int i=j+1;i<n;i++){
+    if(a[i]!=0){
+        swap(a[i],a[j]);
+        j++;
+    }
+}
+// return a;
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -154,9 +171,26 @@ int main(){
 //  }
 
 // Rotate array by K elements
-int n=7;
-int arr[]={3,4,2,5,6,1,7};
-int d=3;
+// int n=7;
+// int arr[]={3,4,2,5,6,1,7};
+// int d=3;
+
+// cout<<"Before Left Rotation " << endl;
+// for(int i=0;i<n;i++){
+//     cout<<arr[i]<< " ";
+// }
+// cout<<endl;
+
+//   leftd(arr,n,d);
+//   cout<<"Before Left Rotation " << endl;
+//   for(int i=0;i<n;i++){
+//       cout<<arr[i]<<" ";
+//   }
+
+
+
+int arr[]={1,2,0,0,3,4,0,2,3,22,0,-1};
+int n=sizeof(arr)/sizeof(arr[0]);
 
 cout<<"Before Left Rotation " << endl;
 for(int i=0;i<n;i++){
@@ -164,11 +198,13 @@ for(int i=0;i<n;i++){
 }
 cout<<endl;
 
-  leftd(arr,n,d);
+  zero(arr,n);
   cout<<"Before Left Rotation " << endl;
   for(int i=0;i<n;i++){
       cout<<arr[i]<<" ";
   }
+
+
 
 
     return 0;
