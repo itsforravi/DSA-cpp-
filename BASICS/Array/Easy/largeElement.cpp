@@ -80,7 +80,20 @@ void leftRotation(int arr[],int n){
     // return arr;
 }
 
-
+// Rotate array by K elements
+void leftd(int arr[], int n, int d){
+    d=d%n;
+    int temp[d];
+    for(int i=0;i<d;i++){
+        temp[i]=arr[i];
+    }
+    for(int i=d;i<n;i++){
+        arr[i-d]=arr[i];
+    }
+    for(int i=n-d;i<n;i++){
+        arr[i]=temp[i-(n-d)];
+    }
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -122,12 +135,22 @@ int main(){
 
 
 // Left Rotate the Array by One
- int arr1[] = {1,2,3,4,5,6};
- int n1=sizeof(arr1)/sizeof(arr1[0]);
- leftRotation(arr1,n1);
- for(int i=0;i<n1;i++){
-  cout<<arr1[i]<<" ";
- }
+//  int arr1[] = {1,2,3,4,5,6};
+//  int n1=sizeof(arr1)/sizeof(arr1[0]);
+//  leftRotation(arr1,n1);
+//  for(int i=0;i<n1;i++){
+//   cout<<arr1[i]<<" ";
+//  }
+
+// Rotate array by K elements
+int n=7;
+int arr[]={3,4,2,5,6,1,7};
+int d=3;
+  leftd(arr,n,d);
+  for(int i=0;i<n;i++){
+      cout<<arr[i]<<" ";
+  }
+
 
     return 0;
 }
