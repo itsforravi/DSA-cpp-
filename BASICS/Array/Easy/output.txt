@@ -1,2 +1,1 @@
-1 2 3 4 5 
- Number of element that is after remove dublicate 5 
+2 3 4 5 6 1 

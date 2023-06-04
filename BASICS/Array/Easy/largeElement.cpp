@@ -70,6 +70,17 @@ int removeDuplicates(int arr[], int n) {
 	return (i+1);
 }
 
+// Left Rotate the Array by One
+void leftRotation(int arr[],int n){
+     int temp=arr[0];
+    for(int i=1;i<n ;i++){
+        arr[i-1]=arr[i];
+    }
+    arr[n-1]=temp;
+    // return arr;
+}
+
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -100,14 +111,23 @@ int main(){
 // cout<<k<<" ";
 
 // // Remove Duplicates in-place from Sorted Array
-int arr1[] = {1,1,2,2,2,3,3,4,4,4,5,5};
+// int arr1[] = {1,1,2,2,2,3,3,4,4,4,5,5};
+//  int n1=sizeof(arr1)/sizeof(arr1[0]);
+//     int k=removeDuplicates(arr1,n1);
+//    for(int i=0;i<k;i++){
+//     cout<< arr1[i]<<" ";
+//    }
+//    cout<<endl;
+// cout<<" Number of element that is after remove dublicate "<<k<<" ";
+
+
+// Left Rotate the Array by One
+ int arr1[] = {1,2,3,4,5,6};
  int n1=sizeof(arr1)/sizeof(arr1[0]);
-    int k=removeDuplicates(arr1,n1);
-   for(int i=0;i<k;i++){
-    cout<< arr1[i]<<" ";
-   }
-   cout<<endl;
-cout<<" Number of element that is after remove dublicate "<<k<<" ";
+ leftRotation(arr1,n1);
+ for(int i=0;i<n1;i++){
+  cout<<arr1[i]<<" ";
+ }
 
     return 0;
 }
