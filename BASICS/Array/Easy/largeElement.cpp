@@ -194,7 +194,7 @@ int main(){
 
 // Move all Zeros to the end of the array
 
-int arr[]={1,2,0,0,3,4,0,2,3,22,0,-1};
+int arr[]={1,2,0,0,3,4,0,2,3,22,0,23};
 int n=sizeof(arr)/sizeof(arr[0]);
 
 cout<<"Before Left Rotation " << endl;
