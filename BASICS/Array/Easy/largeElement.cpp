@@ -135,6 +135,47 @@ int linear(int arr[],int n,int num){
     return -1;
 }
 
+// Union of two sorted array
+vector < int > sortedArray(int  a[], int b[],int n1,int n2) {
+    
+    int i=0;
+    int j=0;
+    vector<int > unionArr;
+  while( i<n1 && j< n2){
+      if(a[i]<=b[j]){
+          if(unionArr.size() ==0 || 
+          unionArr.back()!=a[i])
+              unionArr.push_back(a[i]);
+          
+          i++;
+      }
+      else {
+        if (unionArr.size() ==0 || 
+        unionArr.back()!=b[j]) 
+          unionArr.push_back(b[j]);
+        
+        j++;
+      }
+  }
+
+     
+      while(j<n2){
+        if (unionArr.size() ==0 ||
+         unionArr.back()!=b[j]) 
+          unionArr.push_back(b[j]);
+        
+        j++;
+      }
+       while(i<n1){
+          if(unionArr.size()==0 || 
+          unionArr.back()!=a[i])
+              unionArr.push_back(a[i]);
+          
+          i++;
+      }
+      return unionArr;
+  }
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -219,14 +260,25 @@ int main(){
 //   }
 
 // Linear Search
-int arr[]={1,2,3,4,5};
+// int arr[]={1,2,3,4,5};
 
-int n=sizeof(arr)/sizeof(arr[0]);
-int num=4;
-int value=linear(arr,n,num);
-cout<<value<<" ";
+// int n=sizeof(arr)/sizeof(arr[0]);
+// int num=4;
+// int value=linear(arr,n,num);
+// cout<<value<<" ";
 
 
+// Union of two sorted array
+int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int n1=sizeof(a)/sizeof(a[0]);
+  int b[] = {2, 3, 4, 4, 5, 11, 12};
+int n2=sizeof(b)/sizeof(b);
+vector<int> Union=sortedArray(a ,b,n1,n2);
+cout<<"Union of sorted Array "<< endl;
+for(auto & val:Union){
+    
+    cout<<val<<" ";
+}
 
     return 0;
 }
