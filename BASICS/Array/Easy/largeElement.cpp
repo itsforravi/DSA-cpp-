@@ -177,6 +177,7 @@ vector < int > sortedArray(int  a[], int b[],int n1,int n2) {
   }
 
   // Intersection of two sorted array
+//   {Brute force}
   vector<int> findArrayIntersection
   (int arr1[], int arr2[], int n,int m)
 {
@@ -195,6 +196,32 @@ vector < int > sortedArray(int  a[], int b[],int n1,int n2) {
                          }
                  }
 	 }
+	 return ans;
+}
+  // Intersection of two sorted array
+//   {Optimal}
+  vector<int> findArrayIntersection1
+  (int arr1[], int arr2[], int n,int m)
+{
+  int i=0;
+  int j=0;
+	vector<int> ans;
+    while(i<n && j<m){
+        if(arr1[i]<arr2[j]){
+            i++;
+        }
+        else if (arr2[j]<arr1[i])
+        {
+            j++;
+        }
+        else{
+            ans.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+        
+    }
+  
 	 return ans;
 }
 
@@ -306,9 +333,9 @@ int main(){
 // InterSection of two sorted array
 int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int n=sizeof(arr1)/sizeof(arr1[0]);
-  int arr2[] = {2, 3, 4, 4, 5,6,7,8,9,10, 11, 12};
+  int arr2[] = {2, 3, 4, 4, 5,6,7,8, 11, 12};
 int m=sizeof(arr2)/sizeof(arr2[0]);
-vector<int> Union= findArrayIntersection(arr1 ,arr2,n,m);
+vector<int> Union= findArrayIntersection1(arr1 ,arr2,n,m);
 cout<<"InterSection of sorted Array "<< endl;
 for(auto & val:Union){
     
