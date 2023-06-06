@@ -225,6 +225,22 @@ vector < int > sortedArray(int  a[], int b[],int n1,int n2) {
 	 return ans;
 }
 
+// Find the missing number in an array
+
+int missingNumber(int a[], int N) {
+    int xor1=0;
+    int xor2=0;
+    int n=N-1;
+    for(int i=0;i<n;i++){
+        xor1=xor1^(i+1);
+        xor2=xor2^a[i];
+
+    }
+    xor1=xor1^N;
+    return xor1^xor2;
+
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -331,16 +347,22 @@ int main(){
 
 
 // InterSection of two sorted array
-int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int n=sizeof(arr1)/sizeof(arr1[0]);
-  int arr2[] = {2, 3, 4, 4, 5,6,7,8, 11, 12};
-int m=sizeof(arr2)/sizeof(arr2[0]);
-vector<int> Union= findArrayIntersection1(arr1 ,arr2,n,m);
-cout<<"InterSection of sorted Array "<< endl;
-for(auto & val:Union){
+// int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+// int n=sizeof(arr1)/sizeof(arr1[0]);
+//   int arr2[] = {2, 3, 4, 4, 5,6,7,8, 11, 12};
+// int m=sizeof(arr2)/sizeof(arr2[0]);
+// vector<int> Union= findArrayIntersection1(arr1 ,arr2,n,m);
+// cout<<"InterSection of sorted Array "<< endl;
+// for(auto & val:Union){
     
-    cout<<val<<" ";
-}
+//     cout<<val<<" ";
+// }
 
+
+int arr1[] = {1, 2,4, 5};
+int n=sizeof(arr1)/sizeof(arr1[0]);
+int k=missingNumber(arr1,n);
+cout<<"Missing Number in the Array "<<endl;
+cout<<k<<" ";
     return 0;
 }
