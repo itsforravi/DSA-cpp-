@@ -176,6 +176,28 @@ vector < int > sortedArray(int  a[], int b[],int n1,int n2) {
       return unionArr;
   }
 
+  // Intersection of two sorted array
+  vector<int> findArrayIntersection
+  (int arr1[], int arr2[], int n,int m)
+{
+
+	vector<int> ans;
+     int vis[m]={0};
+	 for(int i=0; i<n; i++){
+		 for(int j=0 ;j<m ;j++){
+			 if(arr1[i]==arr2[j] && vis[j]==0){
+				 ans.push_back(arr1[i]);
+				 vis[j]=1;
+				 break;
+			 }
+                         if (arr2[j] > arr1[i]) {
+                           break;
+                         }
+                 }
+	 }
+	 return ans;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -269,12 +291,25 @@ int main(){
 
 
 // Union of two sorted array
-int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int n1=sizeof(a)/sizeof(a[0]);
-  int b[] = {2, 3, 4, 4, 5, 11, 12};
-int n2=sizeof(b)/sizeof(b);
-vector<int> Union=sortedArray(a ,b,n1,n2);
-cout<<"Union of sorted Array "<< endl;
+// int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+// int n1=sizeof(a)/sizeof(a[0]);
+//   int b[] = {2, 3, 4, 4, 5, 11, 12};
+// int n2=sizeof(b)/sizeof(b);
+// vector<int> Union=sortedArray(a ,b,n1,n2);
+// cout<<"Union of sorted Array "<< endl;
+// for(auto & val:Union){
+    
+//     cout<<val<<" ";
+// }
+
+
+// InterSection of two sorted array
+int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int n=sizeof(arr1)/sizeof(arr1[0]);
+  int arr2[] = {2, 3, 4, 4, 5,6,7,8,9,10, 11, 12};
+int m=sizeof(arr2)/sizeof(arr2[0]);
+vector<int> Union= findArrayIntersection(arr1 ,arr2,n,m);
+cout<<"InterSection of sorted Array "<< endl;
 for(auto & val:Union){
     
     cout<<val<<" ";
