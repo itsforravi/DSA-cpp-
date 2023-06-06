@@ -126,6 +126,15 @@ for(int i=j+1;i<n;i++){
 }
 // return a;
 }
+
+// Linear Search
+int linear(int arr[],int n,int num){
+    for(int i=0;i<n;i++){
+        if(arr[i]==num) return i;
+    }
+    return -1;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -194,21 +203,28 @@ int main(){
 
 // Move all Zeros to the end of the array
 
-int arr[]={1,2,0,0,3,4,0,2,3,22,0,23};
+// int arr[]={1,2,0,0,3,4,0,2,3,22,0,23};
+// int n=sizeof(arr)/sizeof(arr[0]);
+
+// cout<<"Before Left Rotation " << endl;
+// for(int i=0;i<n;i++){
+//     cout<<arr[i]<< " ";
+// }
+// cout<<endl;
+
+//   zero(arr,n);
+//   cout<<"Before Left Rotation " << endl;
+//   for(int i=0;i<n;i++){
+//       cout<<arr[i]<<" ";
+//   }
+
+// Linear Search
+int arr[]={1,2,3,4,5};
+
 int n=sizeof(arr)/sizeof(arr[0]);
-
-cout<<"Before Left Rotation " << endl;
-for(int i=0;i<n;i++){
-    cout<<arr[i]<< " ";
-}
-cout<<endl;
-
-  zero(arr,n);
-  cout<<"Before Left Rotation " << endl;
-  for(int i=0;i<n;i++){
-      cout<<arr[i]<<" ";
-  }
-
+int num=4;
+int value=linear(arr,n,num);
+cout<<value<<" ";
 
 
 
