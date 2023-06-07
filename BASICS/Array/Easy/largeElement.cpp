@@ -246,7 +246,7 @@ int maximunOnes(int arr[] ,int n){
     int maxi=0;
     int cnt=0;
     for(int i=0; i<n;i++){
-        if(arr[i]==0){
+        if(arr[i]==1){
             cnt++;
             maxi=max(maxi,cnt);
         }
@@ -380,7 +380,7 @@ int main(){
 // cout<<k<<" ";
 
 // Maximum Consecutive ones
-int arr1[] = {1,1,1,0,0,0,1,1,0,1,1,1,1};
+int arr1[] = {1,1,1,0,0,1,1,0,1,1,1,1};
 int n=sizeof(arr1)/sizeof(arr1[0]);
 int k=maximunOnes(arr1,n);
 cout<<"Maximun number in ones in the array = "<<endl;
