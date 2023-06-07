@@ -241,6 +241,20 @@ int missingNumber(int a[], int N) {
 
 }
 
+// Maximum Consecutive ones
+int maximunOnes(int arr[] ,int n){
+    int maxi=0;
+    int cnt=0;
+    for(int i=0; i<n;i++){
+        if(arr[i]==0){
+            cnt++;
+            maxi=max(maxi,cnt);
+        }
+        else{ cnt=0;}
+    }
+    return maxi;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -359,10 +373,17 @@ int main(){
 // }
 
 // Find the missing number in an array(Optimal)
-int arr1[] = {1, 2,3,5};
+// int arr1[] = {1, 2,3,5};
+// int n=sizeof(arr1)/sizeof(arr1[0]);
+// int k=missingNumber(arr1,n);
+// cout<<"Missing Number in the Array "<<endl;
+// cout<<k<<" ";
+
+// Maximum Consecutive ones
+int arr1[] = {1,1,1,0,0,0,1,1,0,1,1,1,1};
 int n=sizeof(arr1)/sizeof(arr1[0]);
-int k=missingNumber(arr1,n);
-cout<<"Missing Number in the Array "<<endl;
+int k=maximunOnes(arr1,n);
+cout<<"Maximun number in ones in the array = "<<endl;
 cout<<k<<" ";
     return 0;
 }
