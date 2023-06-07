@@ -255,6 +255,17 @@ int maximunOnes(int arr[] ,int n){
     return maxi;
 }
 
+// Find the number that appears once, 
+// and the other numbers twice
+int getSingleElement(vector<int> &arr){
+	int xorr=0;
+    // int n=arr.size();
+	for(int i=0;i<arr.size();i++){
+		xorr=xorr^arr[i];
+	}	
+	return xorr;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -380,10 +391,20 @@ int main(){
 // cout<<k<<" ";
 
 // Maximum Consecutive ones
-int arr1[] = {1,1,1,0,0,1,1,0,1,1,1,1};
-int n=sizeof(arr1)/sizeof(arr1[0]);
-int k=maximunOnes(arr1,n);
-cout<<"Maximun number in ones in the array = "<<endl;
+// int arr1[] = {1,1,1,0,0,1,1,0,1,1,1,1};
+// int n=sizeof(arr1)/sizeof(arr1[0]);
+// int k=maximunOnes(arr1,n);
+// cout<<"Maximun number in ones in the array = "<<endl;
+// cout<<k<<" ";
+
+// Find the number that appears once, 
+// and the other numbers twice
+   vector<int> arr = {4,1,2,1,2};
+// int n=sizeof(arr1)/sizeof(arr1[0]);
+int k=getSingleElement(arr);
+cout<<"Single number in the array = "<<endl;
 cout<<k<<" ";
+   
+   
     return 0;
 }

@@ -1,2 +1,2 @@
-Maximun number in ones in the array = 
+Single number in the array = 
 4 
