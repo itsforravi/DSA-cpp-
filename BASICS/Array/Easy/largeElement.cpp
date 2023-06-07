@@ -359,7 +359,7 @@ int main(){
 // }
 
 // Find the missing number in an array(Optimal)
-int arr1[] = {1, 2,4, 5};
+int arr1[] = {1, 2,3,5};
 int n=sizeof(arr1)/sizeof(arr1[0]);
 int k=missingNumber(arr1,n);
 cout<<"Missing Number in the Array "<<endl;
