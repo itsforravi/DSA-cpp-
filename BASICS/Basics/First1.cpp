@@ -16,7 +16,7 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
- int n=5;
+ int n=7;
   int arr[n];
  for(int i=0;i<=4;i=i+1){
     cin>>arr[i];
