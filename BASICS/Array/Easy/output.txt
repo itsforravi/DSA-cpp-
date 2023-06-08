@@ -1,2 +1,2 @@
 Single number in the array = 
-7 
+3 

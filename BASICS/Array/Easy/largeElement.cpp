@@ -427,7 +427,7 @@ int main(){
 
 // Find the number that appears once, 
 // and the other numbers twice
-   vector<int> arr = {4,1,2,1,3,2};
+   vector<int> arr = {4,1,2,1,4,3,2};
 int k=getSingleElement(arr);
 cout<<"Single number in the array = "<<endl;
 cout<<k<<" ";
