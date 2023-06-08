@@ -400,16 +400,16 @@ int main(){
 
 
 // InterSection of two sorted array
-// int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-// int n=sizeof(arr1)/sizeof(arr1[0]);
-//   int arr2[] = {2, 3, 4, 4, 5,6,7,8, 11, 12};
-// int m=sizeof(arr2)/sizeof(arr2[0]);
-// vector<int> Union= findArrayIntersection1(arr1 ,arr2,n,m);
-// cout<<"InterSection of sorted Array "<< endl;
-// for(auto & val:Union){
+int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int n=sizeof(arr1)/sizeof(arr1[0]);
+  int arr2[] = {2, 3, 4, 4, 5,6,7,8, 10, 12};
+int m=sizeof(arr2)/sizeof(arr2[0]);
+vector<int> Union= findArrayIntersection1(arr1 ,arr2,n,m);
+cout<<"InterSection of sorted Array "<< endl;
+for(auto & val:Union){
     
-//     cout<<val<<" ";
-// }
+    cout<<val<<" ";
+}
 
 // Find the missing number in an array(Optimal)
 // int arr1[] = {1, 2,3,5};
@@ -434,10 +434,10 @@ int main(){
 
 
 // // Longest Subarray with given Sum K
-vector<int> a = {1,2,3,3,3};
-    long long k = 6;
-    int len =longestSubarrayWithSumK(a, k);
-    cout << "The length of the longest subarray is: " << len << "\n";
+// vector<int> a = {1,2,3,3,3};
+//     long long k = 6;
+//     int len =longestSubarrayWithSumK(a, k);
+//     cout << "The length of the longest subarray is: " << len << "\n";
    
    
     return 0;
