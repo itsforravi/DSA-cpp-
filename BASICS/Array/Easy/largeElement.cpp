@@ -427,17 +427,17 @@ int main(){
 
 // Find the number that appears once, 
 // and the other numbers twice
-   vector<int> arr = {4,1,2,1,4,3,2};
-int k=getSingleElement(arr);
-cout<<"Single number in the array = "<<endl;
-cout<<k<<" ";
+//    vector<int> arr = {4,1,2,1,4,3,2};
+// int k=getSingleElement(arr);
+// cout<<"Single number in the array = "<<endl;
+// cout<<k<<" ";
 
 
 // // Longest Subarray with given Sum K
-// vector<int> a = {2, 3, 5, 1, 9};
-//     long long k = 10;
-//     int len =longestSubarrayWithSumK(a, k);
-//     cout << "The length of the longest subarray is: " << len << "\n";
+vector<int> a = {1,2,3,1,1,1,1,3,3};
+    long long k = 6;
+    int len =longestSubarrayWithSumK(a, k);
+    cout << "The length of the longest subarray is: " << len << "\n";
    
    
     return 0;
