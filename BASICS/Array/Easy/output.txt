@@ -1,1 +1,2 @@
-The length of the longest subarray is: 3
+Single number in the array = 
+7 
