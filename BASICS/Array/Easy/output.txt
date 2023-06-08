@@ -1,2 +1,1 @@
-Single number in the array = 
-4 
+The length of the longest subarray is: 3
