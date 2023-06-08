@@ -434,7 +434,7 @@ int main(){
 
 
 // // Longest Subarray with given Sum K
-vector<int> a = {1,2,3,1,1,1,1,3,3,3};
+vector<int> a = {1,2,3,3,3};
     long long k = 6;
     int len =longestSubarrayWithSumK(a, k);
     cout << "The length of the longest subarray is: " << len << "\n";
