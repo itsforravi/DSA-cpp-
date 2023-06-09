@@ -2,6 +2,35 @@
 typedef unsigned long long int ll;
 using namespace std;
 
+string read(int n, vector<int> book, int target)
+{
+
+    // (Better solution)
+//   map <int,int> mpp;
+//   for(int i=0;i<n;i++){
+//       int a=book[i];
+//       int more=target-a;
+//       if(mpp.find(more)!=mpp.end()){
+//           return "YES" ; //return (mpp[more],i)
+//       }
+//       mpp[a]=i;
+//   }
+//   return "NO";
+
+int left=0,right=n-1;
+sort(book.begin(),book.end());
+while(left<right){
+    int sum=book[left]+book[right];
+    if(sum==target){
+        return "YES";
+    }
+    else if (sum<target)  left++;
+    else right--;
+     
+}
+return "NO";
+
+}
 
 
 
@@ -14,5 +43,10 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
+    int n=5;
+    vector<int> book={2,6,5,8,11};
+    int target=14;
+    string ans=read(n,book,target);
+    cout<<"Sum of the two number which have taget=>  "<<ans<<endl;
     return 0;
 }
