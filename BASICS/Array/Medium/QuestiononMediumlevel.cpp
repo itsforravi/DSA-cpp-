@@ -55,6 +55,34 @@ void sortArray(int arr[],int n){
     }
 }
 
+// Find the Majority Element that occurs more than N/2 times
+
+int majorityElement(vector<int> v){
+int n=v.size();
+
+	int cnt = 0;
+	int el;
+	for(int i=0;i<n;i++){
+		if(cnt == 0){
+			cnt=1;
+			el=v[i];
+		}
+		else if( v[i] == el){
+			cnt++;
+		}
+		else {
+			cnt--;
+		}
+	}
+	int cnt1=0;
+	for(int i=0;i<n;i++){
+		if(v[i] == el) cnt1++;
+	}
+	if(cnt1 > (n/2)){
+		return el;
+	}
+	return -1;
+}
 
 
 int main(){
@@ -72,14 +100,16 @@ int main(){
     
     // Sort an array of 0s, 1s and 2s
     
-    int arr[]={0,1,2,0,1,2,1,2,0,0,0,1};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    sortArray(arr,n);
-    cout<<"After Sorting"<<endl;
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
-    }
-   
-    
+    // int arr[]={0,1,2,0,1,2,1,2,0,0,0,1};
+    // int n=sizeof(arr)/sizeof(arr[0]);
+    // sortArray(arr,n);
+    // cout<<"After Sorting"<<endl;
+    // for(int i=0;i<n;i++){
+    //     cout<<arr[i]<<" ";
+    // }
+   // Find the Majority Element that occurs more than N/2 times
+    vector<int> v={7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5};
+    int ans=majorityElement(v);
+    cout<<"Majority Element of the aray is => " <<ans<<endl;
     return 0;
 }
