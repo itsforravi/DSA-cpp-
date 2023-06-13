@@ -84,6 +84,26 @@ int n=v.size();
 	return -1;
 }
 
+// Kadane’s Algorithm : Maximum Subarray Sum in an Array
+
+long long maxSubarraySum(int arr[], int n)
+{
+   
+    long long sum=0,maxi =LONG_MIN;
+    for(int i=0;i<n;i++){
+        sum+=arr[i];
+
+        if(sum>maxi){
+            maxi=sum;
+     
+        }
+        if (sum<0){
+        sum=0;
+    }
+    }
+    return maxi;
+
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -108,8 +128,14 @@ int main(){
     //     cout<<arr[i]<<" ";
     // }
    // Find the Majority Element that occurs more than N/2 times
-    vector<int> v={7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5};
-    int ans=majorityElement(v);
-    cout<<"Majority Element of the aray is => " <<ans<<endl;
+    // vector<int> v={7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5};
+    // int ans=majorityElement(v);
+    // cout<<"Majority Element of the aray is => " <<ans<<endl;
+
+// Kadane’s Algorithm : Maximum Subarray Sum in an Array
+int arr[]={-2,-3,4,-1,-2,1,5,-3};
+int n=sizeof(arr)/sizeof(arr[0]);
+long long maxSum=maxSubarraySum(arr,n);
+cout<<"Maximum  Subarray sum in an array => "<< maxSum<< endl ;
     return 0;
 }

@@ -1,1 +1,1 @@
-Majority Element of the aray is => 5
+Maximum  Subarray sum in an array => 7
