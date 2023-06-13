@@ -105,6 +105,25 @@ long long maxSubarraySum(int arr[], int n)
 
 }
 
+
+// Subarray with Given Sum
+void subArrWithSumKOptimal(int arr[], int n, int k) {
+  int start = 0, end = -1, sum = 0;
+  while (start < n) {
+    while ((end + 1 < n) && (sum + arr[end + 1] <= k))
+      sum += arr[++end];
+
+    if (sum == k) {
+      for (int p = start; p <= end; p++)
+        cout << arr[p] << " ";
+      cout << "\n";
+    }
+    sum -= arr[start];
+    start++;
+  }
+
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -133,9 +152,16 @@ int main(){
     // cout<<"Majority Element of the aray is => " <<ans<<endl;
 
 // Kadane’s Algorithm : Maximum Subarray Sum in an Array
-int arr[]={-2,-3,4,-1,-2,1,5,-3};
-int n=sizeof(arr)/sizeof(arr[0]);
-long long maxSum=maxSubarraySum(arr,n);
-cout<<"Maximum  Subarray sum in an array => "<< maxSum<< endl ;
+// int arr[]={-2,-3,4,-1,-2,1,5,-3};
+// int n=sizeof(arr)/sizeof(arr[0]);
+// long long maxSum=maxSubarraySum(arr,n);
+// cout<<"Maximum  Subarray sum in an array => "<< maxSum<< endl ;
+    
+int arr[] = {1, 9, 3, 7};
+  int n = sizeof(arr) / sizeof(arr[0]), k = 10;
+ 
+  cout << "Subarray with given sum is: " << endl;
+   subArrWithSumKOptimal(arr, n, k);
+   
     return 0;
 }

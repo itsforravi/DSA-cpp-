@@ -1,1 +1,3 @@
-Maximum  Subarray sum in an array => 7
+Subarray with given sum is: 
+1 9 
+3 7 
