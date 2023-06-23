@@ -224,6 +224,26 @@ reverse(A.begin()+ind+1,A.end());
 return  A;
 }
 
+// Leader in array
+vector<int> superiorElements(vector<int>&a) {
+    vector<int> ans;
+    int n=a.size();
+    int maxi=INT_MIN;
+    for(int i=n-1;i>=0;i--){
+        if(a[i]>maxi){
+            ans.push_back(a[i]);
+
+        }
+        maxi=max(maxi,a[i]);
+    }
+
+
+    sort(a.begin(),a.end());
+    return ans;
+}
+
+
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -287,13 +307,28 @@ int main(){
 
 // next_permutation : find next
 //  lexicographically greater permutation
- vector<int> A={2, 1, 5, 4, 3, 0, 0};
-  vector<int> ans= nextGreaterPermutation(A);
-  cout<<"The next permutation is: [";
-  for(auto it:ans){
-    cout<<it<<" ";
+//  vector<int> A={2, 1, 5, 4, 3, 0, 0};
+//   vector<int> ans= nextGreaterPermutation(A);
+//   cout<<"The next permutation is: [";
+//   for(auto it:ans){
+//     cout<<it<<" ";
+//   }
+//   cout<<"]";
+
+  // Leader in array
+    
+  vector<int> a = {10, 22, 12, 3, 0, 6};
+
+  vector<int> ans = superiorElements(a);
+  
+  cout<<" Leader in array=> ";
+  for(int i = ans.size()-1;i>=0;i--){
+      
+      cout<<ans[i]<<" ";
   }
-  cout<<"]";
+  
+  cout<<endl;
+
 
     return 0;
 }
