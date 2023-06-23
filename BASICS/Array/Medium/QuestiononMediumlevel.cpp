@@ -137,6 +137,25 @@ int maxprofit(vector<int> &arr){
     return maxPrice;
 }
 
+// Rearrange Array Elements by Sign
+vector<int> rearrange(vector<int> &nums){
+    int n=nums.size();
+    vector<int> ans(n,0);
+    int posIndex=0,negIndex=1;
+    for(int i=0;i<n;i++){
+        if(nums[i]<0){
+            ans[negIndex]=nums[i];
+            negIndex +=2;
+        }
+        else{
+            ans[posIndex]=nums[i];
+            posIndex +=2;
+        }
+    }
+    return ans;
+
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -176,10 +195,17 @@ int main(){
 //   cout << "Subarray with given sum is: " << endl;
 //    subArrWithSumKOptimal(arr, n, k);
 
+// // Stock Buy And Sell
+// vector<int> arr={7,1,5,3,6,4};
+// int maxPro=maxprofit(arr);
+// cout<<"Maximum profit "<<maxPro<<endl;
 
-vector<int> arr={7,1,5,3,6,4};
-int maxPro=maxprofit(arr);
-cout<<"Maximum profit "<<maxPro<<endl;
-   
+
+//  Rearrange Array Elements by Sign
+  vector<int> nums={1,2,-4,-5};
+  vector<int> ans=rearrange(nums);
+  for(int i=0;i<ans.size();i++) {
+    cout <<ans[i]<<" ";
+  }
     return 0;
 }
