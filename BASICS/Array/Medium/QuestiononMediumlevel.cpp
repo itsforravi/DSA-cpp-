@@ -107,21 +107,34 @@ long long maxSubarraySum(int arr[], int n)
 
 
 // Subarray with Given Sum
-void subArrWithSumKOptimal(int arr[], int n, int k) {
-  int start = 0, end = -1, sum = 0;
-  while (start < n) {
-    while ((end + 1 < n) && (sum + arr[end + 1] <= k))
-      sum += arr[++end];
+// void subArrWithSumKOptimal(int arr[], int n, int k) {
+//   int start = 0, end = -1, sum = 0;
+//   while (start < n) {
+//     while ((end + 1 < n) && (sum + arr[end + 1] <= k))
+//       sum += arr[++end];
 
-    if (sum == k) {
-      for (int p = start; p <= end; p++)
-        cout << arr[p] << " ";
-      cout << "\n";
+//     if (sum == k) {
+//       for (int p = start; p <= end; p++)
+//         cout << arr[p] << " ";
+//       cout << "\n";
+//     }
+//     sum -= arr[start];
+//     start++;
+//   }
+
+// }
+
+
+// Stock Buy And Sell
+int maxprofit(vector<int> &arr){
+    int maxPrice=0;
+    int n=arr.size();
+    int mini=INT_MAX;
+    for(int i=0;i<n;i++){
+        mini=min(mini,arr[i]);
+        maxPrice=max(maxPrice,arr[i]-mini);
     }
-    sum -= arr[start];
-    start++;
-  }
-
+    return maxPrice;
 }
 
 int main(){
@@ -157,11 +170,16 @@ int main(){
 // long long maxSum=maxSubarraySum(arr,n);
 // cout<<"Maximum  Subarray sum in an array => "<< maxSum<< endl ;
     
-int arr[] = {1, 9, 3, 7};
-  int n = sizeof(arr) / sizeof(arr[0]), k = 10;
+// int arr[] = {1, 9, 3, 7};
+//   int n = sizeof(arr) / sizeof(arr[0]), k = 10;
  
-  cout << "Subarray with given sum is: " << endl;
-   subArrWithSumKOptimal(arr, n, k);
+//   cout << "Subarray with given sum is: " << endl;
+//    subArrWithSumKOptimal(arr, n, k);
+
+
+vector<int> arr={7,1,5,3,6,4};
+int maxPro=maxprofit(arr);
+cout<<"Maximum profit "<<maxPro<<endl;
    
     return 0;
 }
