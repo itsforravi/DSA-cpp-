@@ -138,6 +138,7 @@ int maxprofit(vector<int> &arr){
 }
 
 // Rearrange Array Elements by Sign
+// Verity-1
 vector<int> rearrange(vector<int> &nums){
     int n=nums.size();
     vector<int> ans(n,0);
@@ -154,6 +155,45 @@ vector<int> rearrange(vector<int> &nums){
     }
     return ans;
 
+}
+
+// Rearrange Array Elements by Sign
+// Verity-2
+vector<int> alternateNumbers(vector<int>&a) {
+ vector<int> pos,neg;
+ int n=a.size();
+ for(int i=0;i<n;i++){
+   if (a[i] > 0) {
+     pos.push_back(a[i]);
+   }
+   else{
+       neg.push_back(a[i]);
+   }
+
+ }   
+ if(pos.size()>neg.size()){
+     for(int i=0;i<neg.size();i++){
+         a[2*i]=pos[i];
+         a[2*i+1]=neg[i];
+     }
+     int index=neg.size()*2;
+     for(int i=neg.size();i<pos.size();i++){
+         a[index]=pos[i];
+         index++;
+     }
+ }
+ else{
+     for(int i=0;i<pos.size();i++){
+         a[2*i]=pos[i];
+         a[2*i+1]=neg[i];
+     }
+     int index=pos.size()*2;
+     for (int i = pos.size(); i < neg.size(); i++) {
+       a[index] = neg[i];
+       index++;
+     }
+ }
+ return a;
 }
 
 int main(){
@@ -200,12 +240,22 @@ int main(){
 // int maxPro=maxprofit(arr);
 // cout<<"Maximum profit "<<maxPro<<endl;
 
+// Rearrange Array Elements by Sign
+// Verity-1
+//   vector<int> nums={1,2,-4,-5};
+//   vector<int> ans=rearrange(nums);
+//   for(int i=0;i<ans.size();i++) {
+//     cout <<ans[i]<<" ";
+//   }
 
-//  Rearrange Array Elements by Sign
-  vector<int> nums={1,2,-4,-5};
-  vector<int> ans=rearrange(nums);
+  // Rearrange Array Elements by Sign
+// Verity-2
+ vector<int> a={1,2,-4,-5,3,4};
+  vector<int> ans=alternateNumbers(a);
+  cout<<"Rearrange array element by sign=> "<<endl;
   for(int i=0;i<ans.size();i++) {
     cout <<ans[i]<<" ";
   }
+
     return 0;
 }
