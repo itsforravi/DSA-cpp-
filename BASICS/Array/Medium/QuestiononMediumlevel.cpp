@@ -196,6 +196,34 @@ vector<int> alternateNumbers(vector<int>&a) {
  return a;
 }
 
+// next_permutation :
+//  find next lexicographically greater permutation
+
+vector<int> nextGreaterPermutation(vector<int> &A) {
+int ind=-1;
+int n=A.size();
+for(int i=n-2;i>0;i--){
+    if(A[i]<A[i+1]){
+        ind=i;
+        break;
+
+    }
+
+}
+if(ind==-1){
+    reverse(A.begin(),A.end());
+    return A;
+}
+for(int i=n-1;i>ind;i--){
+    if(A[i]>A[ind]){
+        swap(A[i],A[ind]);
+        break;
+    }
+}
+reverse(A.begin()+ind+1,A.end());
+return  A;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -250,12 +278,22 @@ int main(){
 
   // Rearrange Array Elements by Sign
 // Verity-2
- vector<int> a={1,2,-4,-5,3,4};
-  vector<int> ans=alternateNumbers(a);
-  cout<<"Rearrange array element by sign=> "<<endl;
-  for(int i=0;i<ans.size();i++) {
-    cout <<ans[i]<<" ";
+//  vector<int> a={1,2,-4,-5,3,4};
+//   vector<int> ans=alternateNumbers(a);
+//   cout<<"Rearrange array element by sign=> "<<endl;
+//   for(int i=0;i<ans.size();i++) {
+//     cout <<ans[i]<<" ";
+//   }
+
+// next_permutation : find next
+//  lexicographically greater permutation
+ vector<int> A={2, 1, 5, 4, 3, 0, 0};
+  vector<int> ans= nextGreaterPermutation(A);
+  cout<<"The next permutation is: [";
+  for(auto it:ans){
+    cout<<it<<" ";
   }
+  cout<<"]";
 
     return 0;
 }

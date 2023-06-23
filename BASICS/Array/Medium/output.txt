@@ -1,2 +1,1 @@
-Rearrange array element by sign=> 
-1 -4 2 -5 3 4 
+The next permutation is: [2 3 0 0 1 4 5 ]
