@@ -317,7 +317,7 @@ int main(){
 
   // Leader in array
     
-  vector<int> a = {10, 22, 12, 3, 0, 6};
+  vector<int> a = {10, 22, 12, 3, 4,5, 6};
 
   vector<int> ans = superiorElements(a);
   
