@@ -307,27 +307,27 @@ int main(){
 
 // next_permutation : find next
 //  lexicographically greater permutation
-//  vector<int> A={2, 1, 5, 4, 3, 0, 0};
-//   vector<int> ans= nextGreaterPermutation(A);
-//   cout<<"The next permutation is: [";
-//   for(auto it:ans){
-//     cout<<it<<" ";
-//   }
-//   cout<<"]";
+ vector<int> A={2, 1, 5, 4, 3,6,7};
+  vector<int> ans= nextGreaterPermutation(A);
+  cout<<"The next permutation is: [";
+  for(auto it:ans){
+    cout<<it<<" ";
+  }
+  cout<<"]";
 
   // Leader in array
     
-  vector<int> a = {10, 22, 12, 3, 4,5, 6};
+//   vector<int> a = {10, 22, 12, 3, 4,5, 6};
 
-  vector<int> ans = superiorElements(a);
+//   vector<int> ans = superiorElements(a);
   
-  cout<<" Leader in array=> ";
-  for(int i = ans.size()-1;i>=0;i--){
+//   cout<<" Leader in array=> ";
+//   for(int i = ans.size()-1;i>=0;i--){
       
-      cout<<ans[i]<<" ";
-  }
+//       cout<<ans[i]<<" ";
+//   }
   
-  cout<<endl;
+//   cout<<endl;
 
 
     return 0;

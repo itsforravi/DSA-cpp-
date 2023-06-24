@@ -1,1 +1,1 @@
- Leader in array=> 22 12 6 
+The next permutation is: [2 1 5 4 3 7 6 ]
