@@ -354,6 +354,21 @@ return matrix;
 } 
 
 
+// Rotate Matrix at 90 degree in clock wise direction.
+void rotateMatrix(vector<vector<int>> &mat){
+	int n=mat.size();
+	for(int i=0;i<n-1;i++){
+		for(int j=i+1;j<n;j++){
+			swap(mat[i][j],mat[j][i]);
+		}
+	}
+	for(int i=0;i<n;i++){
+		
+			reverse(mat[i].begin(),mat[i].end());
+		}
+	
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -448,17 +463,28 @@ int main(){
 
 
 // // Set matrix zero
-vector<vector<int>> matrix = {{2,3}, {2,4,3}, {1, 0,0}};
-    int n = matrix.size();
-    int m = matrix.size();
-    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
+// vector<vector<int>> matrix = {{2,3}, {2,4,3}, {1, 0,0}};
+//     int n = matrix.size();
+//     int m = matrix.size();
+//     vector<vector<int>> ans = zeroMatrix(matrix, n, m);
 
-    cout << "The Final matrix is: n";
-    for (auto it : ans) {
-        for (auto ele : it) {
-            cout << ele << " ";
-        }
-        cout << " ";
+//     cout << "The Final matrix is: n";
+//     for (auto it : ans) {
+//         for (auto ele : it) {
+//             cout << ele << " ";
+//         }
+//         cout << " ";
+//     }
+
+ vector < vector < int >> arr;
+    arr =  {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    rotateMatrix(arr);
+    cout << "Rotated Image" << endl;
+    for (int i = 0; i < arr.size(); i++) {
+    for (int j = 0; j < arr[0].size(); j++) {
+        cout << arr[i][j] << " ";
+    }
+    cout << endl;
     }
     return 0;
 }
