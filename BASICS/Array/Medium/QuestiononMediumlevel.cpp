@@ -289,6 +289,30 @@ return longest;
 
 }
 
+// Set matrix zero
+vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m) {
+int row[n]={0};
+int col[m]={0};
+for(int i=0;i<n;i++){
+	for(int j=0;j<m;j++){
+		if(matrix[i][j]==0){
+			row[i]=1;
+			col[j]=1;
+		}
+	}
+}	
+
+
+for(int i=0;i<n;i++){
+  for (int j = 0; j < m; j++) {
+    if (row[i] || col[j]) {
+      matrix[i][j] = 0;
+    }
+          }
+  }
+return matrix;
+} 
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -378,9 +402,23 @@ int main(){
 
 // 
 // Longest Consecutive Sequence in an Array
-vector<int> nums={102,4,5,100,1,101,3,2,1,1};
-int log=longestSuccessiveElements(nums);
-cout<<"Longest Consecutive sequence Is => "<< log<<endl;
+// vector<int> nums={102,4,5,100,1,101,3,2,1,1};
+// int log=longestSuccessiveElements(nums);
+// cout<<"Longest Consecutive sequence Is => "<< log<<endl;
 
+
+// // Set matrix zero
+vector<vector<int>> matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+    int n = matrix.size();
+    int m = matrix[0].size();
+    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
+
+    cout << "The Final matrix is: n";
+    for (auto it : ans) {
+        for (auto ele : it) {
+            cout << ele << " ";
+        }
+        cout << " ";
+    }
     return 0;
 }
