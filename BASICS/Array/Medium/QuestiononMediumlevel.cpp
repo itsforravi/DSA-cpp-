@@ -242,6 +242,52 @@ vector<int> superiorElements(vector<int>&a) {
     return ans;
 }
 
+// Longest Consecutive Sequence in an Array
+
+int longestSuccessiveElements(vector<int>&a) {
+// Better solution
+
+//    if(nums.size()==0) return 0;
+//    sort(nums.begin(),nums.end());
+//    int n=nums.size();
+//    int lastSmaller=INT_MIN;
+//    int cnt=0;
+// int longest=1;
+// for(int i=0;i<n;i++){
+//     if(nums[i]-1==lastSmaller){
+//         cnt+=1;
+//         lastSmaller=nums[i];
+//     }
+//     else if (lastSmaller!=nums[i]){
+//         cnt=1;
+//         lastSmaller=nums[i];
+//     }
+//     longest=max(longest,cnt);
+// }
+
+// Optimal Solution
+int n=a.size();
+if(n==0) return 0;
+int longest=1;
+unordered_set<int> st;
+for(int i=0;i<n;i++){
+    st.insert(a[i]);
+
+}
+for(auto it : st){
+    if(st.find(it-1)==st.end()){
+        int cnt=1;
+        int x=it;
+        while(st.find(x+1)!=st.end()){
+            x=x+1;
+            cnt=cnt+1;
+        }
+        longest=max(longest,cnt);
+    }
+}
+return longest;
+
+}
 
 
 int main(){
@@ -307,13 +353,13 @@ int main(){
 
 // next_permutation : find next
 //  lexicographically greater permutation
- vector<int> A={2, 1, 5, 4, 3,6,7};
-  vector<int> ans= nextGreaterPermutation(A);
-  cout<<"The next permutation is: [";
-  for(auto it:ans){
-    cout<<it<<" ";
-  }
-  cout<<"]";
+//  vector<int> A={2, 1, 5, 4, 3,6,7};
+//   vector<int> ans= nextGreaterPermutation(A);
+//   cout<<"The next permutation is: [";
+//   for(auto it:ans){
+//     cout<<it<<" ";
+//   }
+//   cout<<"]";
 
   // Leader in array
     
@@ -329,6 +375,12 @@ int main(){
   
 //   cout<<endl;
 
+
+// 
+// Longest Consecutive Sequence in an Array
+vector<int> nums={102,4,5,100,1,101,3,2,1,1};
+int log=longestSuccessiveElements(nums);
+cout<<"Longest Consecutive sequence Is => "<< log<<endl;
 
     return 0;
 }
