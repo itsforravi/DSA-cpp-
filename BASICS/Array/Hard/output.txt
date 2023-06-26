@@ -1,2 +1,3 @@
-The majority elements are: 
-11 22 
+ 3 Sum Problem ans is 
+-1 -1 2 
+-1 0 1 

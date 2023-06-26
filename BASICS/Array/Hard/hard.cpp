@@ -119,7 +119,34 @@ return ls;
 }
 
 
-
+// 3 Sum Problem
+vector<vector<int>> triplet( vector<int> &arr)
+{
+ int n=arr.size();
+ set<vector<int>> st;
+ for(int i=0;i<n;i++){
+     set<int> hashmap;
+     for(int j=i+1;j<n;j++){
+         int thrd=-(arr[i]+arr[j]);
+         if(hashmap.find(thrd)!=hashmap.end()){
+             vector<int> temp={arr[i],arr[j] ,thrd};
+             sort(temp.begin(),temp.end());
+             st.insert(temp);
+         }
+         hashmap.insert(arr[j]);
+    //  for(int k=j+1;k<n;k++){
+    //      if(arr[i]+arr[j]+arr[k]==0){
+    //          vector<int> temp={arr[i],arr[j],arr[k]};
+    //          sort(temp.begin(),temp.end());
+    //          st.insert(temp);
+    //      }
+     
+ }
+ }
+ 
+  vector<vector<int>> ans(st.begin(),st.end());
+ return ans;
+}
 
 
 
@@ -160,13 +187,26 @@ int main(){
 
 
 // Majority Elements(>N/3 times) 
-vector<int> arr={11,22,33,22,33,22,11,11};
-vector<int> element=majorityElement(arr);
- cout << "The majority elements are: "<<endl;
+// vector<int> arr={11,22,33,22,33,22,11,11};
+// vector<int> element=majorityElement(arr);
+//  cout << "The majority elements are: "<<endl;
 
-for(auto it : element){
-    cout<<it <<" ";
+// for(auto it : element){
+//     cout<<it <<" ";
+// }
+
+// 3 sum Problem
+vector <int> num1={-1,0,1,2,-1,-4};
+vector<vector<int>> ans=triplet(num1);
+cout<<" 3 Sum Problem ans is " << endl;
+for(int i=0;i<ans.size();i++){
+    for(int j=0;j<ans[i].size();j++){
+        cout<<ans[i][j]<<" ";
+    }
+    cout<<endl;
 }
+
+
 
     return 0;
 }
