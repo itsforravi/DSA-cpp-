@@ -40,6 +40,34 @@ void pascalTriangle1(int n){
 }
 
 
+// Type : 3
+int nCr2(int n,int r){
+    long long res=1;
+    for(int i=0;i<r;i++){
+        res=res*(n-i);
+        res=res/(i+1);
+
+    }
+    return  (int)res;
+}
+
+vector<vector<int>> pascalTriangle2(int n) {
+
+    vector<vector<int>> ans;
+    for(int row=1;row<=n;row++){
+        vector<int> templist;
+        for(int col=1;col<=row;col++){
+            templist.push_back(nCr2(row-1,col-1));
+        }
+        ans.push_back(templist);
+
+
+    }
+    return ans;
+    }
+
+
+
 
 
 
@@ -59,11 +87,22 @@ int main(){
     
 
     // Type :2
-    int n=6;
-    cout<<"Pascal Tringle row number "<<n<<endl;
-    pascalTriangle1(n);
+    // int n=6;
+    // cout<<"Pascal Tringle row number "<<n<<endl;
+    // pascalTriangle1(n);
     
+// Type :3
+int n;
+cin>>n;
+vector<vector<int>> ans=pascalTriangle2(n);
+for(auto it:ans){
+    for(auto ele : it){
+        cout<<ele<<" ";
 
+    }
+
+    cout<<endl;
+}
 
     return 0;
 }
