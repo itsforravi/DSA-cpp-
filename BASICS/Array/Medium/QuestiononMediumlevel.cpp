@@ -369,6 +369,43 @@ void rotateMatrix(vector<vector<int>> &mat){
 	
 }
 
+// Spiral Traversal of Matrix
+vector<int> spiralMatrix(vector<vector<int>>&MATRIX) {
+    int n=MATRIX.size();
+    int m=MATRIX[0].size();
+    int left=0 ,right=m-1;
+    int top=0 , bottom=n-1;
+    vector <int> ans;
+    while(top<= bottom && left<=right){
+    for(int i=left;i<=right;i++){
+        ans.push_back(MATRIX[top][i]);
+    }
+    top++;
+
+    for(int i=top;i<=bottom;i++){
+      ans.push_back(MATRIX[i][right]);  
+    }
+    right--;
+
+    if(top<=bottom){
+
+    for(int i=right;i>=left;i--){
+        ans.push_back(MATRIX[bottom][i]);
+    }
+    bottom--;
+    }
+
+    if(left<=right){
+    for (int i = bottom; i >= top; i--) {
+      ans.push_back(MATRIX[i][left]);
+    }
+    left++;
+    }
+    }
+
+    return ans;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -476,15 +513,33 @@ int main(){
 //         cout << " ";
 //     }
 
- vector < vector < int >> arr;
-    arr =  {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    rotateMatrix(arr);
-    cout << "Rotated Image" << endl;
-    for (int i = 0; i < arr.size(); i++) {
-    for (int j = 0; j < arr[0].size(); j++) {
-        cout << arr[i][j] << " ";
-    }
-    cout << endl;
-    }
+//  vector < vector < int >> arr;
+//     arr =  {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+//     rotateMatrix(arr);
+//     cout << "Rotated Image" << endl;
+//     for (int i = 0; i < arr.size(); i++) {
+//     for (int j = 0; j < arr[0].size(); j++) {
+//         cout << arr[i][j] << " ";
+//     }
+//     cout << endl;
+//     }
+
+
+// Spiral Traversal of Matrix
+ vector<vector<int>> mat   {{1, 2, 3, 4},
+                             {5, 6, 7, 8},
+	                         {9, 10, 11, 12},
+		                     {13, 14, 15, 16}};
+		                     
+  vector<int> ans =spiralMatrix(mat);
+  cout<<"Spiral Matrix is "<< endl;
+
+  for(int i = 0;i<ans.size();i++){
+      
+      cout<<ans[i]<<" ";
+  }
+  
+  cout<<endl;
+
     return 0;
 }
