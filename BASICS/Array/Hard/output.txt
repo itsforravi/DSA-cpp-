@@ -1,2 +1,2 @@
 The majority elements are: 
-11 
+11 22 
