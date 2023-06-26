@@ -1,1 +1,2 @@
-Pascal Trianglr (r,c) is => 10 
+Pascal Tringle row number 6
+1 5 10 10 5 1  
