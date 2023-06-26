@@ -67,6 +67,24 @@ vector<vector<int>> pascalTriangle2(int n) {
     }
 
 
+// Majority Elements(>N/3 times) 
+vector<int> majorityElement(vector<int> v) {
+	vector<int> ls;
+	map<int,int> mpp;
+	int n=v.size();
+	int mini=(int)(n/3)+1;
+	for(int i=0;i<n;i++){
+		mpp[v[i]]++;
+		if(mpp[v[i]]==mini){
+			ls.push_back(v[i]);
+		}
+		if(ls.size()==2) break;
+	}
+	sort(ls.begin(),ls.end());
+	return ls;
+
+
+}
 
 
 
@@ -92,16 +110,27 @@ int main(){
     // pascalTriangle1(n);
     
 // Type :3
-int n;
-cin>>n;
-vector<vector<int>> ans=pascalTriangle2(n);
-for(auto it:ans){
-    for(auto ele : it){
-        cout<<ele<<" ";
+// int n;
+// cin>>n;
+// vector<vector<int>> ans=pascalTriangle2(n);
+// for(auto it:ans){
+//     for(auto ele : it){
+//         cout<<ele<<" ";
 
-    }
+//     }
 
-    cout<<endl;
+//     cout<<endl;
+// }
+
+
+
+// Majority Elements(>N/3 times) 
+vector<int> arr={11,33,22,33,22,11,11};
+vector<int> element=majorityElement(arr);
+ cout << "The majority elements are: "<<endl;
+
+for(auto it : element){
+    cout<<it <<" ";
 }
 
     return 0;
