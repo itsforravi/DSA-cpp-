@@ -262,6 +262,25 @@ int solve(vector<int>& a) {
     return maxLen;
 }
 
+// Count the number of subarrays with given xor K
+int subarraysWithSumK(vector < int > a, int b) {
+    
+    int xr=0;
+    map<int,int> mpp;
+    mpp[xr]++;
+    int cnt=0;
+    for(int i=0;i<a.size();i++){
+        xr=xr^a[i];
+        int x=xr^b;
+        cnt +=mpp[x];
+        mpp[xr]++;
+    }
+    return cnt;
+}
+
+
+
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -359,9 +378,15 @@ int main(){
 
 
 // Length of the longest subarray with zero Sum
- vector<int> a = {9, -3, 3, -1, 6, -5};
-    cout << solve(a) << endl;
+//  vector<int> a = {9, -3, 3, -1, 6, -5};
+//     cout << solve(a) << endl;
 
+// Count the number of subarrays with given xor K
+vector<int> a={4, 2,3,2, 6, 4};
+int b;
+cin>>b;
+int ans=subarraysWithSumK(a,b);
+cout<<" The number of subarrays with XOR k is: "<<ans; 
 
 
     return 0;

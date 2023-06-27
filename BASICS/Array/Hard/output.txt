@@ -1,1 +1,1 @@
-5
+ The number of subarrays with XOR k is: 2
