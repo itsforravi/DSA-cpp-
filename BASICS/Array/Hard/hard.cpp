@@ -240,6 +240,27 @@ vector<vector<int>> fourSum1(vector<int>& nums, int target) {
     return  ans;
 }
 
+// Length of the longest subarray with zero Sum
+
+int solve(vector<int>& a) {
+    int maxLen = 0;
+    unordered_map<int, int> mpp;
+    int sum = 0;
+
+    for (int i = 0; i < a.size(); i++) {
+        sum += a[i];
+
+        if (sum == 0) {
+            maxLen = i + 1;
+        } else if (mpp.find(sum) != mpp.end()) {
+            maxLen = max(maxLen, i - mpp[sum]);
+        } else {
+            mpp[sum] = i;
+        }
+    }
+
+    return maxLen;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -323,18 +344,24 @@ int main(){
 // }
 
 // Optimal Solution
-vector<int > nums={4, 3, 3, 4, 4, 2, 1, 2, 1, 1};
-int target;
-cin>>target;
-vector<vector<int> > ans=fourSum1(nums,target);
-cout<<" The quadruplets are: " <<endl;
-for(auto it: ans){
-    cout<<"[ ";
-    for(auto ele :it){
-        cout<<ele<<" ";
-    }
-    cout<<" ]"<<endl;
-}
+// vector<int > nums={4, 3, 3, 4, 4, 2, 1, 2, 1, 1};
+// int target;
+// cin>>target;
+// vector<vector<int> > ans=fourSum1(nums,target);
+// cout<<" The quadruplets are: " <<endl;
+// for(auto it: ans){
+//     cout<<"[ ";
+//     for(auto ele :it){
+//         cout<<ele<<" ";
+//     }
+//     cout<<" ]"<<endl;
+// }
+
+
+// Length of the longest subarray with zero Sum
+ vector<int> a = {9, -3, 3, -1, 6, -5};
+    cout << solve(a) << endl;
+
 
 
     return 0;
