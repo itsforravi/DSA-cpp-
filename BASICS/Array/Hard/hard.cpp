@@ -175,7 +175,32 @@ for(int i=0;i<n;i++){
     return ans;
 }
 
+// 4 Sum Problem 
+// Better Solution
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+    int n=nums.size();
+    set<vector<int>> st;
+    for(int i=0;i<n ;i++){
+        for(int j=i+1;j<n;j++){
 
+            set<long long> hashset; 
+            for(int k=j+1;k<n;k++){
+                long long sum=nums[i]+nums[j];
+                sum+=nums[k];
+                long long fourth=target-sum;
+                if(hashset.find(fourth)!=hashset.end()){
+                    vector<int> temp={nums[i],nums[j],nums[k],(int)(fourth)};
+                    sort(temp.begin(),temp.end());
+                    st.insert(temp);
+                }
+                hashset.insert(nums[k]);
+
+            }
+        }
+    }
+    vector<vector<int>> ans(st.begin(),st.end());
+    return  ans;
+}
 
 
 int main(){
@@ -223,6 +248,7 @@ int main(){
 // }
 
 // 3 sum Problem
+// Better solution
 // vector <int> num1={-1,0,1,2,-1,-4};
 // vector<vector<int>> ans=triplet(num1);
 // cout<<" 3 Sum Problem ans is " << endl;
@@ -234,16 +260,29 @@ int main(){
 // }
 
 // Optimal solution
-vector <int> num1={-1,0,1,2,-1,-4,2};
-vector<vector<int>> ans=triplet1(num1);
-cout<<" 3 Sum Problem in optimal solution is " << endl;
-for(int i=0;i<ans.size();i++){
-    for(int j=0;j<ans[i].size();j++){
-        cout<<ans[i][j]<<" ";
-    }
-    cout<<endl;
-}
+// vector <int> num1={-1,0,1,2,-1,-4,2};
+// vector<vector<int>> ans=triplet1(num1);
+// cout<<" 3 Sum Problem in optimal solution is " << endl;
+// for(int i=0;i<ans.size();i++){
+//     for(int j=0;j<ans[i].size();j++){
+//         cout<<ans[i][j]<<" ";
+//     }
+//     cout<<endl;
+// }
 
+// 4 Sum Problem 
+vector<int > nums={4, 3, 3, 4, 4, 2, 1, 2, 1, 1};
+int target;
+cin>>target;
+vector<vector<int> > ans=fourSum(nums,target);
+cout<<" The quadruplets are: " <<endl;
+for(auto it: ans){
+    cout<<"[ ";
+    for(auto ele :it){
+        cout<<ele<<" ";
+    }
+    cout<<" ]"<<endl;
+}
 
 
     return 0;
