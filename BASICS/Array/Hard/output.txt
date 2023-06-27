@@ -1,1 +1,2 @@
- The number of subarrays with XOR k is: 2
+The merged intervals are: 
+[1, 6] [8, 10] [15, 18] 
