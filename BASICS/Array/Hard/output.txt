@@ -1,1 +1,1 @@
- The number of subarrays with XOR k is: 3
+ The number of subarrays with XOR k is: 2

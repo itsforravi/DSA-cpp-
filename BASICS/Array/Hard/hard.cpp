@@ -278,6 +278,20 @@ int subarraysWithSumK1(vector<int> a, int k) {
     }
     return cnt;
 }
+// Better Solution
+int subarraysWithSumK2(vector<int> a, int k) {
+    int n = a.size(); 
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+        int xorr = 0;
+        for (int j = i; j < n; j++) {
+            xorr = xorr ^ a[j];
+            if (xorr == k) cnt++;
+        }
+    }
+    return cnt;
+}
+
 
 // Optimal solution
 int subarraysWithSumK3(vector < int > a, int b) {
@@ -402,7 +416,7 @@ int main(){
 vector<int> a={4, 2,3,2, 6, 4};
 int b;
 cin>>b;
-int ans=subarraysWithSumK1(a,b);
+int ans=subarraysWithSumK3(a,b);
 cout<<" The number of subarrays with XOR k is: "<<ans; 
 
 
