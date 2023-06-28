@@ -385,7 +385,7 @@ void marge(long long arr1[],long long arr2[],int n,int m){
     
 }
 
-// Optmial Solution
+// Optmial Solution :1
 void marge1(long long arr1[],long long arr2[],int n,int m){
     int left=n-1;
     int right=0;
@@ -402,6 +402,38 @@ void marge1(long long arr1[],long long arr2[],int n,int m){
     sort(arr1,arr1+n);
     sort(arr2,arr2+m);
 }
+
+// Optmial Solution :2
+void swapIfGreater(long long arr1[], long long arr2[], int ind1, int ind2) {
+    if (arr1[ind1] > arr2[ind2]) {
+        swap(arr1[ind1], arr2[ind2]);
+    }
+}
+void marge2(long long arr1[],long long arr2[],int n,int m){
+    int len = n + m;
+
+    int gap = (len / 2) + (len % 2);
+
+    while (gap > 0) {
+        int left = 0;
+        int right = left + gap;
+        while (right < len) {
+            if (left < n && right >= n) {
+                swapIfGreater(arr1, arr2, left, right - n);
+            }
+            else if (left >= n) {
+                swapIfGreater(arr2, arr2, left - n, right - n);
+            }
+            else {
+                swapIfGreater(arr1, arr1, left, right);
+            }
+            left++, right++;
+        }
+        if (gap == 1) break;
+        gap = (gap / 2) + (gap % 2);
+    }
+}
+
 
 
 int main(){
@@ -548,9 +580,9 @@ int main(){
 
 // Optimal Solution
 long long arr1[]={1,3,5,7};
-long long arr2[]={0,2,8,9,4};
-int n=4,m=5;
-marge1(arr1,arr2,n,m);
+long long arr2[]={0,2,8,9,4,10};
+int n=4,m=6;
+marge2(arr1,arr2,n,m);
 cout<<"The merged arrays are: "<<endl;
 cout<<"arr1[]= ";
  cout<<"[ ";
