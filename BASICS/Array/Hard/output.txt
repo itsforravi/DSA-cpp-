@@ -1,3 +1,1 @@
-The merged arrays are: 
-arr1[]= [ 0 1 2 3  ]
-arr2[]= [ 4 5 7 8 9 10  ]
+The repeating and missing numbers are: {Repeating Number =>5, Missing Nuber=> 8}

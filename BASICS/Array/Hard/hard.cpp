@@ -434,6 +434,46 @@ void marge2(long long arr1[],long long arr2[],int n,int m){
     }
 }
 
+// Find the repeating and missing numbers
+// Better
+vector<int> findMissingRepeatingNumbers(vector < int > a) {
+   int n=a.size();
+   int hash[n+1]={0};
+   for(int i=0;i<n;i++){
+      hash[a[i]]++;
+   }
+   int repeating=-1,missing=-1;
+   for (int i = 1; i <= n; i++) {
+     if (hash[i]==2) repeating=i;
+     else if (hash[i]==0) missing=i;
+     if(repeating !=-1 && missing!=-1){
+         break;
+     }
+
+   }
+   return {repeating,missing};
+}
+
+// Optimal Solution:1
+vector<int> findMissingRepeatingNumbers1(vector < int > a) {
+long long n=a.size();
+// S-Sn=x+y
+// S2-S2n=
+long long Sn=(n*(n+1))/2;
+long long S2n=(n*(n+1)*(2*n+1))/6;
+long long S=0,S2=0;
+for (int i = 0; i < n; i++) {
+  S += a[i];
+  S2 += (long long)a[i] * (long long)a[i];
+}
+long long val1 = S - Sn;//x-y
+long long val2 = S2 - S2n;//x+y
+val2 = val2 / val1;
+long long x = (val1 + val2) / 2;
+long long y = (x - val1);
+return {(int)x, (int)y};
+}
+
 
 
 int main(){
@@ -579,27 +619,33 @@ int main(){
 // cout<<" ]";
 
 // Optimal Solution
-long long arr1[]={1,3,5,7};
-long long arr2[]={0,2,8,9,4,10};
-int n=4,m=6;
-marge2(arr1,arr2,n,m);
-cout<<"The merged arrays are: "<<endl;
-cout<<"arr1[]= ";
- cout<<"[ ";
-for(int i=0;i<n;i++){
+// long long arr1[]={1,3,5,7};
+// long long arr2[]={0,2,8,9,4,10};
+// int n=4,m=6;
+// marge2(arr1,arr2,n,m);
+// cout<<"The merged arrays are: "<<endl;
+// cout<<"arr1[]= ";
+//  cout<<"[ ";
+// for(int i=0;i<n;i++){
    
-    cout<<arr1[i]<<" ";
+//     cout<<arr1[i]<<" ";
     
-}
-cout<<" ]";
-cout<<endl;
+// }
+// cout<<" ]";
+// cout<<endl;
 
-cout<<"arr2[]= ";
-cout<<"[ ";
-for(int i=0;i<m;i++){
-    cout<<arr2[i]<<" ";
-}
-cout<<" ]";
+// cout<<"arr2[]= ";
+// cout<<"[ ";
+// for(int i=0;i<m;i++){
+//     cout<<arr2[i]<<" ";
+// }
+// cout<<" ]";
+
+// Find the repeating and missing numbers
+ vector<int> a = {3, 1, 2, 5, 4, 6, 7, 5};
+    vector<int> ans = findMissingRepeatingNumbers(a);
+    cout << "The repeating and missing numbers are: {"
+         <<"Repeating Number =>"<< ans[0] << ", " <<"Missing Nuber=> "<< ans[1] << "}\n";
 
     return 0;
 }
