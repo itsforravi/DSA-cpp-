@@ -1,1 +1,1 @@
-The repeating and missing numbers are: {Repeating Number =>4, Missing Nuber=> 5}
+Cout of invers in an array => 10

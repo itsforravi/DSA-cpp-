@@ -522,6 +522,16 @@ for (int i = 0; i < n; i++) {
     return {one,zero};
 }
 
+// Count inversions in an array
+int invers(vector<int> &a,int n){
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]>a[j]) cnt++;
+        }
+    }
+    return cnt;
+}
 
 
 
@@ -691,10 +701,16 @@ int main(){
 // cout<<" ]";
 
 // Find the repeating and missing numbers
- vector<int> a = {3, 1, 2, 7, 4, 6, 8, 4};
-    vector<int> ans = findMissingRepeatingNumbers1(a);
-    cout << "The repeating and missing numbers are: {"
-         <<"Repeating Number =>"<< ans[0] << ", " <<"Missing Nuber=> "<< ans[1] << "}\n";
+//  vector<int> a = {3, 1, 2, 7, 4, 6, 8, 4};
+//     vector<int> ans = findMissingRepeatingNumbers1(a);
+//     cout << "The repeating and missing numbers are: {"
+//          <<"Repeating Number =>"<< ans[0] << ", " <<"Missing Nuber=> "<< ans[1] << "}\n";
 
+// Count inversions in an array
+vector<int> a={5,4,3,2,1};
+int n;
+cin>>n;
+int ans=invers(a,n);
+cout<<"Cout of invers in an array => "<<ans<<endl;
     return 0;
 }
