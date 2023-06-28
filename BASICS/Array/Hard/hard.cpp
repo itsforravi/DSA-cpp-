@@ -351,8 +351,38 @@ vector<vector<int>> mergeOverlappingIntervals1(vector<vector<int>> &arr){
 	}
 	} 
 	return ans;
+}
+// Merge two Sorted Arrays Without Extra Space
+// Brute Force
+void marge(long long arr1[],long long arr2[],int n,int m){
+    long long arr3[n+m];
+    int left=0;
+    int right=0;
+    int index=0;
+    while (left<n && right<m)
+    {
+        if(arr1[left]<=arr2[right]){
+            arr3[index]=arr1[left];
+            index++,left++;
 
-	
+        }
+        else{
+            arr3[index]=arr2[right];
+            index++,right++;
+        }
+    }
+    while(left<n){
+        arr3[index++]=arr1[left++];
+    }
+    while(right<m){
+        arr3[index++]=arr2[right++];
+    }
+    for(int i=0;i<n+m;i++){
+        if(i<n) arr1[i]=arr3[i];
+        else arr2[i-n]=arr3[i];
+    }
+
+    
 }
 
 
@@ -465,12 +495,35 @@ int main(){
 
 
 // Merge Overlapping Sub-intervals
- vector<vector<int>> arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18},{19,22}};
-    vector<vector<int>> ans = mergeOverlappingIntervals1(arr);
-    cout << "The merged intervals are: " << "\n";
-    for (auto it : ans) {
-        cout << "[" << it[0] << ", " << it[1] << "] ";
-    }
-    cout << endl;
+//  vector<vector<int>> arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18},{19,22}};
+//     vector<vector<int>> ans = mergeOverlappingIntervals1(arr);
+//     cout << "The merged intervals are: " << "\n";
+//     for (auto it : ans) {
+//         cout << "[" << it[0] << ", " << it[1] << "] ";
+//     }
+//     cout << endl;
+
+long long arr1[]={1,3,5,7};
+long long arr2[]={0,2,8,9};
+int n=4,m=4;
+marge(arr1,arr2,n,m);
+cout<<"The merged arrays are: "<<endl;
+cout<<"arr1[]= ";
+ cout<<"[ ";
+for(int i=0;i<n;i++){
+   
+    cout<<arr1[i]<<" ";
+    
+}
+cout<<" ]";
+cout<<endl;
+
+cout<<"arr2[]= ";
+cout<<"[ ";
+for(int i=0;i<m;i++){
+    cout<<arr2[i]<<" ";
+}
+cout<<" ]";
+
     return 0;
 }
