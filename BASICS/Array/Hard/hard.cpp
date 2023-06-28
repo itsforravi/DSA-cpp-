@@ -642,8 +642,8 @@ int main(){
 // cout<<" ]";
 
 // Find the repeating and missing numbers
- vector<int> a = {3, 1, 2, 5, 4, 6, 7, 5};
-    vector<int> ans = findMissingRepeatingNumbers(a);
+ vector<int> a = {3, 1, 2, 5, 4, 6, 8, 4};
+    vector<int> ans = findMissingRepeatingNumbers1(a);
     cout << "The repeating and missing numbers are: {"
          <<"Repeating Number =>"<< ans[0] << ", " <<"Missing Nuber=> "<< ans[1] << "}\n";
 
