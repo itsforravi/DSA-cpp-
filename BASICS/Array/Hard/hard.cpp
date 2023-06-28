@@ -523,7 +523,8 @@ for (int i = 0; i < n; i++) {
 }
 
 // Count inversions in an array
-int invers(vector<int> &a,int n){
+// Brute force
+int Countinversion(vector<int> &a,int n){
     int cnt=0;
     for(int i=0;i<n;i++){
         for(int j=i+1;j<n;j++){
@@ -710,7 +711,7 @@ int main(){
 vector<int> a={5,4,3,2,1};
 int n;
 cin>>n;
-int ans=invers(a,n);
+int ans=Countinversion(a,n);
 cout<<"Cout of invers in an array => "<<ans<<endl;
     return 0;
 }
