@@ -385,6 +385,24 @@ void marge(long long arr1[],long long arr2[],int n,int m){
     
 }
 
+// Optmial Solution
+void marge1(long long arr1[],long long arr2[],int n,int m){
+    int left=n-1;
+    int right=0;
+    while(left>=0 && right <m){
+        if(arr1[left]>= arr2[right]){
+            swap(arr1[left],arr2[right]);
+            left--,right++;
+
+        }
+        else{
+            break;
+        }
+    }
+    sort(arr1,arr1+n);
+    sort(arr2,arr2+m);
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -503,10 +521,36 @@ int main(){
 //     }
 //     cout << endl;
 
+
+// Merge two Sorted Arrays Without Extra Space
+// Brute Force
+// long long arr1[]={1,3,5,7};
+// long long arr2[]={0,2,8,9};
+// int n=4,m=4;
+// marge(arr1,arr2,n,m);
+// cout<<"The merged arrays are: "<<endl;
+// cout<<"arr1[]= ";
+//  cout<<"[ ";
+// for(int i=0;i<n;i++){
+   
+//     cout<<arr1[i]<<" ";
+    
+// }
+// cout<<" ]";
+// cout<<endl;
+
+// cout<<"arr2[]= ";
+// cout<<"[ ";
+// for(int i=0;i<m;i++){
+//     cout<<arr2[i]<<" ";
+// }
+// cout<<" ]";
+
+// Optimal Solution
 long long arr1[]={1,3,5,7};
-long long arr2[]={0,2,8,9};
-int n=4,m=4;
-marge(arr1,arr2,n,m);
+long long arr2[]={0,2,8,9,4};
+int n=4,m=5;
+marge1(arr1,arr2,n,m);
 cout<<"The merged arrays are: "<<endl;
 cout<<"arr1[]= ";
  cout<<"[ ";
