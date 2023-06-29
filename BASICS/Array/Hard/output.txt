@@ -1,1 +1,1 @@
-Cout of invers in an array => 3
+Cout of invers in an array => 6
