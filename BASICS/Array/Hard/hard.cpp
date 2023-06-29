@@ -590,6 +590,25 @@ int numberOfInversions(vector<int>&a, int n) {
 }
 
 
+// Count Reverse Pairs
+int count(vector<int> &a,int n){
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]>2*a[j]) cnt++;
+        }
+    }
+    return cnt;
+}
+
+
+int team(vector <int> & skill, int n)
+{
+   return  count(skill,n);
+}
+
+
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -769,11 +788,20 @@ int main(){
 // cout<<"Cout of invers in an array => "<<ans<<endl;
 
 // Opitmal Solution
-vector<int> a={6,5,4,3,2,1};
+// vector<int> a={6,5,4,3,2,1};
+// int n;
+// cin>>n;
+// int ans=numberOfInversions(a,n);
+// cout<<"Cout of invers in an array => "<<ans<<endl;
+
+// // Count Reverse Pairs
+vector<int> a={4,1,2,3,1};
 int n;
 cin>>n;
-int ans=numberOfInversions(a,n);
+int ans=team(a,n);
 cout<<"Cout of invers in an array => "<<ans<<endl;
+
+
 
 
 
