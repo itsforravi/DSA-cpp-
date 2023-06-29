@@ -675,6 +675,20 @@ int team1(vector <int> & skill, int n)
 }
 
 
+// Maximum Product Subarray in an Array
+int subarrayWithMaxProduct(vector<int> &arr){
+	int pre=1,suff=1;
+	int maxi=INT_MIN;
+	int n=arr.size();
+	for(int i=0;i<n;i++){
+		if(pre==0) pre=1;
+		if(suff==0) suff=1;
+		pre=pre*arr[i];
+		suff=suff*arr[n-i-1];
+		maxi=max(maxi,max(pre,suff));
+	}
+	return maxi;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -862,12 +876,16 @@ int main(){
 // cout<<"Cout of invers in an array => "<<ans<<endl;
 
 // // Count Reverse Pairs
-vector<int> a={5,4,1,2,3,1};
-int n;
-cin>>n;
-int ans=team1(a,n);
-cout<<"Cout of invers in an array => "<<ans<<endl;
+// vector<int> a={5,4,1,2,3,1};
+// int n;
+// cin>>n;
+// int ans=team1(a,n);
+// cout<<"Cout of invers in an array => "<<ans<<endl;
 
+// Maximum Product Subarray in an Array
+vector<int> arr={1,2,-3,0,-4,-5};
+int ans=subarrayWithMaxProduct(arr);
+cout<<" Maximum Product Subarray in an Array=> "<<ans<<endl;
 
 
 

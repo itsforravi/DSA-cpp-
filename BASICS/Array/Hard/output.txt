@@ -1,1 +1,1 @@
-Cout of invers in an array => 6
+ Maximum Product Subarray in an Array=> 20
