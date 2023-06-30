@@ -1,1 +1,1 @@
- Search insert  in the array is => 3 
+The floor and ceil are: 8 10
