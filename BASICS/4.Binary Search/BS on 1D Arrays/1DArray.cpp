@@ -72,7 +72,23 @@ int upperBound(vector<int> &arr, int x, int n){
 }
 	
 // Search Insert Position
-
+ int searchInsert(vector<int>& arr, int m)
+{
+	int n=arr.size();
+	int low=0,high=n-1;
+	int ans=n;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]>=m){
+			ans=mid;
+			high=mid-1;
+		}
+		else{
+			low=mid+1;
+		}
+	}
+	return ans;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -108,14 +124,20 @@ int main(){
     // cout<<"Lower Bound Search in the array is => "<<ans<<" ";
 
 //Implement Upper Bound
-    vector<int> arr={3, 5, 8, 15, 19};
-    int target;
-    cin>>target;
-    int n=5;
-    int ans=upperBound(arr,n,target);
-    cout<<"Lower Bound Search in the array is => "<<ans<<" ";
+    // vector<int> arr={3, 5, 8, 15, 19};
+    // int target;
+    // cin>>target;
+    // int n=5;
+    // int ans=upperBound(arr,n,target);
+    // cout<<"Lower Bound Search in the array is => "<<ans<<" ";
 
 // Search Insert Position
+//    vector<int> arr={3, 5, 8, 15, 19};
+//     int target;
+//     cin>>target;
+   
+//     int ans=searchInsert(arr,target);
+//     cout<<" Search insert  in the array is => "<<ans<<" ";
 
 
 }

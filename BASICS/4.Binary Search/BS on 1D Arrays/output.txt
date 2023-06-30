@@ -1,1 +1,1 @@
-Lower Bound Search in the array is => 2 
+ Search insert  in the array is => 3 
