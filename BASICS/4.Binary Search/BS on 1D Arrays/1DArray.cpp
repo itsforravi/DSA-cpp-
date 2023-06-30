@@ -32,7 +32,7 @@ int search1(vector<int>& nums, int target) {
 
 }
 
-// Lower Bound
+//Implement Lower Bound
 int lowerBound(vector<int> arr, int n, int x) {
 	int low=0,high=n-1;
 	int ans=n;
@@ -50,6 +50,28 @@ int lowerBound(vector<int> arr, int n, int x) {
 	}
 	return ans;
 }
+
+//Implement Upper Bound
+int upperBound(vector<int> &arr, int x, int n){
+	
+	int low=0,high=n-1;
+	int ans=n;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]> x) {
+			ans=mid;
+			high=mid-1;
+		}
+		
+		else{
+			low=mid+1;
+		} 
+
+	}
+	return ans;
+}
+	
+
 
 
 int main(){
@@ -75,11 +97,21 @@ int main(){
     // int ans=search1(arr,target);
     // cout<<"Search in the array is => "<<ans<<" ";
 
-    // Lower bound
-    vector<int> arr={3, 5, 8, 15, 19};
+    //Implement Lower bound
+    // vector<int> arr={3, 5, 8, 15, 19};
+    // int target;
+    // cin>>target;
+    // int n=5;
+    // int ans=lowerBound(arr,n,target);
+    // cout<<"Lower Bound Search in the array is => "<<ans<<" ";
+
+//Implement Upper Bound
+vector<int> arr={3, 5, 8, 15, 19};
     int target;
     cin>>target;
     int n=5;
-    int ans=lowerBound(arr,n,target);
+    int ans=upperBound(arr,n,target);
     cout<<"Lower Bound Search in the array is => "<<ans<<" ";
+
+
 }
