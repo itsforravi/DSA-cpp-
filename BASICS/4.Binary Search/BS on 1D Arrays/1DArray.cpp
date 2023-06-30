@@ -71,7 +71,7 @@ int upperBound(vector<int> &arr, int x, int n){
 	return ans;
 }
 	
-
+// Search Insert Position
 
 
 int main(){
@@ -81,7 +81,8 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    // Binary Search to find in X sorted Array
+
+// Binary Search to find in X sorted Array
 // Iterative Implementation
     // vector<int> arr={3,4,5,6,7,8,9,10,11,12};
     // int target;
@@ -90,14 +91,15 @@ int main(){
     // cout<<"Search in the array is => "<<ans<<" ";
 
 
-// Recursive  Implementation
+ // Recursive  Implementation
     // vector<int> arr={3,4,5,6,7,8,9,10,11,12};
     // int target;
     // cin>>target;
     // int ans=search1(arr,target);
     // cout<<"Search in the array is => "<<ans<<" ";
 
-    //Implement Lower bound
+
+//Implement Lower bound
     // vector<int> arr={3, 5, 8, 15, 19};
     // int target;
     // cin>>target;
@@ -106,12 +108,14 @@ int main(){
     // cout<<"Lower Bound Search in the array is => "<<ans<<" ";
 
 //Implement Upper Bound
-vector<int> arr={3, 5, 8, 15, 19};
+    vector<int> arr={3, 5, 8, 15, 19};
     int target;
     cin>>target;
     int n=5;
     int ans=upperBound(arr,n,target);
     cout<<"Lower Bound Search in the array is => "<<ans<<" ";
+
+// Search Insert Position
 
 
 }
