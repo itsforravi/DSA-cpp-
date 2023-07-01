@@ -133,6 +133,49 @@ pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
 	
 }
 
+// First and Last occurance
+int lowerBound1(vector<int> arr, int n, int x) {
+	int low=0,high=n-1;
+	int ans=n;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]>= x) {
+			ans=mid;
+			high=mid-1;
+		}
+		
+		else{
+			low=mid+1;
+		} 
+
+	}
+	return ans;
+}
+int upperBound1(vector<int> &arr, int n, int x){
+	
+	int low=0,high=n-1;
+	int ans=n;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]> x) {
+			ans=mid;
+			high=mid-1;
+		}
+		
+		else{
+			low=mid+1;
+		} 
+
+	}
+	return ans;
+}
+pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k)
+{
+    int lb=lowerBound1( arr, n, k);
+    if(lb==n || arr[lb]!=k) return {-1,-1};
+    return {lb,upperBound1(arr,n,k)-1};
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -185,10 +228,17 @@ int main(){
 
 
 // Floor and Ceil in Sorted Array
-int arr[] = {3, 4, 4, 7, 8, 10};
-	int n = 6, x = 9;
-	pair<int, int> ans = getFloorAndCeil(arr, n, x);
-	cout << "The floor and ceil are: " << ans.first
+    //  int arr[] = {3, 4, 4, 7, 8, 10};
+	// int n = 6, x = 9;
+	// pair<int, int> ans = getFloorAndCeil(arr, n, x);
+	// cout << "The floor and ceil are: " << ans.first
+	//      << " " << ans.second << endl;
+
+//  firstAndLastPosition 
+vector<int> arr = {3, 4, 4, 7, 8, 10};
+	int n = 6, k = 9;
+	pair<int, int> ans = firstAndLastPosition(arr, n, k);
+	cout << "firstAndLastPosition of the arry: " << ans.first
 	     << " " << ans.second << endl;
          return 0;
 }
