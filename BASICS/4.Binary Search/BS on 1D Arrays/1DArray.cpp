@@ -176,6 +176,25 @@ pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k)
     return {lb,upperBound1(arr,n,k)-1};
 }
 
+// first occurance
+int first(int arr[],int n,int k){
+	int low=0,high=n-1;
+	int first=-1;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]==k){
+			first=mid;
+			high=mid-1;
+		}
+		else if(arr[mid]<k){
+          low=mid+1;
+		}
+		else{
+            high=mid-1;
+		}
+	}
+	return first;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -235,10 +254,17 @@ int main(){
 	//      << " " << ans.second << endl;
 
 //  firstAndLastPosition 
-vector<int> arr = {3, 4, 4, 7,8,8, 8, 10};
-	int n = 8, k = 8;
-	pair<int, int> ans = firstAndLastPosition(arr, n, k);
-	cout << "firstAndLastPosition of the arry: " << ans.first
-	     << " " << ans.second << endl;
-         return 0;
+// vector<int> arr = {3, 4, 4, 7,8,8, 8, 10};
+// 	int n = 8, k = 8;
+// 	pair<int, int> ans = firstAndLastPosition(arr, n, k);
+// 	cout << "firstAndLastPosition of the arry: " << ans.first
+// 	     << " " << ans.second << endl;
+//          return 0;
+
+// first occurance
+int arr[]={2,3,4,4,5,6,6,7,8};
+int n=9;
+int k=6;
+int ans=first(arr,n,k);
+cout<<" First occurance in the array=> "<<ans<<" ";
 }

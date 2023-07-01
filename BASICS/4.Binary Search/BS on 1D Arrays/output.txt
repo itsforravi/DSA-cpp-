@@ -1,1 +1,1 @@
-firstAndLastPosition of the arry: 4 6
+ First occurance in the array=> 5 
