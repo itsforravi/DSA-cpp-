@@ -1,1 +1,1 @@
- First occurance in the array=> 5 
+ last occurance in the array=> 8 

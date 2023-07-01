@@ -195,7 +195,25 @@ int first(int arr[],int n,int k){
 	}
 	return first;
 }
-
+// Last occurance
+int last(int arr[],int n,int k){
+	int low=0,high=n-1;
+	int last=-1;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]==k){
+			last=mid;
+			low=mid+1;
+		}
+		else if(arr[mid]<k){
+          low=mid+1;
+		}
+		else{
+            high=mid-1;
+		}
+	}
+	return last;
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -262,9 +280,19 @@ int main(){
 //          return 0;
 
 // first occurance
+// int arr[]={2,3,4,4,5,6,6,7,8};
+// int n=9;
+// int k=6;
+// int ans=first(arr,n,k);
+// cout<<" First occurance in the array=> "<<ans<<" ";
+
+
+// Last Occurance
 int arr[]={2,3,4,4,5,6,6,7,8};
 int n=9;
-int k=6;
-int ans=first(arr,n,k);
-cout<<" First occurance in the array=> "<<ans<<" ";
+int k=8;
+int ans=last(arr,n,k);
+cout<<" last occurance in the array=> "<<ans<<" ";
+return 0;
+
 }
