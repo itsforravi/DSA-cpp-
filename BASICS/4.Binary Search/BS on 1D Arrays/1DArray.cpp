@@ -235,8 +235,8 @@ int main(){
 	//      << " " << ans.second << endl;
 
 //  firstAndLastPosition 
-vector<int> arr = {3, 4, 4, 7, 8, 10};
-	int n = 6, k = 9;
+vector<int> arr = {3, 4, 4, 7,8,8, 8, 10};
+	int n = 8, k = 8;
 	pair<int, int> ans = firstAndLastPosition(arr, n, k);
 	cout << "firstAndLastPosition of the arry: " << ans.first
 	     << " " << ans.second << endl;
