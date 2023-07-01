@@ -1,1 +1,1 @@
- last occurance in the array=> 8 
+The number of occurrences is: 2 

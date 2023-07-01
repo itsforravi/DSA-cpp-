@@ -214,6 +214,65 @@ int last(int arr[],int n,int k){
 	}
 	return last;
 }
+
+// Count Occurrences in Sorted Array
+
+int firstOccurance(vector<int> arr, int n, int x) {
+	int low=0,high=n-1;
+	int first=-1;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]== x) {
+			first=mid;
+			high=mid-1;
+		}
+		
+		else if(arr[mid]<x){
+			low=mid+1;
+		} 
+		else{
+			high=mid-1;
+		}
+
+	}
+	return first;
+}
+int lastOccurance(vector<int> &arr, int n, int x){
+	
+	int low=0,high=n-1;
+	int last=-1;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]== x) {
+			last=mid;
+			low=mid+1;
+		}
+		
+		else if(arr[mid]<x){
+			low=mid+1;
+		} 
+		else{
+			high=mid-1;
+		}
+
+	}
+	return last;
+}
+pair<int, int> firstAndLastPosition1(vector<int>& arr, int n, int k)
+{
+    int lb=firstOccurance( arr, n, k);
+    if(lb==-1) return {-1,-1};
+	int up=lastOccurance(arr,n,k);
+    return {lb,up};
+}
+int count1(vector<int>& arr, int n, int x) {
+	pair<int, int> ans= firstAndLastPosition1(arr,  n,  x);
+	if(ans.first==-1) return 0;
+	return ans.second-ans.first+1;
+}
+
+
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -280,6 +339,7 @@ int main(){
 //          return 0;
 
 // first occurance
+
 // int arr[]={2,3,4,4,5,6,6,7,8};
 // int n=9;
 // int k=6;
@@ -288,11 +348,27 @@ int main(){
 
 
 // Last Occurance
-int arr[]={2,3,4,4,5,6,6,7,8};
+
+// int arr[]={2,3,4,4,5,6,6,7,8};
+// int n=9;
+// int k=8;
+// int ans=last(arr,n,k);
+// cout<<" last occurance in the array=> "<<ans<<" ";
+
+// Count Occurrences in Sorted Array
+
+
+vector<int> arr={2,3,4,4,5,6,6,7,8};
 int n=9;
-int k=8;
-int ans=last(arr,n,k);
-cout<<" last occurance in the array=> "<<ans<<" ";
+int k=6;
+int ans=count1(arr,n,k);
+cout<<"The number of occurrences is: "<<ans<<" ";
+
+
+
+
+
+
 return 0;
 
 }
