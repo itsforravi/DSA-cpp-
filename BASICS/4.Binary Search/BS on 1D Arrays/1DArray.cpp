@@ -334,6 +334,7 @@ int searchRotateII(vector<int>& arr, int k)
 }
 
 // Minimum in Rotated Sorted Array
+// Time comlexity nearabout=O(N)
 int findMin(vector<int>& arr)
 {
 	int n=arr.size();
@@ -354,7 +355,7 @@ int findMin(vector<int>& arr)
 }
 
 // // Minimum in Rotated Sorted Array
-// Optimized for better comlexity;
+// Optimized for better comlexity;=O(log N)
 int findMin1(vector<int>& arr)
 {
 	int n=arr.size();
