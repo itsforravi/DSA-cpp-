@@ -271,6 +271,34 @@ int count1(vector<int>& arr, int n, int x) {
 	return ans.second-ans.first+1;
 }
 
+// Search Element in a Rotated Sorted Array
+
+int search(vector<int>& arr, int n, int k)
+{
+    int low=0,high=n-1;
+    while(low<=high){
+        int mid=(low+high)/2;
+        if(arr[mid]==k) return  mid;
+        if(arr[low]<=arr[mid]){
+          if (arr[low] <= k && k <= arr[mid]) {
+            high = mid - 1;
+          } else {
+            low = mid + 1;
+          }
+        }
+
+        else {
+          if (arr[mid] <= k && k <= arr[high]) {
+            low = mid + 1;
+          }
+           else {
+            high = mid - 1;
+          }
+        }
+        
+    }
+    return -1;
+}
 
 
 int main(){
@@ -357,14 +385,19 @@ int main(){
 
 // Count Occurrences in Sorted Array
 
+// vector<int> arr={2,3,4,4,5,6,6,7,8};
+// int n=9;
+// int k=6;
+// int ans=count1(arr,n,k);
+// cout<<"The number of occurrences is: "<<ans<<" ";
 
-vector<int> arr={2,3,4,4,5,6,6,7,8};
+// Search Element in a Rotated Sorted Array
+
+vector<int> arr={7,8,9,1,2,3,4,5,6};
 int n=9;
-int k=6;
-int ans=count1(arr,n,k);
-cout<<"The number of occurrences is: "<<ans<<" ";
-
-
+int k=1;
+int ans=search(arr,n,k);
+cout<<"Search Element in a Rotated Sorted Array: "<<ans<<" ";
 
 
 
