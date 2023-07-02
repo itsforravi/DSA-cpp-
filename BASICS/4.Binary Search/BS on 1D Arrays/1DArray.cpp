@@ -380,6 +380,60 @@ int findMin1(vector<int>& arr)
 }
 
 // Find out how many times the array has been rotated
+int findKRotation(vector<int> &arr){
+    //   int n=
+	int low=0,high=arr.size()-1;
+	int ans=INT_MAX;
+    int index=-1;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[low]<=arr[high]){
+			if(arr[low]<ans){
+                index=low;
+                ans=arr[low];
+            }
+			break;
+		}
+		if(arr[low]<=arr[mid]){
+			if(arr[low]<ans){
+                index=low;
+                ans=arr[low];
+            }
+			low=mid+1;
+		}
+		else{
+			if(arr[mid]<ans){
+                index=mid;
+                ans=arr[mid];
+            }
+			high=mid-1;
+		}
+	}
+	return index;
+}
+
+// Search Single Element in a sorted array
+int singleNonDuplicate(vector<int>& arr)
+{
+	int n=arr.size();
+	if(n==1) return arr[0];
+	if(arr[0]!=arr[1] ) return arr[0];
+	if(arr[n-1]!=arr[n-2]) return arr[n-1];
+	int low=1,high=n-2;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]==arr[mid+1] && arr[mid]==arr[mid-1]) return arr[mid];
+		if((mid%2==1 && arr[mid-1]==arr[mid]) || (mid%2==0 && arr[mid+1]==arr[mid])){
+			low=mid+1;
+		} 
+		// return arr[mid];
+           else{
+			   high=mid-1;
+		   }
+	}
+return-1;
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -494,12 +548,20 @@ int main(){
 //         cout << "Target is present in the array.\n";
 
 // Minimum in Rotated Sorted Array
-vector<int> arr={7, 8, 0,1, 2, 3, 4, 5, 6};
-int ans=findMin1(arr);
-cout<<"Minimun in the array : "<<ans<<" ";
+// vector<int> arr={7, 8, 0,1, 2, 3, 4, 5, 6};
+// int ans=findMin1(arr);
+// cout<<"Minimun in the array : "<<ans<<" ";
 
 // Find out how many times the array has been rotated
+// vector<int> arr={4, 5, 6, 7, 0, 1, 2, 3};
+// int ans=findKRotation(arr);
+// cout<<"The array has been rotated: "<<ans<<" times ";
 
+// Search Single Element in a sorted array
+
+vector<int> arr={1,1,2,2,3,3,4,5,5,6,6,7,7};
+int ans=singleNonDuplicate(arr);
+cout<<"Single Element in a sorted array: "<<ans<<" ";
 
 
 return 0;
