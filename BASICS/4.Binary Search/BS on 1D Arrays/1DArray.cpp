@@ -379,6 +379,8 @@ int findMin1(vector<int>& arr)
 	return ans;
 }
 
+// Find out how many times the array has been rotated
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -495,6 +497,9 @@ int main(){
 vector<int> arr={7, 8, 0,1, 2, 3, 4, 5, 6};
 int ans=findMin1(arr);
 cout<<"Minimun in the array : "<<ans<<" ";
+
+// Find out how many times the array has been rotated
+
 
 
 return 0;
