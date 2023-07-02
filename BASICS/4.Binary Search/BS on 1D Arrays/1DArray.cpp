@@ -301,8 +301,9 @@ int search(vector<int>& arr, int n, int k)
 }
 
 // Search Element in Rotated Sorted Array II
-int searchRotateII(vector<int>& arr, int n, int k)
+int searchRotateII(vector<int>& arr, int k)
 {
+	int n=arr.size();
     int low=0,high=n-1;
     while(low<=high){
         int mid=(low+high)/2;
@@ -435,9 +436,10 @@ int main(){
 // Search Element in Rotated Sorted Array II
 
 vector<int> arr={7, 8, 1, 2, 3, 3, 3, 4, 5, 6};
-int n=10;
-int k=3;
-int ans=searchRotateII(arr,n,k);
+
+int k;
+cin>>k;
+int ans=searchRotateII(arr,k);
 // cout<<"Search Element in a Rotated Sorted Array II: "<<ans<<" ";
  if (!ans)
         cout << "Target is not present.\n";
