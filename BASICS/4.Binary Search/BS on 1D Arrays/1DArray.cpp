@@ -434,6 +434,29 @@ int singleNonDuplicate(vector<int>& arr)
 return-1;
 }
 
+//Peak element in Array
+ int peakEleOptimal(int arr[], int n) {
+  int start = 0, end = n - 1;
+
+  while (start < end) {
+    int mid = (start + end) / 2;
+
+    if (mid == 0)
+      return arr[0] >= arr[1] ? arr[0] : arr[1];
+
+    if (mid == n - 1)
+      return arr[n - 1] >= arr[n - 2] ? arr[n - 1] : arr[n - 2];
+    if (arr[mid] >= arr[mid - 1] && arr[mid] >= arr[mid + 1])
+      return arr[mid];
+    if (arr[mid] < arr[mid - 1])
+      end = mid - 1;
+    else
+      start = mid + 1;
+  }
+
+  return arr[start];
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -559,9 +582,15 @@ int main(){
 
 // Search Single Element in a sorted array
 
-vector<int> arr={1,1,2,2,3,3,4,5,5,6,6,7,7};
-int ans=singleNonDuplicate(arr);
-cout<<"Single Element in a sorted array: "<<ans<<" ";
+// vector<int> arr={1,1,2,2,3,3,4,5,5,6,6,7,7};
+// int ans=singleNonDuplicate(arr);
+// cout<<"Single Element in a sorted array: "<<ans<<" ";
+
+//Peak element in Array
+int arr[]={1,2,3,4,5,6,7,8,1};
+ int n = sizeof(arr) / sizeof(arr[0]);
+int ans=peakEleOptimal(arr,n);
+cout<<"Peak Element in the Array: "<<ans <<" ";
 
 
 return 0;

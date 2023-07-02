@@ -1,1 +1,1 @@
-Single Element in a sorted array: -1 
+Peak Element in the Array: 8 
