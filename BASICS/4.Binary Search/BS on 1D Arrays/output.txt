@@ -1,1 +1,1 @@
-Search Element in a Rotated Sorted Array: 3 
+Target is present in the array.

@@ -300,6 +300,38 @@ int search(vector<int>& arr, int n, int k)
     return -1;
 }
 
+// Search Element in Rotated Sorted Array II
+int searchRotateII(vector<int>& arr, int n, int k)
+{
+    int low=0,high=n-1;
+    while(low<=high){
+        int mid=(low+high)/2;
+        if(arr[mid]==k) return  mid;
+		if(arr[low]==arr[mid] && arr[mid]==arr[high]){
+			low++,high--;
+			continue;
+		}
+        if(arr[low]<=arr[mid]){
+          if (arr[low] <= k && k <= arr[mid]) {
+            high = mid - 1;
+          } else {
+            low = mid + 1;
+          }
+        }
+
+        else {
+          if (arr[mid] <= k && k <= arr[high]) {
+            low = mid + 1;
+          }
+           else {
+            high = mid - 1;
+          }
+        }
+        
+    }
+    return false;
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -393,12 +425,24 @@ int main(){
 
 // Search Element in a Rotated Sorted Array
 
-vector<int> arr={7,8,9,1,2,3,4,5,6};
-int n=9;
-int k=1;
-int ans=search(arr,n,k);
-cout<<"Search Element in a Rotated Sorted Array: "<<ans<<" ";
+// vector<int> arr={7,8,9,1,2,3,4,5,6};
+// int n=9;
+// int k=1;
+// int ans=search(arr,n,k);
+// cout<<"Search Element in a Rotated Sorted Array: "<<ans<<" ";
 
+
+// Search Element in Rotated Sorted Array II
+
+vector<int> arr={7, 8, 1, 2, 3, 3, 3, 4, 5, 6};
+int n=10;
+int k=3;
+int ans=searchRotateII(arr,n,k);
+// cout<<"Search Element in a Rotated Sorted Array II: "<<ans<<" ";
+ if (!ans)
+        cout << "Target is not present.\n";
+    else
+        cout << "Target is present in the array.\n";
 
 
 
