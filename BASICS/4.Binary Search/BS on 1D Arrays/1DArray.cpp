@@ -353,6 +353,30 @@ int findMin(vector<int>& arr)
 	return ans;
 }
 
+// // Minimum in Rotated Sorted Array
+// Optimized for better comlexity;
+int findMin1(vector<int>& arr)
+{
+	int n=arr.size();
+	int low=0,high=n-1;
+	int ans=INT_MAX;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[low]<=arr[high]){
+			ans=min(ans,arr[low]);
+			break;
+		}
+		if(arr[low]<=arr[mid]){
+			ans=min(ans,arr[low]);
+			low=mid+1;
+		}
+		else{
+			ans=min(ans,arr[mid]);
+			high=mid-1;
+		}
+	}
+	return ans;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -468,7 +492,7 @@ int main(){
 
 // Minimum in Rotated Sorted Array
 vector<int> arr={7, 8, 0,1, 2, 3, 4, 5, 6};
-int ans=findMin(arr);
+int ans=findMin1(arr);
 cout<<"Minimun in the array : "<<ans<<" ";
 
 
