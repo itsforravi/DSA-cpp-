@@ -435,27 +435,25 @@ return-1;
 }
 
 //Peak element in Array
- int peakEleOptimal(int arr[], int n) {
-  int start = 0, end = n - 1;
+int findPeakElement(vector<int> &arr) {
+    int n=arr.size();
+    if(n==0) return 0;
+    if(arr[0]>arr[1]) return 0;
+    if(arr[n-1]>arr[n-2]) return n-1;
+    int low=1,high=n-2;
+    while(low<=high){
+        int mid=(low+high)/2;
+        if(arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1])
+        return mid;
+        else if(arr[mid]> arr[mid-1])
+        low=mid+1;
+        else 
+        high=mid-1;
+    }
+    return -1;
 
-  while (start < end) {
-    int mid = (start + end) / 2;
-
-    if (mid == 0)
-      return arr[0] >= arr[1] ? arr[0] : arr[1];
-
-    if (mid == n - 1)
-      return arr[n - 1] >= arr[n - 2] ? arr[n - 1] : arr[n - 2];
-    if (arr[mid] >= arr[mid - 1] && arr[mid] >= arr[mid + 1])
-      return arr[mid];
-    if (arr[mid] < arr[mid - 1])
-      end = mid - 1;
-    else
-      start = mid + 1;
-  }
-
-  return arr[start];
 }
+
 
 
 int main(){
@@ -587,9 +585,9 @@ int main(){
 // cout<<"Single Element in a sorted array: "<<ans<<" ";
 
 //Peak element in Array
-int arr[]={1,2,3,4,5,6,7,8,1};
- int n = sizeof(arr) / sizeof(arr[0]);
-int ans=peakEleOptimal(arr,n);
+vector<int> arr={1,2,3,4,5,6,7,8,9,1};
+//  int n = sizeof(arr) / sizeof(arr[0]);
+int ans=findPeakElement(arr);
 cout<<"Peak Element in the Array: "<<ans <<" ";
 
 
