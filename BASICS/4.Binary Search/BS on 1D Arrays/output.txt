@@ -1,1 +1,1 @@
-Peak Element in the Array: 8 
+Square root of a number: 6 

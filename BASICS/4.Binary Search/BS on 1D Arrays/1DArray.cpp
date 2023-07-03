@@ -454,6 +454,22 @@ int findPeakElement(vector<int> &arr) {
 
 }
 
+// Find square root of a number in log…
+int floorSqrt(int n)
+{
+    int low=1,high=n;
+    while(low<=high){
+        long long mid=(low+high)/2;
+        long long val=(mid*mid);
+        if(val<=n){
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    return high;
+}
 
 
 int main(){
@@ -585,11 +601,17 @@ int main(){
 // cout<<"Single Element in a sorted array: "<<ans<<" ";
 
 //Peak element in Array
-vector<int> arr={1,2,3,4,5,6,7,8,9,1};
-//  int n = sizeof(arr) / sizeof(arr[0]);
-int ans=findPeakElement(arr);
-cout<<"Peak Element in the Array: "<<ans <<" ";
+// vector<int> arr={1,2,3,4,5,6,7,8,9,1};
+// //  int n = sizeof(arr) / sizeof(arr[0]);
+// int ans=findPeakElement(arr);
+// cout<<"Peak Element in the Array: "<<ans <<" ";
 
+
+// // Find square root of a number in log…
+int n;
+cin>>n;
+int ans=floorSqrt(n);
+cout<<"Square root of a number: "<<ans<<" ";
 
 return 0;
 
