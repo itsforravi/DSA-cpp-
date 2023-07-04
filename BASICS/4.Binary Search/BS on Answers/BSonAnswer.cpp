@@ -84,7 +84,7 @@ int minimumRateToEatBananas(vector<int> v, int h) {
 
 
 
-bool possible(vector<int> & arr,int day,int m,int k){
+bool possible(vector<int> & arr,int day,int k,int m){
 	int n=arr.size();
 	int cnt=0;
 	int noofB=0;
