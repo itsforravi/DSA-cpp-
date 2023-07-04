@@ -195,6 +195,24 @@ int leastWeightCapacity(vector<int> &weights, int d)
 }
 
 
+// Kth Missing Positive Number
+int missingK(vector < int > vec, int n, int k) {
+   int low=0,high=n-1;
+   while(low<=high){
+       int mid=(low+high)/2;
+       int missing=vec[mid]-(mid+1);
+       if(missing<k){
+           low=mid+1;
+       }
+       else{
+           high=mid-1;
+       }
+   }
+   return (high+1+k);
+}
+
+
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -251,14 +269,26 @@ int main(){
 
 
 // Capacity to Ship Packages within Days
-vector<int> arr={1,2,3,4,5,6,7,8,9,10};
-int cap=15;
-int ans=leastWeightCapacity(arr,cap);
+// vector<int> arr={1,2,3,4,5,6,7,8,9,10};
+// int cap=15;
+// int ans=leastWeightCapacity(arr,cap);
+// if(ans==-1){
+//     cout<<"We cannot  Ship Packages within Days\n";
+// }
+// else{
+//     cout<<"We can Ship Packages within : "<<ans<<" days ";
+// }
+
+// Kth Missing Positive Number
+vector<int> arr={2,3,4,7,9,11};
+int n=sizeof(arr)/sizeof(arr[0]);
+int k1=6;
+int ans=missingK(arr,n,k1);
 if(ans==-1){
-    cout<<"We cannot  Ship Packages within Days\n";
+    cout<<"We cannot  kth missing number \n";
 }
 else{
-    cout<<"We can Ship Packages within : "<<ans<<" days ";
+    cout<<"We can kth missing number : "<<ans<<"  ";
 }
 
     return 0;
