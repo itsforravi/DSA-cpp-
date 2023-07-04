@@ -1,1 +1,1 @@
-We can find minimum divisor: 4 
+We can Ship Packages within : 10 days 

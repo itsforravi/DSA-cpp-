@@ -155,6 +155,44 @@ int smallestDivisor(vector<int>& arr, int limit)
 	return low;
 }
 
+// Capacity to Ship Packages within D Days
+
+int sumofday(vector<int> &weights,int cap){
+    int n=weights.size();
+    int days=1,load=0;
+    for(int i=0;i<n;i++){
+        if(weights[i]+load>cap){
+            days +=1;
+            load=weights[i];
+        }
+        else{
+            load+=weights[i];
+        }
+    }
+    return days;
+}
+
+
+
+
+int leastWeightCapacity(vector<int> &weights, int d)
+{
+   
+    int low= *max_element(weights.begin(),weights.end());
+    int high= accumulate(weights.begin(),weights.end(),0);
+    while(low<=high){
+        int mid=(low+high)/2;
+        int numberofDays=sumofday(weights,mid);
+        if(numberofDays<=d){
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
+
+    }
+    return low;
+}
 
 
 
@@ -201,14 +239,26 @@ int main(){
 
 // Find the Smallest Divisor Given a Threshold
 
-vector<int> arr={1, 2, 3, 4, 5,6};
-int limit=8;
-int ans=smallestDivisor(arr,limit);
+// vector<int> arr={1, 2, 3, 4, 5,6};
+// int limit=8;
+// int ans=smallestDivisor(arr,limit);
+// if(ans==-1){
+//     cout<<"We cannot find minimum divisor\n";
+// }
+// else{
+//     cout<<"We can find minimum divisor: "<<ans<<" ";
+// }
+
+
+// Capacity to Ship Packages within Days
+vector<int> arr={1,2,3,4,5,6,7,8,9,10};
+int cap=15;
+int ans=leastWeightCapacity(arr,cap);
 if(ans==-1){
-    cout<<"We cannot find minimum divisor\n";
+    cout<<"We cannot  Ship Packages within Days\n";
 }
 else{
-    cout<<"We can find minimum divisor: "<<ans<<" ";
+    cout<<"We can Ship Packages within : "<<ans<<" days ";
 }
 
     return 0;
