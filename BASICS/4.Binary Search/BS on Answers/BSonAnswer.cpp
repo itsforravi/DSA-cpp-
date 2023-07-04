@@ -9,7 +9,7 @@ int floorSqrt(int n)
     while(low<=high){
         long long mid=(low+high)/2;
         long long val=(mid*mid);
-        if(val<=n){
+        if(val<=(long long)(n)){
             low=mid+1;
         }
         else{
@@ -92,10 +92,10 @@ int main(){
     #endif
 
 // // Find square root of a number in log…
-// int n;
-// cin>>n;
-// int ans=floorSqrt(n);
-// cout<<"Square root of a number: "<<ans<<" ";
+int n;
+cin>>n;
+int ans=floorSqrt(n);
+cout<<"Square root of a number: "<<ans<<" ";
 
 // Nth Root of a Number using Binary Search
 // int n=4,m=27;
@@ -104,11 +104,11 @@ int main(){
 // cout<<"Nth Root of a Number using Binary Search: "<<ans<<" ";
 
 // // Koko Eating Bananas
-vector<int> v={3,4,7,13};
-int h=7;
-// cin>>h;
-int ans=minimumRateToEatBananas(v,h);
-cout<<"Koko Eating Bananas: "<<ans<<" Bananas/Hrs. ";
+// vector<int> v={3,4,7,13};
+// int h=7;
+// // cin>>h;
+// int ans=minimumRateToEatBananas(v,h);
+// cout<<"Koko Eating Bananas: "<<ans<<" Bananas/Hrs. ";
 
     return 0;
 }
