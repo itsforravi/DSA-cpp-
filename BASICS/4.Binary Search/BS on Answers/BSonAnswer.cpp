@@ -80,6 +80,53 @@ int minimumRateToEatBananas(vector<int> v, int h) {
  return low;
 }
 
+// Minimum days to make M bouquets
+
+
+
+bool possible(vector<int> & arr,int day,int m,int k){
+	int n=arr.size();
+	int cnt=0;
+	int noofB=0;
+	for(int i=0;i<n;i++){
+		if(arr[i]<=day){
+			cnt++;
+		}
+		else{
+			noofB+=(cnt/k);
+			cnt=0;
+		}
+	}
+	noofB +=(cnt/k);
+	return noofB>=m;
+}
+
+
+
+
+int roseGarden(vector<int> arr, int k, int m)
+{
+	long long val=k*1LL*m*1LL;
+	int n=arr.size();
+	if(val>n) return -1;
+	int mini=INT_MAX,maxi=INT_MAX;
+	for(int i=0;i<n;i++){
+		mini=min(mini,arr[i]);
+		maxi=max(maxi,arr[i]);
+	}
+	int low=mini,high=maxi;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(possible(arr,mid,k,m)){
+			high=mid-1;
+		}
+		else{
+			low=mid+1;
+		}
+
+	}
+	return low;
+}
 
 
 
@@ -92,10 +139,10 @@ int main(){
     #endif
 
 // // Find square root of a number in log…
-int n;
-cin>>n;
-int ans=floorSqrt(n);
-cout<<"Square root of a number: "<<ans<<" ";
+// int n;
+// cin>>n;
+// int ans=floorSqrt(n);
+// cout<<"Square root of a number: "<<ans<<" ";
 
 // Nth Root of a Number using Binary Search
 // int n=4,m=27;
@@ -109,6 +156,18 @@ cout<<"Square root of a number: "<<ans<<" ";
 // // cin>>h;
 // int ans=minimumRateToEatBananas(v,h);
 // cout<<"Koko Eating Bananas: "<<ans<<" Bananas/Hrs. ";
+
+// Minimum days to make M bouquets
+vector<int> arr={7, 7, 7, 7, 13, 11, 12, 7};
+int m=2;
+int k=4;
+int ans=roseGarden(arr,m,k);
+if(ans==-1){
+    cout<<"We cannot make m bouquets.\n";
+}
+else{
+    cout<<"We can make bouquets on a days: "<<ans<<" ";
+}
 
     return 0;
 }
