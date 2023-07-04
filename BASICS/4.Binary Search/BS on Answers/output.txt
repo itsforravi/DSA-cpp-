@@ -1,1 +1,1 @@
-We can make bouquets on a days: 13 
+We can find minimum divisor: 4 

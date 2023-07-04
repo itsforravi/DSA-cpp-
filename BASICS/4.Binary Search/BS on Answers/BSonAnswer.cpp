@@ -109,7 +109,7 @@ int roseGarden(vector<int> arr, int k, int m)
 	long long val=k*1LL*m*1LL;
 	int n=arr.size();
 	if(val>n) return -1;
-	int mini=INT_MAX,maxi=INT_MAX;
+	int mini=INT_MAX,maxi=INT_MIN;
 	for(int i=0;i<n;i++){
 		mini=min(mini,arr[i]);
 		maxi=max(maxi,arr[i]);
@@ -127,6 +127,34 @@ int roseGarden(vector<int> arr, int k, int m)
 	}
 	return low;
 }
+
+// Find the Smallest Divisor Given a Threshold
+int sumDby(vector<int> &arr,int div){
+	int n = arr.size();
+	int sum = 0;
+	for(int i = 0 ; i < n ; i++){
+		sum += ceil ((double)(arr[i]) / (double)(div));
+	}
+	return sum;
+}
+
+
+int smallestDivisor(vector<int>& arr, int limit)
+{  int n = arr.size();
+	if(n > limit) return -1;
+	int low = 1,high =  *max_element(arr.begin(),arr.end());
+	while(low <= high){
+		int mid = (low+high)/2;
+		if(sumDby(arr,mid) <= limit){
+			 high=mid-1;
+		}
+		else{
+			 low=mid+1;
+		}
+	}
+	return low;
+}
+
 
 
 
@@ -158,15 +186,29 @@ int main(){
 // cout<<"Koko Eating Bananas: "<<ans<<" Bananas/Hrs. ";
 
 // Minimum days to make M bouquets
-vector<int> arr={7, 7, 7, 7, 13, 11, 12, 7};
-int m=2;
-int k=4;
-int ans=roseGarden(arr,m,k);
+// vector<int> arr={7, 7, 7, 7, 13, 11, 12, 7};
+// int m=2;
+// int k=4;
+// int ans=roseGarden(arr,m,k);
+// if(ans==-1){
+//     cout<<"We cannot make m bouquets.\n";
+// }
+// else{
+//     cout<<"We can make bouquets on a days: "<<ans<<" ";
+// }
+
+
+
+// Find the Smallest Divisor Given a Threshold
+
+vector<int> arr={1, 2, 3, 4, 5,6};
+int limit=8;
+int ans=smallestDivisor(arr,limit);
 if(ans==-1){
-    cout<<"We cannot make m bouquets.\n";
+    cout<<"We cannot find minimum divisor\n";
 }
 else{
-    cout<<"We can make bouquets on a days: "<<ans<<" ";
+    cout<<"We can find minimum divisor: "<<ans<<" ";
 }
 
     return 0;
