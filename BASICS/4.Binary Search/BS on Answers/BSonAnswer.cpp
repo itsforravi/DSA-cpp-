@@ -323,6 +323,38 @@ int splitArray(vector<int>& nums, int k) {
         return asw;
     }
 
+// Median of Two Sorted Arrays of different sizes
+ float findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        if(nums1.size()>nums2.size()) return findMedianSortedArrays(nums2,nums1);
+        int n1=nums1.size();
+        int n2=nums2.size();
+        int low=0,high=n1;
+        if(low<=high){
+             int cut1 = (low+high)>>1;
+             int cut2 =(n1+n2+1)/2 - cut1;
+             int left1 = (cut1 == 0)? INT_MIN:nums1[cut1-1];
+             int left2 = (cut2 == 0)? INT_MIN:nums2[cut2-1];
+             int right1 = (cut1 == n1)? INT_MAX:nums1[cut1];
+             int right2 = (cut2 == n2)? INT_MAX:nums2[cut2];
+
+
+             if(left1 <= right2 && left2 <= right1){
+                 if((n1+n2)%2==0)
+                 return (max(left1,left2)+min(right1,right2))/2.0;
+
+                 else return max(left1,left2);
+
+
+             }
+             else if(left1>right2){ high=cut1-1;}
+             else {low=cut1+1;}
+        }
+
+        
+    
+    return 0.0;
+    }
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -416,13 +448,18 @@ int main(){
 // cout<<"Allocate the book of the pages: "<<ans<<" student";
 
 // Split array - Largest Sum
-vector<int> arr={7,2,5,10,8};
-// int n=sizeof(arr)/sizeof(arr[0]);
-int k;
-cin>>k;
-int ans=splitArray(arr,k);
-cout<<"Split array - Largest Sum: "<<ans<<" ";
+// vector<int> arr={7,2,5,10,8};
+// // int n=sizeof(arr)/sizeof(arr[0]);
+// int k;
+// cin>>k;
+// int ans=splitArray(arr,k);
+// cout<<"Split array - Largest Sum: "<<ans<<" ";
 
+
+vector<int> arr1 = {1,4,7,10,12};
+vector<int> arr2= {2,3,6,15};
+;
+cout<<"Median of array: "<<findMedianSortedArrays(arr1,arr2)<<" ";
 
 
     return 0;

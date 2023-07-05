@@ -1,1 +1,1 @@
-Split array - Largest Sum: 14 
+Median of array: 0 
