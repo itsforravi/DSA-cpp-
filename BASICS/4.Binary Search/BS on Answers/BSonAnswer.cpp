@@ -212,6 +212,39 @@ int missingK(vector < int > vec, int n, int k) {
 }
 
 
+// Aggressive Cows 
+bool canWePlace(vector<int> &stall,int dist,int cows){
+    int cntcows=1,last=stall[0];
+    for(int i=1;i<stall.size();i++){
+       if(stall[i]-last>=dist){
+           cntcows++;
+           last=stall[i];
+       }
+       if(cntcows>=cows) return true;
+
+    }
+    return false;
+}
+
+
+
+int aggressiveCows(vector<int> &stall, int k)
+{
+    sort(stall.begin(),stall.end());
+    int n=stall.size();
+    int low=1,high=stall[n-1]-stall[0];
+     while(low<=high){
+         int mid=(low+high)/2;
+         if(canWePlace(stall,mid,k)==true){
+             low=mid+1;
+         }
+         else high=mid-1;
+     }
+     return high;
+    
+}
+
+
 
 
 int main(){
@@ -280,16 +313,23 @@ int main(){
 // }
 
 // Kth Missing Positive Number
-vector<int> arr={2,3,4,7,9,11};
-int n=sizeof(arr)/sizeof(arr[0]);
-int k1=6;
-int ans=missingK(arr,n,k1);
-if(ans==-1){
-    cout<<"We cannot  kth missing number \n";
-}
-else{
-    cout<<"We can kth missing number : "<<ans<<"  ";
-}
+// vector<int> arr={2,3,4,7,9,11};
+// int n=sizeof(arr)/sizeof(arr[0]);
+// int k1=6;
+// int ans=missingK(arr,n,k1);
+// if(ans==-1){
+//     cout<<"We cannot  kth missing number \n";
+// }
+// else{
+//     cout<<"We can kth missing number : "<<ans<<"  ";
+// }
+
+// Aggressive Cows 
+vector<int> stall={1,2,8,4,9};
+int k;
+cin>>k;
+int ans=aggressiveCows(stall,k);
+cout<<"Aggressive Cows : "<<ans<<" ";
 
     return 0;
 }
