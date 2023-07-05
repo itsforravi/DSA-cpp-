@@ -245,6 +245,42 @@ int aggressiveCows(vector<int> &stall, int k)
 }
 
 
+// Book Allocation Problem
+int countstudent(vector<int> &arr,int pages){
+    int student=1;
+    long long pagestudent=0;
+    for(int i=0;i<arr.size();i++){
+        if(pagestudent+arr[i]<=pages){
+            pagestudent+=arr[i];
+        }
+        else{
+            student+=1;
+            pagestudent=arr[i];
+        }
+    }
+    return student;
+}
+
+
+
+int findPages(vector<int>& arr, int n, int m) {
+    if(m>n) return -1;
+    int low=*max_element(arr.begin(),arr.end());
+    int high=accumulate(arr.begin(),arr.end(),0);
+    while(low<=high){
+        int mid=(low+high)/2;
+        int noStudent=countstudent(arr,mid);
+        if(noStudent>m){
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    return low;
+
+}
+
 
 
 int main(){
@@ -325,11 +361,21 @@ int main(){
 // }
 
 // Aggressive Cows 
-vector<int> stall={1,2,8,4,9};
+// vector<int> stall={1,2,8,4,9};
+// int k;
+// cin>>k;
+// int ans=aggressiveCows(stall,k);
+// cout<<"Aggressive Cows : "<<ans<<" ";
+
+// Book Allocation Problem
+vector<int> arr={25,46,28,49,24};
+int n=sizeof(arr)/sizeof(arr[0]);
 int k;
 cin>>k;
-int ans=aggressiveCows(stall,k);
-cout<<"Aggressive Cows : "<<ans<<" ";
+int ans=findPages(arr,n,k);
+cout<<"Allocate the book of the pages: "<<ans<<" student";
+
+
 
     return 0;
 }
