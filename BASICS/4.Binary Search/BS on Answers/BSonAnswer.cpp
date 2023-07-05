@@ -282,6 +282,46 @@ int findPages(vector<int>& arr, int n, int m) {
 }
 
 
+// Split array - Largest Sum
+int isPossible(vector<int> &arr,int number){
+       int count=0,tempsum=0,n=arr.size();
+       for(int i=0;i<n;i++){
+           if(arr[i]+tempsum<=number){
+               tempsum+=arr[i];
+
+           }
+           else{
+               count ++;
+               tempsum=arr[i];
+
+           }
+       }
+       count++;
+       return count;
+   }
+   
+  
+int splitArray(vector<int>& nums, int k) {
+        int n=nums.size();
+        int low=0,high=n-1;
+        int asw=0;
+        for(int i=0;i<n;i++){
+            low=max(low,nums[i]);
+            high+=nums[i];}
+            while(low<=high){
+           
+            int mid=(low+high)/2;
+            int count=isPossible(nums,mid);
+            if(count<=k){
+                 asw=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return asw;
+    }
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -368,12 +408,20 @@ int main(){
 // cout<<"Aggressive Cows : "<<ans<<" ";
 
 // Book Allocation Problem
-vector<int> arr={25,46,28,49,24};
-int n=sizeof(arr)/sizeof(arr[0]);
+// vector<int> arr={25,46,28,49,24};
+// int n=sizeof(arr)/sizeof(arr[0]);
+// int k;
+// cin>>k;
+// int ans=findPages(arr,n,k);
+// cout<<"Allocate the book of the pages: "<<ans<<" student";
+
+// Split array - Largest Sum
+vector<int> arr={7,2,5,10,8};
+// int n=sizeof(arr)/sizeof(arr[0]);
 int k;
 cin>>k;
-int ans=findPages(arr,n,k);
-cout<<"Allocate the book of the pages: "<<ans<<" student";
+int ans=splitArray(arr,k);
+cout<<"Split array - Largest Sum: "<<ans<<" ";
 
 
 

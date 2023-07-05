@@ -1,1 +1,1 @@
-Allocate the book of the pages: 73 student
+Split array - Largest Sum: 14 
