@@ -1,1 +1,1 @@
-Median of array: 0 
+The Median of two sorted arrays is 6.00000
