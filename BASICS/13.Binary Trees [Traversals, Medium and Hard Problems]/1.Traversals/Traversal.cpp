@@ -3,6 +3,32 @@ typedef unsigned long long int ll;
 using namespace std;
 
 // Preorde Traversal In BT
+// struct node
+// {
+//     int data;
+//     struct node * left,* right;
+// };
+
+
+// void preodertra(node * curr , vector<int> &preorder){
+//     if(curr==NULL){ 
+//         return;
+//     }
+//     preorder.push_back(curr -> data);
+//     preodertra(curr -> left,preorder);
+//     preodertra(curr -> right,preorder);
+// }
+// struct node * newNode(int data){
+//     struct node * node=(struct node *)malloc(sizeof(struct node));
+//     node -> data=data;
+//     node -> left=NULL;
+//     node -> right=NULL;
+
+//     return (node);
+
+// }
+
+// Inorde Traversal In BT
 struct node
 {
     int data;
@@ -10,14 +36,18 @@ struct node
 };
 
 
-void preodertra(node * curr , vector<int> &preorder){
+void Inordertra(node * curr , vector<int> &Inorder){
     if(curr==NULL){ 
         return;
     }
-    preorder.push_back(curr -> data);
-    preodertra(curr -> left,preorder);
-    preodertra(curr -> right,preorder);
+
+    Inordertra(curr -> left,Inorder);
+
+    Inorder.push_back(curr -> data);
+    
+    Inordertra(curr -> right,Inorder);
 }
+
 struct node * newNode(int data){
     struct node * node=(struct node *)malloc(sizeof(struct node));
     node -> data=data;
@@ -63,11 +93,23 @@ int main(){
     root->right->right->left=newNode(9);
     root->right->right->right=newNode(10);
 
-    vector<int> preoder;
-    preodertra(root,preoder);
-    cout<<"Preoder Travesal :";
-    for(int i=0;i<preoder.size();i++){
-        cout<<preoder[i]<<" ";
+
+
+//    Preoder Traversal in BT
+    // vector<int> preoder;
+    // preodertra(root,preorder);
+    // cout<<"Preoder Travesal :";
+    // for(int i=0;i<preoder.size();i++){
+    //     cout<<preoder[i]<<" ";
+    // }
+
+
+//    Preoder Traversal in BT
+    vector<int> Inorder;
+    Inordertra(root,Inorder);
+    cout<<"Inoder Travesal :";
+    for(int i=0;i<Inorder.size();i++){
+        cout<<Inorder[i]<<" ";
     }
 
 
