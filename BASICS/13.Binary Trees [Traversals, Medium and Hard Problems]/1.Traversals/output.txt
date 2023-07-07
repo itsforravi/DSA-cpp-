@@ -1,1 +1,1 @@
-postoder Travesal :4 8 5 2 6 9 10 7 3 1 
+postoder Travesal :5 8 4 2 6 9 11 7 3 1 
