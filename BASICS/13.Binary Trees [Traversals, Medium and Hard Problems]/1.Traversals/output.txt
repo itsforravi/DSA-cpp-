@@ -1,1 +1,1 @@
-Preoder Travesal :1 2 5 4 8 3 6 7 9 11 
+Preoder Travesal :1 2 5 4 8 3 6 7 8 11 

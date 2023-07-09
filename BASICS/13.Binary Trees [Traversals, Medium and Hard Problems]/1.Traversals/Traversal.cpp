@@ -123,7 +123,7 @@ int main(){
     root->right=newNode(3);
     root->right->left=newNode(6);
     root->right->right=newNode(7);
-    root->right->right->left=newNode(9);
+    root->right->right->left=newNode(8);
     root->right->right->right=newNode(11);
 
 
