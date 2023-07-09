@@ -3,35 +3,6 @@ typedef unsigned long long int ll;
 using namespace std;
 
 // Preorde Traversal In BT
-struct node
-{
-    int data;
-    struct node * left,* right;
-};
-
-
-void preodertra(node * curr , vector<int> &preorder){
-    if(curr==NULL){ 
-        return;
-    }
-    preorder.push_back(curr -> data);
-    preodertra(curr -> left,preorder);
-    preodertra(curr -> right,preorder);
-}
-struct node * newNode(int data){
-    struct node * node=(struct node *)malloc(sizeof(struct node));
-    node -> data=data;
-    node -> left=NULL;
-    node -> right=NULL;
-
-    return (node);
-
-}
-
-
-
-
-// // Inorde Traversal In BT
 // struct node
 // {
 //     int data;
@@ -39,18 +10,14 @@ struct node * newNode(int data){
 // };
 
 
-// void Inordertra(node * curr , vector<int> &Inorder){
+// void preodertra(node * curr , vector<int> &preorder){
 //     if(curr==NULL){ 
 //         return;
 //     }
-
-//     Inordertra(curr -> left,Inorder);
-
-//     Inorder.push_back(curr -> data);
-    
-//     Inordertra(curr -> right,Inorder);
+//     preorder.push_back(curr -> data);
+//     preodertra(curr -> left,preorder);
+//     preodertra(curr -> right,preorder);
 // }
-
 // struct node * newNode(int data){
 //     struct node * node=(struct node *)malloc(sizeof(struct node));
 //     node -> data=data;
@@ -60,6 +27,39 @@ struct node * newNode(int data){
 //     return (node);
 
 // }
+
+
+
+
+// // Inorde Traversal In BT
+struct node
+{
+    int data;
+    struct node * left,* right;
+};
+
+
+void Inordertra(node * curr , vector<int> &Inorder){
+    if(curr==NULL){ 
+        return;
+    }
+
+    Inordertra(curr -> left,Inorder);
+
+    Inorder.push_back(curr -> data);
+    
+    Inordertra(curr -> right,Inorder);
+}
+
+struct node * newNode(int data){
+    struct node * node=(struct node *)malloc(sizeof(struct node));
+    node -> data=data;
+    node -> left=NULL;
+    node -> right=NULL;
+
+    return (node);
+
+}
 
 
 
@@ -129,21 +129,21 @@ int main(){
 
 
 //    Preorder Traversal in BT
-    vector<int> preorder;
-    preodertra(root,preorder);
-    cout<<"Preoder Travesal :";
-    for(int i=0;i<preorder.size();i++){
-        cout<<preorder[i]<<" ";
-    }
-
-
-//    Preorder Traversal in BT
-    // vector<int> Inorder;
-    // Inordertra(root,Inorder);
-    // cout<<"Inoder Travesal :";
-    // for(int i=0;i<Inorder.size();i++){
-    //     cout<<Inorder[i]<<" ";
+    // vector<int> preorder;
+    // preodertra(root,preorder);
+    // cout<<"Preoder Travesal :";
+    // for(int i=0;i<preorder.size();i++){
+    //     cout<<preorder[i]<<" ";
     // }
+
+
+//    Inorder Traversal in BT
+    vector<int> Inorder;
+    Inordertra(root,Inorder);
+    cout<<"Inoder Travesal :";
+    for(int i=0;i<Inorder.size();i++){
+        cout<<Inorder[i]<<" ";
+    }
 
 
 //    Postorder Traversal in BT
