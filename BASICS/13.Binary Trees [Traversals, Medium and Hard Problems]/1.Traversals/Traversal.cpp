@@ -130,7 +130,8 @@ void printLevelOrder(Node* root)
 {
     Node* temp = new Node;
     temp->data = data;
-    temp->left = temp->right = NULL;
+    temp->left =NULL;
+     temp->right = NULL;
     return temp;
 }
  
