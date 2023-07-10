@@ -64,32 +64,76 @@ using namespace std;
 
 
 // Postorder Traversal In BT
-struct node
-{
+// struct node
+// {
+//     int data;
+//     struct node * left,* right;
+// };
+
+
+// void postordertra(node * curr , vector<int> &postorder){
+//     if(curr==NULL){ 
+//         return;
+//     }
+
+//     postordertra(curr -> left,postorder);
+//     postordertra(curr -> right,postorder);
+//      postorder.push_back(curr -> data);
+// }
+
+// struct node * newNode(int data){
+//     struct node * node=(struct node *)malloc(sizeof(struct node));
+//     node -> data=data;
+//     node -> left=NULL;
+//     node -> right=NULL;
+
+//     return (node);
+
+// }
+
+// Level Order Traversal of a Binary Tree
+struct Node {
     int data;
-    struct node * left,* right;
+    struct Node *left, *right;
 };
-
-
-void postordertra(node * curr , vector<int> &postorder){
-    if(curr==NULL){ 
+ 
+void printLevelOrder(Node* root)
+{
+   
+    if (root == NULL)
         return;
+ 
+    
+    queue<Node*> q;
+ 
+   
+    q.push(root);
+ 
+    while (q.empty() == false) {
+         
+          Node* node = q.front();
+        cout << node->data << " ";
+        q.pop();
+ 
+        
+        if (node->left != NULL)
+            q.push(node->left);
+ 
+        
+        if (node->right != NULL)
+            q.push(node->right);
     }
-
-    postordertra(curr -> left,postorder);
-    postordertra(curr -> right,postorder);
-     postorder.push_back(curr -> data);
 }
+ 
 
-struct node * newNode(int data){
-    struct node * node=(struct node *)malloc(sizeof(struct node));
-    node -> data=data;
-    node -> left=NULL;
-    node -> right=NULL;
-
-    return (node);
-
+ struct Node* newNode(int data)
+{
+    Node* temp = new Node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
 }
+ 
 
 
 
@@ -115,16 +159,16 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    struct node * root=newNode(1);
-    root->left=newNode(2);
-    root->left->left=newNode(5);
-    root->left->right=newNode(4);
-    root->left->right->left=newNode(8);
-    root->right=newNode(3);
-    root->right->left=newNode(6);
-    root->right->right=newNode(7);
-    root->right->right->left=newNode(8);
-    root->right->right->right=newNode(11);
+    // struct node * root=newNode(1);
+    // root->left=newNode(2);
+    // root->left->left=newNode(5);
+    // root->left->right=newNode(4);
+    // root->left->right->left=newNode(8);
+    // root->right=newNode(3);
+    // root->right->left=newNode(6);
+    // root->right->right=newNode(7);
+    // root->right->right->left=newNode(8);
+    // root->right->right->right=newNode(11);
 
 
 
@@ -147,13 +191,22 @@ int main(){
 
 
 //    Postorder Traversal in BT
-    vector<int> postorder;
-    postordertra(root,postorder);
-    cout<<"postoder Travesal :";
-    for(int i=0;i<postorder.size();i++){
-        cout<<postorder[i]<<" ";
-    }
+    // vector<int> postorder;
+    // postordertra(root,postorder);
+    // cout<<"postoder Travesal :";
+    // for(int i=0;i<postorder.size();i++){
+    //     cout<<postorder[i]<<" ";
+    // }
 
+
+ struct Node * root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+ 
+    cout << "Level Order traversal of binary tree is \n";
+    printLevelOrder(root);
 
 
 
