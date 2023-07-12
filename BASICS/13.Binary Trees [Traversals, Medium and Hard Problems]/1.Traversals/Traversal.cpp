@@ -92,48 +92,88 @@ using namespace std;
 // }
 
 // Level Order Traversal of a Binary Tree
-struct Node {
-    int data;
-    struct Node *left, *right;
-};
+// struct Node {
+//     int data;
+//     struct Node *left, *right;
+// };
  
-void printLevelOrder(Node* root)
-{
+// void printLevelOrder(Node* root)
+// {
    
-    if (root == NULL)
-        return;
+//     if (root == NULL)
+//         return;
  
     
-    queue<Node*> q;
+//     queue<Node*> q;
  
    
-    q.push(root);
+//     q.push(root);
  
-    while (q.empty() == false) {
+//     while (q.empty() == false) {
          
-          Node* node = q.front();
-        cout << node->data << " ";
-        q.pop();
+//           Node* node = q.front();
+//         cout << node->data << " ";
+//         q.pop();
  
         
-        if (node->left != NULL)
-            q.push(node->left);
+//         if (node->left != NULL)
+//             q.push(node->left);
  
         
-        if (node->right != NULL)
-            q.push(node->right);
-    }
-}
+//         if (node->right != NULL)
+//             q.push(node->right);
+//     }
+// }
  
 
- struct Node* newNode(int data)
+//  struct Node* newNode(int data)
+// {
+//     Node* temp = new Node;
+//     temp->data = data;
+//     temp->left =NULL;
+//      temp->right = NULL;
+//     return temp;
+// }
+
+
+// PreOrder Itravtive  
+struct node
 {
-    Node* temp = new Node;
-    temp->data = data;
-    temp->left =NULL;
-     temp->right = NULL;
-    return temp;
+    int data;
+    node *left,*right;
+    
+};
+vector<int>preorderIt(node *curr){
+    vector<int> preorder;
+    if(curr==NULL)
+    return preorder;
+    stack<node*> st;
+    st.push(curr);
+
+    while(!st.empty()){
+      node *topnode=st.top();
+      preorder.push_back(topnode->data);
+      st.pop();
+      if(topnode->right!=NULL){
+        st.push(topnode->right);
+      }
+      if(topnode->left!=NULL){
+        st.push(topnode->left);
+      }
+    }
+      return preorder;
+
+
+    }
+    struct node * newNode(int data){
+    struct node *node=(struct node*)malloc(sizeof(struct node));
+    node->data=data;
+    node->right=NULL;
+    node->left=NULL;
+    return (node);
+    
 }
+
  
 
 
@@ -160,16 +200,16 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    // struct node * root=newNode(1);
-    // root->left=newNode(2);
-    // root->left->left=newNode(5);
-    // root->left->right=newNode(4);
-    // root->left->right->left=newNode(8);
-    // root->right=newNode(3);
-    // root->right->left=newNode(6);
-    // root->right->right=newNode(7);
-    // root->right->right->left=newNode(8);
-    // root->right->right->right=newNode(11);
+    struct node * root=newNode(1);
+    root->left=newNode(2);
+    root->left->left=newNode(5);
+    root->left->right=newNode(4);
+    root->left->right->left=newNode(8);
+    root->right=newNode(3);
+    root->right->left=newNode(6);
+    root->right->right=newNode(7);
+    root->right->right->left=newNode(8);
+    root->right->right->right=newNode(11);
 
 
 
@@ -200,15 +240,23 @@ int main(){
     // }
 
 // // Level Order Traversal of a Binary Tree
- struct Node * root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(6);
+//  struct Node * root = newNode(1);
+//     root->left = newNode(2);
+//     root->right = newNode(3);
+//     root->left->left = newNode(4);
+//     root->left->right = newNode(6);
  
-    cout << "Level Order traversal of binary tree is \n";
-    printLevelOrder(root);
+//     cout << "Level Order traversal of binary tree is \n";
+//     printLevelOrder(root);
 
+
+// Preorder itrative
+vector<int> preorder;
+    preorder=preorderIt(root);
+    cout<<"Preorder Travesal :";
+    for(int i=0;i<preorder.size();i++){
+        cout<<preorder[i]<<" ";
+    }
 
 
 
