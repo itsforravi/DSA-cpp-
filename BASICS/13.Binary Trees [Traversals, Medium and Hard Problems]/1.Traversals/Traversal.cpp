@@ -136,45 +136,82 @@ using namespace std;
 // }
 
 
-// PreOrder Itravtive  
-struct node
+// PreOrder Itravtive  Binary search tree
+// struct node
+// {
+//     int data;
+//     node *left,*right;
+    
+// };
+// vector<int>preorderIt(node *curr){
+//     vector<int> preorder;
+//     if(curr==NULL)
+//     return preorder;
+//     stack<node*> st;
+//     st.push(curr);
+
+//     while(!st.empty()){
+//       node *topnode=st.top();
+//       preorder.push_back(topnode->data);
+//       st.pop();
+//       if(topnode->right!=NULL){
+//         st.push(topnode->right);
+//       }
+//       if(topnode->left!=NULL){
+//         st.push(topnode->left);
+//       }
+//     }
+//       return preorder;
+
+
+//     }
+//     struct node * newNode(int data){
+//     struct node *node=(struct node*)malloc(sizeof(struct node));
+//     node->data=data;
+//     node->right=NULL;
+//     node->left=NULL;
+//     return (node);
+    
+// }
+
+// Inorder Traversal of Binary Tree
+
+ struct node
 {
     int data;
     node *left,*right;
     
 };
-vector<int>preorderIt(node *curr){
-    vector<int> preorder;
-    if(curr==NULL)
-    return preorder;
+
+vector<int> InorderIt(node *curr){
+    vector<int> inorder;
     stack<node*> st;
-    st.push(curr);
+    while(true){
+        if(curr!=NULL){
+            st.push(curr);
+            curr=curr->left;
+        }
+        else{
+            if(st.empty()==true) break;
+            curr=st.top();
+            inorder.push_back(curr->data);
+            st.pop();
+            curr=curr->right;
 
-    while(!st.empty()){
-      node *topnode=st.top();
-      preorder.push_back(topnode->data);
-      st.pop();
-      if(topnode->right!=NULL){
-        st.push(topnode->right);
-      }
-      if(topnode->left!=NULL){
-        st.push(topnode->left);
-      }
+        }
     }
-      return preorder;
+    return inorder;
 
-
-    }
-    struct node * newNode(int data){
-    struct node *node=(struct node*)malloc(sizeof(struct node));
-    node->data=data;
-    node->right=NULL;
-    node->left=NULL;
-    return (node);
-    
 }
+struct node *newNode(int data){
+struct node *node=(struct node*)malloc(sizeof(struct node));
+node->data=data;
+node->right=NULL;
+node->left=NULL;
 
- 
+
+return (node);
+}
 
 
 
@@ -202,14 +239,14 @@ int main(){
     #endif
     struct node * root=newNode(1);
     root->left=newNode(2);
-    root->left->left=newNode(5);
-    root->left->right=newNode(4);
-    root->left->right->left=newNode(8);
+    root->left->left=newNode(4);
+    root->left->right=newNode(5);
+    root->left->right->left=newNode(6);
     root->right=newNode(3);
-    root->right->left=newNode(6);
-    root->right->right=newNode(7);
-    root->right->right->left=newNode(8);
-    root->right->right->right=newNode(11);
+    root->right->left=newNode(7);
+    root->right->right=newNode(8);
+    root->right->right->left=newNode(9);
+    root->right->right->right=newNode(10);
 
 
 
@@ -250,13 +287,22 @@ int main(){
 //     printLevelOrder(root);
 
 
-// Preorder itrative
-vector<int> preorder;
-    preorder=preorderIt(root);
-    cout<<"Preorder Travesal :";
-    for(int i=0;i<preorder.size();i++){
-        cout<<preorder[i]<<" ";
+// Preorder itrative Binary search tree
+// vector<int> preorder;
+//     preorder=preorderIt(root);
+//     cout<<"Preorder Travesal :";
+//     for(int i=0;i<preorder.size();i++){
+//         cout<<preorder[i]<<" ";
+//     }
+
+    // Inorder Traversal of Binary Tree
+    vector<int> inorder;
+    inorder=InorderIt(root);
+    cout<<"Inorder Travesal :";
+    for(int i=0;i<inorder.size();i++){
+        cout<<inorder[i]<<" ";
     }
+
 
 
 
