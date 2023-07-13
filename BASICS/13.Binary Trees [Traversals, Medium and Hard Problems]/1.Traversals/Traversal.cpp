@@ -176,84 +176,84 @@ using namespace std;
 
 // Inorder Traversal of Binary Tree
 
-//  struct node
-// {
-//     int data;
-//     node *left,*right;
+ struct node
+{
+    int data;
+    node *left,*right;
     
-// };
+};
 
-// vector<int> InorderIt(node *curr){
-//     vector<int> inorder;
-//     stack<node*> st;
-//     while(true){
-//         if(curr!=NULL){
-//             st.push(curr);
-//             curr=curr->left;
-//         }
-//         else{
-//             if(st.empty()==true) break;
-//             curr=st.top();
-//             inorder.push_back(curr->data);
-//             st.pop();
-//             curr=curr->right;
+vector<int> InorderIt(node *curr){
+    vector<int> inorder;
+    stack<node*> st;
+    while(true){
+        if(curr!=NULL){
+            st.push(curr);
+            curr=curr->left;
+        }
+        else{
+            if(st.empty()==true) break;
+            curr=st.top();
+            inorder.push_back(curr->data);
+            st.pop();
+            curr=curr->right;
 
-//         }
-//     }
-//     return inorder;
+        }
+    }
+    return inorder;
 
-// }
-// struct node *newNode(int data){
-// struct node *node=(struct node*)malloc(sizeof(struct node));
-// node->data=data;
-// node->right=NULL;
-// node->left=NULL;
+}
+struct node *newNode(int data){
+struct node *node=(struct node*)malloc(sizeof(struct node));
+node->data=data;
+node->right=NULL;
+node->left=NULL;
 
 
-// return (node);
-// }
+return (node);
+}
 
 
 
 // Postorder Traversal in iteravtive
 
-struct node {
-  int data;
-  struct node * left, * right;
-};
+// struct node {
+//   int data;
+//   struct node * left, * right;
+// };
 
-vector < int > postOrderTrav(node * curr) {
+// vector < int > postOrderTrav(node * curr) {
 
-  vector < int > postOrder;
-  if (curr == NULL) return postOrder;
+//   vector < int > postOrder;
+//   if (curr == NULL) return postOrder;
 
-  stack < node * > s1;
-  stack < node * > s2;
-  s1.push(curr);
-  while (!s1.empty()) {
-    curr = s1.top();
-    s1.pop();
-    s2.push(curr);
-    if (curr -> left != NULL)
-      s1.push(curr -> left);
-    if (curr -> right != NULL)
-      s1.push(curr -> right);
-  }
-  while (!s2.empty()) {
-    postOrder.push_back(s2.top() -> data);
-    s2.pop();
-  }
-  return postOrder;
-}
+//   stack < node * > s1;
+//   stack < node * > s2;
+//   s1.push(curr);
+//   while (!s1.empty()) {
+//     curr = s1.top();
+//     s1.pop();
+//     s2.push(curr);
+//     if (curr -> left != NULL)
+//       s1.push(curr -> left);
+//     if (curr -> right != NULL)
+//       s1.push(curr -> right);
+//   }
+//   while (!s2.empty()) {
+//     postOrder.push_back(s2.top() -> data);
+//     s2.pop();
+//   }
+//   return postOrder;
+// }
 
-struct node * newNode(int data) {
-  struct node * node = (struct node * ) malloc(sizeof(struct node));
-  node -> data = data;
-  node -> left = NULL;
-  node -> right = NULL;
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
 
-  return (node);
-}
+//   return (node);
+// }
 
 
 
@@ -338,22 +338,22 @@ int main(){
 //     }
 
     // Inorder Traversal of Binary Tree
-    // vector<int> inorder;
-    // inorder=InorderIt(root);
-    // cout<<"Inorder Travesal :";
-    // for(int i=0;i<inorder.size();i++){
-    //     cout<<inorder[i]<<" ";
-    // }
-
-
-
-    // // Inorder Traversal of Binary Tree
-    vector<int> postOrder;
-    postOrder=postOrderTrav(root);
-    cout<<"postOrder Travesal :";
-    for(int i=0;i<postOrder.size();i++){
-        cout<<postOrder[i]<<" ";
+    vector<int> inorder;
+    inorder=InorderIt(root);
+    cout<<"Inorder Travesal :";
+    for(int i=0;i<inorder.size();i++){
+        cout<<inorder[i]<<" ";
     }
+
+
+
+    // // Postorder Traversal of Binary Tree
+    // vector<int> postOrder;
+    // postOrder=postOrderTrav(root);
+    // cout<<"postOrder Travesal :";
+    // for(int i=0;i<postOrder.size();i++){
+    //     cout<<postOrder[i]<<" ";
+    // }
 
 
 
