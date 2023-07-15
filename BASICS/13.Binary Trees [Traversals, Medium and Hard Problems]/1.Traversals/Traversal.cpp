@@ -281,7 +281,7 @@ int main(){
     #endif
     struct node * root=newNode(1);
     root->left=newNode(2);
-    root->left->left=newNode(4);
+    root->left->left=newNode(0);
     root->left->right=newNode(5);
     root->left->right->left=newNode(6);
     root->right=newNode(3);
