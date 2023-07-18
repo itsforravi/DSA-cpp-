@@ -4,5 +4,6 @@
         "string": "cpp",
         "vector": "cpp"
     },
-    "C_Cpp.default.compilerPath": "c:\\MinGW\\bin\\mingw-get.exe"
+    "C_Cpp.default.compilerPath": "c:\\MinGW\\bin\\mingw-get.exe",
+    "C_Cpp.errorSquiggles": "disabled"
 }
