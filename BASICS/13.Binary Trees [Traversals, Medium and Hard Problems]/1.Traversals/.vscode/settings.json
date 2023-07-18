@@ -3,5 +3,6 @@
         "deque": "cpp",
         "string": "cpp",
         "vector": "cpp"
-    }
+    },
+    "C_Cpp.default.compilerPath": "c:\\MinGW\\bin\\mingw-get.exe"
 }
