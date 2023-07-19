@@ -224,27 +224,54 @@ struct node {
 
 vector < int > postOrderTrav(node * curr) {
 
-  vector < int > postOrder;
-  if (curr == NULL) return postOrder;
+//   vector < int > postOrder;
+//   if (curr == NULL) return postOrder;
 
-  stack < node * > s1;
-  stack < node * > s2;
-  s1.push(curr);
-  while (!s1.empty()) {
-    curr = s1.top();
-    s1.pop();
-    s2.push(curr);
-    if (curr -> left != NULL)
-      s1.push(curr -> left);
-    if (curr -> right != NULL)
-      s1.push(curr -> right);
+//   stack < node * > s1;
+//   stack < node * > s2;
+//   s1.push(curr);
+//   while (!s1.empty()) {
+//     curr = s1.top();
+//     s1.pop();
+//     s2.push(curr);
+//     if (curr -> left != NULL)
+//       s1.push(curr -> left);
+//     if (curr -> right != NULL)
+//       s1.push(curr -> right);
+//   }
+//   while (!s2.empty()) {
+//     postOrder.push_back(s2.top() -> data);
+//     s2.pop();
+//   }
+//   return postOrder;
+// }
+
+vector<int> postorder;
+if(curr==NULL) return postorder;
+stack<node *>st1;
+stack<node *> st2;
+st1.push(curr);
+while(!st1.empty()){
+  curr=st1.top();
+  st1.pop();
+  st2.push(curr);
+  if(curr->left!=NULL){
+    st1.push(curr->left);
   }
-  while (!s2.empty()) {
-    postOrder.push_back(s2.top() -> data);
-    s2.pop();
+  if(curr->right!=NULL){
+    st1.push(curr->right);
   }
-  return postOrder;
 }
+  while(!st2.empty()){
+    postorder.push_back(st2.top()->data);
+    st2.pop();
+  }
+
+  return postorder;
+}
+
+
+
 
 struct node * newNode(int data) {
   struct node * node = (struct node * ) malloc(sizeof(struct node));
@@ -281,14 +308,15 @@ int main(){
     #endif
     struct node * root=newNode(1);
     root->left=newNode(2);
-    root->left->left=newNode(0);
+    root->left->left=newNode(4);
     root->left->right=newNode(5);
-    root->left->right->left=newNode(6);
+    // root->left->right->left=newNode(6);
     root->right=newNode(3);
-    root->right->left=newNode(7);
-    root->right->right=newNode(8);
-    root->right->right->left=newNode(9);
-    root->right->right->right=newNode(10);
+    root->right->left=newNode(6);
+    root->right->left->right=newNode(7);
+    root->right->left->right->right=newNode(8);
+    // root->right->right->left=newNode(9);
+    // root->right->right->right=newNode(10);
 
 
 
