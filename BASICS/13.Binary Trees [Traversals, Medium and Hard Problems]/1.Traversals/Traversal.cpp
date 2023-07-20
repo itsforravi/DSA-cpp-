@@ -284,42 +284,100 @@ using namespace std;
 
 
 // Postorder Traversal in iteravtive using 1 stack
+// struct node{
+//   int data;
+//   struct node *left,*right;
+// };
+
+// vector<int> postOrderTrav1(node * curr){
+//   vector<int> postorder;
+//   if(curr==NULL) return postorder;
+//   stack<node *> st;
+//   while (curr!=NULL || !st.empty())
+//   {
+//     if(curr!=NULL){
+//       st.push(curr);
+//       curr=curr->left;
+//     }
+//     else{
+//       node *temp=st.top()->right;
+//       if(temp==NULL){
+//         temp=st.top();
+//         st.pop();
+//         postorder.push_back(temp->data);
+//         while (!st.empty() && temp==st.top()->right)
+//         {
+//             temp=st.top();
+//         st.pop();
+//         postorder.push_back(temp->data);
+//         }
+        
+//       }
+//        else curr=temp;
+//     }
+   
+//   }
+  
+// }
+
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+
+//   return (node);
+// }
+
+// Preorder Inorder Postorder Traversals in One Traversal
+
 struct node{
   int data;
   struct node *left,*right;
 };
 
-vector<int> postOrderTrav1(node * curr){
-  vector<int> postorder;
-  if(curr==NULL) return postorder;
-  stack<node *> st;
-  while (curr!=NULL || !st.empty())
+void allTraversal(node * root,vector<int> &pre,vector<int> &in,vector<int> &post)
+{
+  stack<pair<node *,int>> st;
+  st.push({
+    root,1
+  });
+  if(root==NULL) return;
+  while (!st.empty())
   {
-    if(curr!=NULL){
-      st.push(curr);
-      curr=curr->left;
-    }
-    else{
-      node *temp=st.top()->right;
-      if(temp==NULL){
-        temp=st.top();
-        st.pop();
-        postorder.push_back(temp->data);
-        while (!st.empty() && temp==st.top()->right)
-        {
-            temp=st.top();
-        st.pop();
-        postorder.push_back(temp->data);
-        }
-        
+    auto it=st.top();
+    st.pop();
+
+    if(it.second==1){
+      pre.push_back(it.first->data);
+      it.second++;
+      st.push(it);
+      if(it.first->left!=NULL){
+        st.push({
+          it.first->left,
+          1
+        });
+
       }
-       else curr=temp;
+
+
+
     }
-   
-  }
+else if(it.second==2){
+      in.push_back(it.first->data);
+      it.second++;
+      st.push(it);
+      if(it.first->right!=NULL){
+        st.push({
+          it.first->right,1
+        });
+
+      }}
+      else{
+        post.push_back(it.first->data);
+      }}
   
 }
-
 struct node * newNode(int data) {
   struct node * node = (struct node * ) malloc(sizeof(struct node));
   node -> data = data;
@@ -340,8 +398,6 @@ struct node * newNode(int data) {
 
 
 
-
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -349,15 +405,15 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    struct node * root=newNode(1);
-    root->left=newNode(2);
-    root->left->left=newNode(4);
-    root->left->right=newNode(15);
-    // root->left->right->left=newNode(6);
-    root->right=newNode(3);
-    root->right->left=newNode(6);
-    root->right->left->right=newNode(7);
-    root->right->left->right->right=newNode(8);
+    // struct node * root=newNode(1);
+    // root->left=newNode(2);
+    // root->left->left=newNode(4);
+    // root->left->right=newNode(15);
+    // // root->left->right->left=newNode(6);
+    // root->right=newNode(3);
+    // root->right->left=newNode(6);
+    // root->right->left->right=newNode(7);
+    // root->right->left->right->right=newNode(8);
     // root->right->right->left=newNode(9);
     // root->right->right->right=newNode(10);
 
@@ -427,12 +483,40 @@ int main(){
     // }
 
     // Postorder Traversal in iteravtive using 1 stack
-    vector<int> postOrder;
-    postOrder=postOrderTrav1(root);
-    cout<<"postOrder Travesal :";
-    for(int i=0;i<postOrder.size();i++){
-        cout<<postOrder[i]<<" ";
-    }
+    // vector<int> postOrder;
+    // postOrder=postOrderTrav1(root);
+    // cout<<"postOrder Travesal :";
+    // for(int i=0;i<postOrder.size();i++){
+    //     cout<<postOrder[i]<<" ";
+    // }
+
+     struct node * root = newNode(1);
+  root -> left = newNode(2);
+  root -> left -> left = newNode(4);
+  root -> left -> right = newNode(5);
+  root -> right = newNode(3);
+  root -> right -> left = newNode(6);
+  root -> right -> right = newNode(7);
+
+  vector < int > pre, in , post;
+  allTraversal(root, pre, in , post);
+
+  cout << "The preorder Traversal is : ";
+  for (auto nodeVal: pre) {
+    cout << nodeVal << " ";
+  }
+  cout << endl;
+  cout << "The inorder Traversal is : ";
+  for (auto nodeVal: in ) {
+    cout << nodeVal << " ";
+  }
+  cout << endl;
+  cout << "The postorder Traversal is : ";
+  for (auto nodeVal: post) {
+    cout << nodeVal << " ";
+  }
+  cout << endl;
+
 
 
 
