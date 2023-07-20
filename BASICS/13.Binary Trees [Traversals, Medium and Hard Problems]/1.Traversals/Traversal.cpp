@@ -215,14 +215,14 @@ using namespace std;
 
 
 
-// Postorder Traversal in iteravtive
+// Postorder Traversal in iteravtive using 2 stack
 
-struct node {
-  int data;
-  struct node * left, * right;
-};
+// struct node {
+//   int data;
+//   struct node * left, * right;
+// };
 
-vector < int > postOrderTrav(node * curr) {
+// vector < int > postOrderTrav(node * curr) {
 
 //   vector < int > postOrder;
 //   if (curr == NULL) return postOrder;
@@ -246,32 +246,79 @@ vector < int > postOrderTrav(node * curr) {
 //   return postOrder;
 // }
 
-vector<int> postorder;
-if(curr==NULL) return postorder;
-stack<node *>st1;
-stack<node *> st2;
-st1.push(curr);
-while(!st1.empty()){
-  curr=st1.top();
-  st1.pop();
-  st2.push(curr);
-  if(curr->left!=NULL){
-    st1.push(curr->left);
+// vector<int> postorder;
+// if(curr==NULL) return postorder;
+// stack<node *>st1;
+// stack<node *> st2;
+// st1.push(curr);
+// while(!st1.empty()){
+//   curr=st1.top();
+//   st1.pop();
+//   st2.push(curr);
+//   if(curr->left!=NULL){
+//     st1.push(curr->left);
+//   }
+//   if(curr->right!=NULL){
+//     st1.push(curr->right);
+//   }
+// }
+//   while(!st2.empty()){
+//     postorder.push_back(st2.top()->data);
+//     st2.pop();
+//   }
+
+//   return postorder;
+// }
+
+
+
+
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+
+//   return (node);
+// }
+
+
+// Postorder Traversal in iteravtive using 1 stack
+struct node{
+  int data;
+  struct node *left,*right;
+};
+
+vector<int> postOrderTrav1(node * curr){
+  vector<int> postorder;
+  if(curr==NULL) return postorder;
+  stack<node *> st;
+  while (curr!=NULL || !st.empty())
+  {
+    if(curr!=NULL){
+      st.push(curr);
+      curr=curr->left;
+    }
+    else{
+      node *temp=st.top()->right;
+      if(temp==NULL){
+        temp=st.top();
+        st.pop();
+        postorder.push_back(temp->data);
+        while (!st.empty() && temp==st.top()->right)
+        {
+            temp=st.top();
+        st.pop();
+        postorder.push_back(temp->data);
+        }
+        
+      }
+       else curr=temp;
+    }
+   
   }
-  if(curr->right!=NULL){
-    st1.push(curr->right);
-  }
+  
 }
-  while(!st2.empty()){
-    postorder.push_back(st2.top()->data);
-    st2.pop();
-  }
-
-  return postorder;
-}
-
-
-
 
 struct node * newNode(int data) {
   struct node * node = (struct node * ) malloc(sizeof(struct node));
@@ -281,10 +328,6 @@ struct node * newNode(int data) {
 
   return (node);
 }
-
-
-
-
 
 
 
@@ -309,7 +352,7 @@ int main(){
     struct node * root=newNode(1);
     root->left=newNode(2);
     root->left->left=newNode(4);
-    root->left->right=newNode(5);
+    root->left->right=newNode(15);
     // root->left->right->left=newNode(6);
     root->right=newNode(3);
     root->right->left=newNode(6);
@@ -375,9 +418,17 @@ int main(){
 
 
 
-    // // Postorder Traversal of Binary Tree
+    // Postorder Traversal in iteravtive using 2 stack
+    // vector<int> postOrder;
+    // postOrder=postOrderTrav(root);
+    // cout<<"postOrder Travesal :";
+    // for(int i=0;i<postOrder.size();i++){
+    //     cout<<postOrder[i]<<" ";
+    // }
+
+    // Postorder Traversal in iteravtive using 1 stack
     vector<int> postOrder;
-    postOrder=postOrderTrav(root);
+    postOrder=postOrderTrav1(root);
     cout<<"postOrder Travesal :";
     for(int i=0;i<postOrder.size();i++){
         cout<<postOrder[i]<<" ";
