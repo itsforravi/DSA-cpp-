@@ -72,7 +72,7 @@ int main(){
     // root->left->right->left=newNode(6);
     root->right=newNode(3);
     root->right->left=newNode(6);
-    root->right->left->right=newNode(7);
+    root->right->left->right=newNode(9);
     root->right->left->right->right=newNode(8);
     // root->right->right->left=newNode(9);
 
