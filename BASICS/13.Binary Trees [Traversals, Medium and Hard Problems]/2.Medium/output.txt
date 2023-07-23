@@ -1,1 +1,1 @@
-Tree is not balanced
+Tree is balanced
