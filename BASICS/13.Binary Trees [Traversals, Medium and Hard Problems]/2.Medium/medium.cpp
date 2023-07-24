@@ -104,9 +104,9 @@ struct node {
 	struct node *left, *right;
 };
 
-struct node* newNode(int data);
+// struct node* newNode(int data);
 
-int max(int a, int b) { return (a > b) ? a : b; }
+// int max(int a, int b) { return (a > b) ? a : b; }
 
 int height(struct node* node);
 
