@@ -1,1 +1,1 @@
-Diameter of the given binary tree is 4
+The Max Path Sum for this tree is 33

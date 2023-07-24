@@ -40,36 +40,36 @@ using namespace std;
 // }
 
 // Check if the Binary Tree is Balanced Binary Tree
-class Node {
-public:
-    int data;
-    Node* left;
-    Node* right;
-    Node(int d)
-    {
-        int data = d;
-        left = right = NULL;
-    }
-};
-int height(Node* node)
-{
-        if (node == NULL)
-        return 0;
+// class Node {
+// public:
+//     int data;
+//     Node* left;
+//     Node* right;
+//     Node(int d)
+//     {
+//         int data = d;
+//         left = right = NULL;
+//     }
+// };
+// int height(Node* node)
+// {
+//         if (node == NULL)
+//         return 0;
     
-}
-    bool BalanceTree(Node* root){
-        if(root==NULL)
-        return -1;
-        int leftHeight=height(root->left);
-        int rightHeight=height(root->right);
-        if(rightHeight==-1)
-        return -1;
-        if(abs(leftHeight-rightHeight)>1){
-            return -1;
-        }
-        return max(leftHeight,rightHeight)+1;
+// }
+//     bool BalanceTree(Node* root){
+//         if(root==NULL)
+//         return -1;
+//         int leftHeight=height(root->left);
+//         int rightHeight=height(root->right);
+//         if(rightHeight==-1)
+//         return -1;
+//         if(abs(leftHeight-rightHeight)>1){
+//             return -1;
+//         }
+//         return max(leftHeight,rightHeight)+1;
 
-    }
+//     }
 
 // Calculate the Diameter of a Binary Tree
 // class Solution{
@@ -99,58 +99,118 @@ int height(Node* node)
 
 
 
+// struct node {
+// 	int data;
+// 	struct node *left, *right;
+// };
+
+// // struct node* newNode(int data);
+
+// // int max(int a, int b) { return (a > b) ? a : b; }
+
+// int height(struct node* node);
+
+// int diameter(struct node* tree)
+// {
+	
+// 	if (tree == NULL)
+// 		return 0;
+
+// 	int lheight = height(tree->left);
+// 	int rheight = height(tree->right);
+// 	int ldiameter = diameter(tree->left);
+// 	int rdiameter = diameter(tree->right);
+
+	
+// 	return max(lheight + rheight + 1,
+// 			max(ldiameter, rdiameter));
+// }
+
+// int height(struct node* node)
+// {
+// 	if (node == NULL)
+// 		return 0;
+
+	
+// 	return 1 + max(height(node->left), height(node->right));
+// }
+
+
+// struct node* newNode(int data)
+// {
+// 	struct node* node
+// 		= (struct node*)malloc(sizeof(struct node));
+// 	node->data = data;
+// 	node->left = NULL;
+// 	node->right = NULL;
+
+// 	return (node);
+// }
+
+// Maximum Sum Path in Binary Tree
+
+// struct Node{
+//      int data;
+//      struct node *left,*right;
+// };
+
+
+// int findmaxpathsum(node * root, int& maxi){
+//     if(root==NULL) return 0;
+//     int leftpath=max(0,findmaxpathsum(root->left ,maxi));
+//     int rightpath=max(0,findmaxpathsum(root->right ,maxi));
+//     int val=root->data;
+//     maxi=max(maxi,(leftpath+rightpath)+val);
+//     return max(leftpath,rightpath)+val;
+// }
+
+// int maxPathSum(node* root){
+//     int maxi=INT_MIN;
+//     findmaxpathsum(root,maxi);
+//     return maxi;
+// }
+
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+
+//   return (node);
+// }
+
+
 struct node {
-	int data;
-	struct node *left, *right;
+  int data;
+  struct node * left, * right;
 };
 
-// struct node* newNode(int data);
+int findMaxPathSum(node * root, int & maxi) {
+  if (root == NULL) return 0;
 
-// int max(int a, int b) { return (a > b) ? a : b; }
+  int leftMaxPath = max(0, findMaxPathSum(root -> left, maxi));
+  int rightMaxPath = max(0, findMaxPathSum(root -> right, maxi));
+  int val = root -> data;
+  maxi = max(maxi, (leftMaxPath + rightMaxPath) + val);
+  return max(leftMaxPath, rightMaxPath) + val;
 
-int height(struct node* node);
-
-int diameter(struct node* tree)
-{
-	
-	if (tree == NULL)
-		return 0;
-
-	int lheight = height(tree->left);
-	int rheight = height(tree->right);
-	int ldiameter = diameter(tree->left);
-	int rdiameter = diameter(tree->right);
-
-	
-	return max(lheight + rheight + 1,
-			max(ldiameter, rdiameter));
 }
 
-int height(struct node* node)
-{
-	if (node == NULL)
-		return 0;
+int maxPathSum(node * root) {
+  int maxi = INT_MIN;
+  findMaxPathSum(root, maxi);
+  return maxi;
 
-	
-	return 1 + max(height(node->left), height(node->right));
 }
 
+struct node * newNode(int data) {
+  struct node * node = (struct node * ) malloc(sizeof(struct node));
+  node -> data = data;
+  node -> left = NULL;
+  node -> right = NULL;
 
-struct node* newNode(int data)
-{
-	struct node* node
-		= (struct node*)malloc(sizeof(struct node));
-	node->data = data;
-	node->left = NULL;
-	node->right = NULL;
-
-	return (node);
+  return (node);
 }
-
-
-
-;
-
 
 
 
@@ -183,15 +243,15 @@ struct node* newNode(int data)
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-//     struct node * root=newNode(1);
-//     root->left=newNode(2);
-//     root->left->left=newNode(4);
-//     root->left->right=newNode(15);
-//     // root->left->right->left=newNode(6);
-//     root->right=newNode(3);
-//     root->right->left=newNode(6);
-//     root->right->left->right=newNode(9);
-//     root->right->left->right->right=newNode(8);
+    struct node * root=newNode(-10);
+    root->left=newNode(2);
+    root->left->left=newNode(4);
+    root->left->right=newNode(15);
+    // root->left->right->left=newNode(6);
+    root->right=newNode(3);
+    root->right->left=newNode(6);
+    root->right->left->right=newNode(9);
+    root->right->left->right->right=newNode(8);
 //     // root->right->right->left=newNode(9);
 
 
@@ -213,15 +273,18 @@ struct node* newNode(int data)
 
 
 // Calculate the Diameter of a Binary Tree
-	struct node* root = newNode(1);
-	root->left = newNode(2);
-	root->right = newNode(3);
-	root->left->left = newNode(4);
-	root->left->right = newNode(5);
+	// struct node* root = newNode(1);
+	// root->left = newNode(2);
+	// root->right = newNode(3);
+	// root->left->left = newNode(4);
+	// root->left->right = newNode(5);
 
-	cout << "Diameter of the given binary tree is "
-		<< diameter(root);
+	// cout << "Diameter of the given binary tree is "
+	// 	<< diameter(root);
 
+
+    int ans=maxPathSum(root);
+    cout<<"The Max Path Sum for this tree is " << ans;
 
 
     return 0;
