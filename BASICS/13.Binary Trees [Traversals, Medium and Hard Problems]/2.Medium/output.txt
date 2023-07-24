@@ -1,1 +1,1 @@
-Tree is balanced
+Diameter of the given binary tree is 4
