@@ -246,7 +246,7 @@ struct node * newNode(int data) {
     struct node * root=newNode(-10);
     root->left=newNode(2);
     root->left->left=newNode(4);
-    root->left->right=newNode(15);
+    root->left->right=newNode(5);
     // root->left->right->left=newNode(6);
     root->right=newNode(3);
     root->right->left=newNode(6);
