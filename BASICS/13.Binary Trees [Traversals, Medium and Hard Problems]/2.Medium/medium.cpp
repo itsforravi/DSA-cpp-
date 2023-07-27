@@ -179,7 +179,7 @@ using namespace std;
 //   return (node);
 // }
 
-
+// Maximum Sum Path in Binary Tree
 struct node {
   int data;
   struct node * left, * right;
@@ -283,6 +283,7 @@ struct node * newNode(int data) {
 	// 	<< diameter(root);
 
 
+// Maximum Sum Path in Binary Tree
     int ans=maxPathSum(root);
     cout<<"The Max Path Sum for this tree is " << ans;
 
