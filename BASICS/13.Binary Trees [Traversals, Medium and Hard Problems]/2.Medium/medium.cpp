@@ -240,52 +240,119 @@ using namespace std;
 
 // Zig Zag Traversal Of Binary Tree
 
-class Node {
-  public:
-    int val;
-  Node * left, * right;
+// class Node {
+//   public:
+//     int val;
+//   Node * left, * right;
+// };
+
+// vector < vector < int >> zigzaglevel(Node * root) {
+//   vector < vector < int >> result;
+//   if (root == NULL) {
+//     return result;
+//   }
+
+//   queue < Node * > nodesQueue;
+//   nodesQueue.push(root);
+//   bool leftToRight = true;
+
+//   while (!nodesQueue.empty()) {
+//     int size = nodesQueue.size();
+//     vector < int > row(size);
+//     for (int i = 0; i < size; i++) {
+//       Node * node = nodesQueue.front();
+//       nodesQueue.pop();
+
+//       // find position to fill node's value
+//       int index = (leftToRight) ? i : (size - 1 - i);
+
+//       row[index] = node -> val;
+//       if (node -> left) {
+//         nodesQueue.push(node -> left);
+//       }
+//       if (node -> right) {
+//         nodesQueue.push(node -> right);
+//       }
+//     }
+//     // after this level
+//     leftToRight = !leftToRight;
+//     result.push_back(row);
+//   }
+//   return result;
+// }
+// Node * newNode(int data) {
+//   Node * node = new Node;
+//   node -> val = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+//   return node;
+// }
+
+
+
+
+// Boundary Traversal of a Binary Tree
+struct node {
+  int data;
+  struct node * left, * right;
 };
 
-vector < vector < int >> zigzaglevel(Node * root) {
-  vector < vector < int >> result;
-  if (root == NULL) {
-    return result;
-  }
-
-  queue < Node * > nodesQueue;
-  nodesQueue.push(root);
-  bool leftToRight = true;
-
-  while (!nodesQueue.empty()) {
-    int size = nodesQueue.size();
-    vector < int > row(size);
-    for (int i = 0; i < size; i++) {
-      Node * node = nodesQueue.front();
-      nodesQueue.pop();
-
-      // find position to fill node's value
-      int index = (leftToRight) ? i : (size - 1 - i);
-
-      row[index] = node -> val;
-      if (node -> left) {
-        nodesQueue.push(node -> left);
-      }
-      if (node -> right) {
-        nodesQueue.push(node -> right);
-      }
-    }
-    // after this level
-    leftToRight = !leftToRight;
-    result.push_back(row);
-  }
-  return result;
+bool isLeaf(node * root) {
+  return !root -> left && !root -> right;
 }
-Node * newNode(int data) {
-  Node * node = new Node;
-  node -> val = data;
+
+void addLeftBoundary(node * root, vector < int > & res) {
+  node * cur = root -> left;
+  while (cur) {
+    if (!isLeaf(cur)) res.push_back(cur -> data);
+    if (cur -> left) cur = cur -> left;
+    else cur = cur -> right;
+  }
+}
+void addRightBoundary(node * root, vector < int > & res) {
+  node * cur = root -> right;
+  vector < int > tmp;
+  while (cur) {
+    if (!isLeaf(cur)) tmp.push_back(cur -> data);
+    if (cur -> right) cur = cur -> right;
+    else cur = cur -> left;
+  }
+  for (int i = tmp.size() - 1; i >= 0; --i) {
+    res.push_back(tmp[i]);
+  }
+}
+
+
+void addLeaves(node * root, vector < int > & res) {
+  if (isLeaf(root)) {
+    res.push_back(root -> data);
+    return;
+  }
+  if (root -> left) addLeaves(root -> left, res);
+  if (root -> right) addLeaves(root -> right, res);
+}
+
+vector < int > printBoundary(node * root) {
+  vector < int > res;
+  if (!root) return res;
+
+  if (!isLeaf(root)) res.push_back(root -> data);
+
+  addLeftBoundary(root, res);
+
+  addLeaves(root, res);
+
+  addRightBoundary(root, res);
+  return res;
+}
+
+struct node * newNode(int data) {
+  struct node * node = (struct node * ) malloc(sizeof(struct node));
+  node -> data = data;
   node -> left = NULL;
   node -> right = NULL;
-  return node;
+
+  return (node);
 }
 
 
@@ -375,20 +442,43 @@ Node * newNode(int data) {
 
 
 // Zig Zag Traversal Of Binary Tree
-  int i, j;
-  Node * root = newNode(3);
-  root -> left = newNode(9);
-  root -> right = newNode(20);
-  root -> right -> left = newNode(15);
-  root -> right -> right = newNode(7);
-  vector < vector < int >> ans;
-  ans = zigzaglevel(root);
-  cout << "Zig Zag Traversal of Binary Tree" << endl;
-  for (i = 0; i < ans.size(); i++) {
-    for (j = 0; j < ans[i].size(); j++) {
-      cout << ans[i][j] << " ";
-    }
-    cout << endl;
+  // int i, j;
+  // Node * root = newNode(3);
+  // root -> left = newNode(9);
+  // root -> right = newNode(20);
+  // root -> right -> left = newNode(15);
+  // root -> right -> right = newNode(7);
+  // vector < vector < int >> ans;
+  // ans = zigzaglevel(root);
+  // cout << "Zig Zag Traversal of Binary Tree" << endl;
+  // for (i = 0; i < ans.size(); i++) {
+  //   for (j = 0; j < ans[i].size(); j++) {
+  //     cout << ans[i][j] << " ";
+  //   }
+  //   cout << endl;
+  // }
+
+
+
+  // Boundary Traversal of a Binary Tree
+    struct node * root = newNode(1);
+  root -> left = newNode(2);
+  root -> left -> left = newNode(3);
+  root -> left -> left -> right = newNode(4);
+  root -> left -> left -> right -> left = newNode(5);
+  root -> left -> left -> right -> right = newNode(6);
+  root -> right = newNode(7);
+  root -> right -> right = newNode(8);
+  root -> right -> right -> left = newNode(9);
+  root -> right -> right -> left -> left = newNode(10);
+  root -> right -> right -> left -> right = newNode(11);
+
+  vector < int > boundaryTraversal;
+  boundaryTraversal = printBoundary(root);
+
+  cout << "The Boundary Traversal is : ";
+  for (int i = 0; i < boundaryTraversal.size(); i++) {
+    cout << boundaryTraversal[i] << " ";
   }
 
     return 0;
