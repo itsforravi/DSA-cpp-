@@ -1,1 +1,4 @@
-Two trees are not indetical...
+Zig Zag Traversal of Binary Tree
+3 
+20 9 
+15 7 

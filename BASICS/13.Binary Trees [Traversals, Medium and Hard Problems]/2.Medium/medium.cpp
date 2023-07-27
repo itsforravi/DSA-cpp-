@@ -215,29 +215,78 @@ using namespace std;
 
 // Check if two trees are identical
 
-struct node{
-  int data;
-  struct node *left,*right;
+// struct node{
+//   int data;
+//   struct node *left,*right;
+// };
+//  bool isidentical(node *node1,node *node2){
+//        if(node1==NULL && node2==NULL){
+//         return true;
+//        }
+//        else if( node1==NULL || node2==NULL){
+//         return false;
+//        }
+//        return ((node1->data==node2->data)&& isidentical(node1->left,node2->left)&&isidentical(node1->right,node2->right));
+//  }
+
+// struct node *newNode(int data){
+//   struct node *node=(struct node*)malloc(sizeof(struct node));
+//   node->data=data;
+//   node->left=NULL;
+//   node->right=NULL;
+// }
+
+
+
+// Zig Zag Traversal Of Binary Tree
+
+class Node {
+  public:
+    int val;
+  Node * left, * right;
 };
- bool isidentical(node *node1,node *node2){
-       if(node1==NULL && node2==NULL){
-        return true;
-       }
-       else if( node1==NULL || node2==NULL){
-        return false;
-       }
-       return ((node1->data==node2->data)&& isidentical(node1->left,node2->left)&&isidentical(node1->right,node2->right));
- }
 
-struct node *newNode(int data){
-  struct node *node=(struct node*)malloc(sizeof(struct node));
-  node->data=data;
-  node->left=NULL;
-  node->right=NULL;
+vector < vector < int >> zigzaglevel(Node * root) {
+  vector < vector < int >> result;
+  if (root == NULL) {
+    return result;
+  }
+
+  queue < Node * > nodesQueue;
+  nodesQueue.push(root);
+  bool leftToRight = true;
+
+  while (!nodesQueue.empty()) {
+    int size = nodesQueue.size();
+    vector < int > row(size);
+    for (int i = 0; i < size; i++) {
+      Node * node = nodesQueue.front();
+      nodesQueue.pop();
+
+      // find position to fill node's value
+      int index = (leftToRight) ? i : (size - 1 - i);
+
+      row[index] = node -> val;
+      if (node -> left) {
+        nodesQueue.push(node -> left);
+      }
+      if (node -> right) {
+        nodesQueue.push(node -> right);
+      }
+    }
+    // after this level
+    leftToRight = !leftToRight;
+    result.push_back(row);
+  }
+  return result;
 }
-
-
-
+Node * newNode(int data) {
+  Node * node = new Node;
+  node -> val = data;
+  node -> left = NULL;
+  node -> right = NULL;
+  return node;
+}
 
 
 
@@ -307,23 +356,40 @@ struct node *newNode(int data){
 
 // Check if two trees are identical
 
-struct node * root1 = newNode(1);
-  root1 -> left = newNode(2);
-  root1 -> right = newNode(3);
-  root1 -> right -> left = newNode(4);
-  root1 -> right -> right = newNode(5);
+// struct node * root1 = newNode(1);
+//   root1 -> left = newNode(2);
+//   root1 -> right = newNode(3);
+//   root1 -> right -> left = newNode(4);
+//   root1 -> right -> right = newNode(5);
 
-  struct node * root2 = newNode(1);
-  root2 -> left = newNode(2);
-  root2 -> right = newNode(3);
-  root2 -> right -> left = newNode(4);
+//   struct node * root2 = newNode(1);
+//   root2 -> left = newNode(2);
+//   root2 -> right = newNode(3);
+//   root2 -> right -> left = newNode(4);
   
 
-  if(isidentical(root1,root2)){
-    cout<<"Two trees are identical..";
-  }
-  else cout<<"Two trees are not indetical...";
+//   if(isidentical(root1,root2)){
+//     cout<<"Two trees are identical..";
+//   }
+//   else cout<<"Two trees are not indetical...";
 
+
+// Zig Zag Traversal Of Binary Tree
+  int i, j;
+  Node * root = newNode(3);
+  root -> left = newNode(9);
+  root -> right = newNode(20);
+  root -> right -> left = newNode(15);
+  root -> right -> right = newNode(7);
+  vector < vector < int >> ans;
+  ans = zigzaglevel(root);
+  cout << "Zig Zag Traversal of Binary Tree" << endl;
+  for (i = 0; i < ans.size(); i++) {
+    for (j = 0; j < ans[i].size(); j++) {
+      cout << ans[i][j] << " ";
+    }
+    cout << endl;
+  }
 
     return 0;
 }
