@@ -180,44 +180,61 @@ using namespace std;
 // }
 
 // Maximum Sum Path in Binary Tree
-struct node {
+// struct node {
+//   int data;
+//   struct node * left, * right;
+// };
+
+// int findMaxPathSum(node * root, int & maxi) {
+//   if (root == NULL) return 0;
+
+//   int leftMaxPath = max(0, findMaxPathSum(root -> left, maxi));
+//   int rightMaxPath = max(0, findMaxPathSum(root -> right, maxi));
+//   int val = root -> data;
+//   maxi = max(maxi, (leftMaxPath + rightMaxPath) + val);
+//   return max(leftMaxPath, rightMaxPath) + val;
+
+// }
+
+// int maxPathSum(node * root) {
+//   int maxi = INT_MIN;
+//   findMaxPathSum(root, maxi);
+//   return maxi;
+
+// }
+
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+
+//   return (node);
+// }
+
+
+// Check if two trees are identical
+
+struct node{
   int data;
-  struct node * left, * right;
+  struct node *left,*right;
 };
+ bool isidentical(node *node1,node *node2){
+       if(node1==NULL && node2==NULL){
+        return true;
+       }
+       else if( node1==NULL || node2==NULL){
+        return false;
+       }
+       return ((node1->data==node2->data)&& isidentical(node1->left,node2->left)&&isidentical(node1->right,node2->right));
+ }
 
-int findMaxPathSum(node * root, int & maxi) {
-  if (root == NULL) return 0;
-
-  int leftMaxPath = max(0, findMaxPathSum(root -> left, maxi));
-  int rightMaxPath = max(0, findMaxPathSum(root -> right, maxi));
-  int val = root -> data;
-  maxi = max(maxi, (leftMaxPath + rightMaxPath) + val);
-  return max(leftMaxPath, rightMaxPath) + val;
-
+struct node *newNode(int data){
+  struct node *node=(struct node*)malloc(sizeof(struct node));
+  node->data=data;
+  node->left=NULL;
+  node->right=NULL;
 }
-
-int maxPathSum(node * root) {
-  int maxi = INT_MIN;
-  findMaxPathSum(root, maxi);
-  return maxi;
-
-}
-
-struct node * newNode(int data) {
-  struct node * node = (struct node * ) malloc(sizeof(struct node));
-  node -> data = data;
-  node -> left = NULL;
-  node -> right = NULL;
-
-  return (node);
-}
-
-
-
-
-
-
-
 
 
 
@@ -243,16 +260,16 @@ struct node * newNode(int data) {
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    struct node * root=newNode(-10);
-    root->left=newNode(2);
-    root->left->left=newNode(4);
-    root->left->right=newNode(5);
-    // root->left->right->left=newNode(6);
-    root->right=newNode(3);
-    root->right->left=newNode(6);
-    root->right->left->right=newNode(9);
-    root->right->left->right->right=newNode(8);
-//     // root->right->right->left=newNode(9);
+//     struct node * root=newNode(-10);
+//     root->left=newNode(2);
+//     root->left->left=newNode(4);
+//     root->left->right=newNode(5);
+//     // root->left->right->left=newNode(6);
+//     root->right=newNode(3);
+//     root->right->left=newNode(6);
+//     root->right->left->right=newNode(9);
+//     root->right->left->right->right=newNode(8);
+// //     // root->right->right->left=newNode(9);
 
 
 
@@ -284,8 +301,28 @@ struct node * newNode(int data) {
 
 
 // Maximum Sum Path in Binary Tree
-    int ans=maxPathSum(root);
-    cout<<"The Max Path Sum for this tree is " << ans;
+    // int ans=maxPathSum(root);
+    // cout<<"The Max Path Sum for this tree is " << ans;
+
+
+// Check if two trees are identical
+
+struct node * root1 = newNode(1);
+  root1 -> left = newNode(2);
+  root1 -> right = newNode(3);
+  root1 -> right -> left = newNode(4);
+  root1 -> right -> right = newNode(5);
+
+  struct node * root2 = newNode(1);
+  root2 -> left = newNode(2);
+  root2 -> right = newNode(3);
+  root2 -> right -> left = newNode(4);
+  root2 -> right -> right = newNode(5);
+
+  if(isidentical(root1,root2)){
+    cout<<"Two trees are identical..";
+  }
+  else cout<<"Two trees are not indetical...";
 
 
     return 0;
