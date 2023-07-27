@@ -317,7 +317,7 @@ struct node * root1 = newNode(1);
   root2 -> left = newNode(2);
   root2 -> right = newNode(3);
   root2 -> right -> left = newNode(4);
-  root2 -> right -> right = newNode(5);
+  
 
   if(isidentical(root1,root2)){
     cout<<"Two trees are identical..";
