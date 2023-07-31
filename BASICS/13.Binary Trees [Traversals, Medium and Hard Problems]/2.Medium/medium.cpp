@@ -422,56 +422,107 @@ using namespace std;
 
 
 //Top view of a Binary Tree
-struct Node {
-    Node* left;
-    Node* right;
-    int hd;
+// struct Node {
+//     Node* left;
+//     Node* right;
+//     int hd;
+//     int data;
+// };
+ 
+// Node* newNode(int key)
+// {
+//     Node* node = new Node();
+//     node->left = node->right = NULL;
+//     node->data = key;
+//     return node;
+// }
+
+// void topview(Node* root)
+// {
+//     if (root == NULL)
+//         return;
+//     queue<Node*> q;
+//     map<int, int> m;
+//     int hd = 0;
+//     root->hd = hd;
+//     q.push(root);
+ 
+//     cout << "The top view of the tree is : \n";
+ 
+//     while (q.size()) {
+//         hd = root->hd;
+//         if (m.count(hd) == 0)
+//             m[hd] = root->data;
+//         if (root->left) {
+//             root->left->hd = hd - 1;
+//             q.push(root->left);
+//         }
+//         if (root->right) {
+//             root->right->hd = hd + 1;
+//             q.push(root->right);
+//         }
+//         q.pop();
+//         root = q.front();
+//     }
+ 
+//     for (auto i = m.begin(); i != m.end(); i++) {
+//         cout << i->second << " ";
+//     }
+// } 
+
+
+// Bottom view of a Binary Tree
+struct Node
+{
     int data;
+    int hd; 
+    Node *left, *right; 
+    Node(int key)
+    {
+        data = key;
+        hd = INT_MAX;
+        left = right = NULL;
+    }
 };
  
-Node* newNode(int key)
-{
-    Node* node = new Node();
-    node->left = node->right = NULL;
-    node->data = key;
-    return node;
-}
-
-void topview(Node* root)
+void bottomView(Node *root)
 {
     if (root == NULL)
         return;
-    queue<Node*> q;
-    map<int, int> m;
+ 
     int hd = 0;
+ 
+    map<int, int> m;
+ 
+    queue<Node *> q;
+ 
     root->hd = hd;
-    q.push(root);
+    q.push(root);  
  
-    cout << "The top view of the tree is : \n";
+    while (!q.empty())
+    {
+        Node *temp = q.front();
+        q.pop();   
+        hd = temp->hd;
+        m[hd] = temp->data;
+        if (temp->left != NULL)
+        {
+            temp->left->hd = hd-1;
+            q.push(temp->left);
+        }
  
-    while (q.size()) {
-        hd = root->hd;
-        if (m.count(hd) == 0)
-            m[hd] = root->data;
-        if (root->left) {
-            root->left->hd = hd - 1;
-            q.push(root->left);
+        if (temp->right != NULL)
+        
+            temp->right->hd = hd+1;
+            q.push(temp->right);
         }
-        if (root->right) {
-            root->right->hd = hd + 1;
-            q.push(root->right);
-        }
-        q.pop();
-        root = q.front();
     }
  
-    for (auto i = m.begin(); i != m.end(); i++) {
+    for (auto i = m.begin(); i != m.end(); ++i)
         cout << i->second << " ";
-    }
-} 
 
-
-
+        
+ 
 
 
 
@@ -597,6 +648,8 @@ void topview(Node* root)
 
 
 // Vertical Order Traversal of Binary Tree
+
+
 // struct node * root = newNode(1);
 //   root -> left = newNode(2);
 //   root -> left -> left = newNode(4);
@@ -618,15 +671,29 @@ void topview(Node* root)
 //     cout << endl;
 //   }
 
-// 
+// Top view of a Binary Tree
 
-Node* root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->right = newNode(4);
-    root->left->right->right = newNode(5);
-    root->left->right->right->right = newNode(6);
-    topview(root);
+// Node* root = newNode(1);
+//     root->left = newNode(2);
+//     root->right = newNode(3);
+//     root->left->right = newNode(4);
+//     root->left->right->right = newNode(5);
+//     root->left->right->right->right = newNode(6);
+//     topview(root);
+
+// Bottom view of a Binary Tree
+
+Node *root = new Node(20);
+    root->left = new Node(8);
+    root->right = new Node(22);
+    root->left->left = new Node(5);
+    root->left->right = new Node(3);
+    root->right->left = new Node(4);
+    root->right->right = new Node(25);
+    root->left->right->left = new Node(10);
+    root->left->right->right = new Node(14);
+    cout << "Bottom view of the given binary tree :\n";
+    bottomView(root);
 
     return 0;
 }
