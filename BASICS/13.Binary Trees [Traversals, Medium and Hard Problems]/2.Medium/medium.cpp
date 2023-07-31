@@ -429,7 +429,6 @@ struct Node {
     int data;
 };
  
-// function to create a new node
 Node* newNode(int key)
 {
     Node* node = new Node();
@@ -437,8 +436,7 @@ Node* newNode(int key)
     node->data = key;
     return node;
 }
- 
-// function should print the topView of the binary tree
+
 void topview(Node* root)
 {
     if (root == NULL)
@@ -619,6 +617,8 @@ void topview(Node* root)
 //     }
 //     cout << endl;
 //   }
+
+// 
 
 Node* root = newNode(1);
     root->left = newNode(2);
