@@ -474,11 +474,15 @@ using namespace std;
 
 // Bottom view of a Binary Tree
 
+
+
 // struct Node
 // {
-//     int data;
+//     int data; 
 //     int hd; 
 //     Node *left, *right; 
+ 
+  
 //     Node(int key)
 //     {
 //         data = key;
@@ -486,91 +490,101 @@ using namespace std;
 //         left = right = NULL;
 //     }
 // };
- 
 // void bottomView(Node *root)
 // {
 //     if (root == NULL)
 //         return;
- 
 //     int hd = 0;
- 
 //     map<int, int> m;
- 
 //     queue<Node *> q;
- 
 //     root->hd = hd;
 //     q.push(root);  
- 
 //     while (!q.empty())
 //     {
 //         Node *temp = q.front();
-//         q.pop();   
+//         q.pop();  
 //         hd = temp->hd;
+        
 //         m[hd] = temp->data;
 //         if (temp->left != NULL)
 //         {
 //             temp->left->hd = hd-1;
 //             q.push(temp->left);
 //         }
- 
 //         if (temp->right != NULL)
-        
+//         {
 //             temp->right->hd = hd+1;
 //             q.push(temp->right);
 //         }
-    
- 
+//     }
 //     for (auto i = m.begin(); i != m.end(); ++i)
 //         cout << i->second << " ";
+// }
+ 
+// Right/Left view of binary tree
+
+// Left view
+struct Node{
+    int data;
+    struct Node *left,*right;
+};
+
+void leftview(struct Node* root,int level, int* max_level){
+  if(root==NULL)
+  return ;
+  if(*max_level<level){
+    cout<<root->data<<" ";
+    *max_level=level;
+  }
+  leftview(root->left,level+1,max_level);
+  leftview(root->right,level+1,max_level);
+
+}
+
+void leftview1(struct Node* root){
+    int max_level=0;
+    leftview(root,1,&max_level);
+}
+
+struct Node* newNode(int data){
+    struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
+    node->data=data;
+    node->left=NULL;
+    node->right=NULL;
+    return (node);
+}
+
+
+// Right view of binary tree
+// struct Node{
+//     int data;
+//     struct Node *left,*right;
+// };
+
+// void leftview(struct Node* root,int level, int* max_level){
+//   if(root==NULL)
+//   return ;
+//   if(*max_level<level){
+//     cout<<root->data<<" ";
+//     *max_level=level;
+//   }
+//   leftview(root->right,level+1,max_level);
+//   leftview(root->left,level+1,max_level);
 
 // }
 
-struct Node
-{
-    int data; 
-    int hd; 
-    Node *left, *right; 
- 
-  
-    Node(int key)
-    {
-        data = key;
-        hd = INT_MAX;
-        left = right = NULL;
-    }
-};
-void bottomView(Node *root)
-{
-    if (root == NULL)
-        return;
-    int hd = 0;
-    map<int, int> m;
-    queue<Node *> q;
-    root->hd = hd;
-    q.push(root);  
-    while (!q.empty())
-    {
-        Node *temp = q.front();
-        q.pop();  
-        hd = temp->hd;
-        
-        m[hd] = temp->data;
-        if (temp->left != NULL)
-        {
-            temp->left->hd = hd-1;
-            q.push(temp->left);
-        }
-        if (temp->right != NULL)
-        {
-            temp->right->hd = hd+1;
-            q.push(temp->right);
-        }
-    }
-    for (auto i = m.begin(); i != m.end(); ++i)
-        cout << i->second << " ";
-}
- 
+// void leftview1(struct Node* root){
+//     int max_level=0;
+//     leftview(root,1,&max_level);
+// }
 
+// struct Node* newNode(int data){
+//     struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+// }
         
  
 
@@ -734,17 +748,29 @@ void bottomView(Node *root)
 
 // Bottom view of a Binary Tree
 
-Node *root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->left->right->left = new Node(8);
-    root->left->right->right = new Node(9);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
-    cout << "Bottom view of the given binary tree :\n";
-    bottomView(root);
+// Node *root = new Node(1);
+//     root->left = new Node(2);
+//     root->right = new Node(3);
+//     root->left->left = new Node(4);
+//     root->left->right = new Node(5);
+//     root->left->right->left = new Node(8);
+//     root->left->right->right = new Node(9);
+//     root->right->left = new Node(6);
+//     root->right->right = new Node(7);
+//     cout << "Bottom view of the given binary tree :\n";
+//     bottomView(root);
+
+
+// Right/Left view of binary tree
+Node* root=newNode(1);
+root->left=newNode(2);
+root->right=newNode(3);
+root->left->left=newNode(4);
+root->left->right=newNode(5);
+root->left->right->left=newNode(6);
+root->right->right=newNode(7);
+cout<<"Right/Left view of binary tree :\n";
+leftview1(root);
 
     return 0;
 }
