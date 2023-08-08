@@ -524,38 +524,6 @@ using namespace std;
 // Right/Left view of binary tree
 
 // Left view
-struct Node{
-    int data;
-    struct Node *left,*right;
-};
-
-void leftview(struct Node* root,int level, int* max_level){
-  if(root==NULL)
-  return ;
-  if(*max_level<level){
-    cout<<root->data<<" ";
-    *max_level=level;
-  }
-  leftview(root->left,level+1,max_level);
-  leftview(root->right,level+1,max_level);
-
-}
-
-void leftview1(struct Node* root){
-    int max_level=0;
-    leftview(root,1,&max_level);
-}
-
-struct Node* newNode(int data){
-    struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
-    node->data=data;
-    node->left=NULL;
-    node->right=NULL;
-    return (node);
-}
-
-
-// Right view of binary tree
 // struct Node{
 //     int data;
 //     struct Node *left,*right;
@@ -568,8 +536,8 @@ struct Node* newNode(int data){
 //     cout<<root->data<<" ";
 //     *max_level=level;
 //   }
-//   leftview(root->right,level+1,max_level);
 //   leftview(root->left,level+1,max_level);
+//   leftview(root->right,level+1,max_level);
 
 // }
 
@@ -585,6 +553,38 @@ struct Node* newNode(int data){
 //     node->right=NULL;
 //     return (node);
 // }
+
+
+// Right view of binary tree
+struct Node{
+    int data;
+    struct Node *left,*right;
+};
+
+void leftview(struct Node* root,int level, int* max_level){
+  if(root==NULL)
+  return ;
+  if(*max_level<level){
+    cout<<root->data<<" ";
+    *max_level=level;
+  }
+  leftview(root->right,level+1,max_level);
+  leftview(root->left,level+1,max_level);
+
+}
+
+void leftview1(struct Node* root){
+    int max_level=0;
+    leftview(root,1,&max_level);
+}
+
+struct Node* newNode(int data){
+    struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
+    node->data=data;
+    node->left=NULL;
+    node->right=NULL;
+    return (node);
+}
         
  
 
