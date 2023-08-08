@@ -1,2 +1,2 @@
-The top view of the tree is : 
-4 2 1 3 6 
+Bottom view of the given binary tree :
+4 8 6 9 7 
