@@ -358,118 +358,118 @@ using namespace std;
 
 // // Vertical Order Traversal of Binary Tree
 
-struct node {
-  int data;
-  struct node * left, * right;
-};
+// struct node {
+//   int data;
+//   struct node * left, * right;
+// };
 
-vector < vector < int >> findVertical(node * root) {
-  map < int, map < int, multiset < int >>> nodes;
-  queue < pair < node * , pair < int, int >>> todo;
-  todo.push({
-    root,
-    {
-      0,
-      0
-    }
-  }); //initial vertical and level
-  while (!todo.empty()) {
-    auto p = todo.front();
-    todo.pop();
-    node * temp = p.first;
+// vector < vector < int >> findVertical(node * root) {
+//   map < int, map < int, multiset < int >>> nodes;
+//   queue < pair < node * , pair < int, int >>> todo;
+//   todo.push({
+//     root,
+//     {
+//       0,
+//       0
+//     }
+//   }); //initial vertical and level
+//   while (!todo.empty()) {
+//     auto p = todo.front();
+//     todo.pop();
+//     node * temp = p.first;
 
-    //x -> vertical , y->level
-    int x = p.second.first, y = p.second.second;
-    nodes[x][y].insert(temp -> data); //inserting to multiset
+//     //x -> vertical , y->level
+//     int x = p.second.first, y = p.second.second;
+//     nodes[x][y].insert(temp -> data); //inserting to multiset
 
-    if (temp -> left) {
-      todo.push({
-        temp -> left,
-        {
-          x - 1,
-          y + 1
-        }
-      });
-    }
-    if (temp -> right) {
-      todo.push({
-        temp -> right,
-        {
-          x + 1,
-          y + 1
-        }
-      });
-    }
-  }
-  vector < vector < int >> ans;
-  for (auto p: nodes) {
-    vector < int > col;
-    for (auto q: p.second) {
-      col.insert(col.end(), q.second.begin(), q.second.end());
-    }
-    ans.push_back(col);
-  }
-  return ans;
-}
+//     if (temp -> left) {
+//       todo.push({
+//         temp -> left,
+//         {
+//           x - 1,
+//           y + 1
+//         }
+//       });
+//     }
+//     if (temp -> right) {
+//       todo.push({
+//         temp -> right,
+//         {
+//           x + 1,
+//           y + 1
+//         }
+//       });
+//     }
+//   }
+//   vector < vector < int >> ans;
+//   for (auto p: nodes) {
+//     vector < int > col;
+//     for (auto q: p.second) {
+//       col.insert(col.end(), q.second.begin(), q.second.end());
+//     }
+//     ans.push_back(col);
+//   }
+//   return ans;
+// }
 
-struct node * newNode(int data) {
-  struct node * node = (struct node * ) malloc(sizeof(struct node));
-  node -> data = data;
-  node -> left = NULL;
-  node -> right = NULL;
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
 
-  return (node);
-}
+//   return (node);
+// }
 
 
 //Top view of a Binary Tree
-// struct Node {
-//     Node* left;
-//     Node* right;
-//     int hd;
-//     int data;
-// };
+struct Node {
+    Node* left;
+    Node* right;
+    int hd;
+    int data;
+};
  
-// Node* newNode(int key)
-// {
-//     Node* node = new Node();
-//     node->left = node->right = NULL;
-//     node->data = key;
-//     return node;
-// }
+Node* newNode(int key)
+{
+    Node* node = new Node();
+    node->left = node->right = NULL;
+    node->data = key;
+    return node;
+}
 
-// void topview(Node* root)
-// {
-//     if (root == NULL)
-//         return;
-//     queue<Node*> q;
-//     map<int, int> m;
-//     int hd = 0;
-//     root->hd = hd;
-//     q.push(root);
+void topview(Node* root)
+{
+    if (root == NULL)
+        return;
+    queue<Node*> q;
+    map<int, int> m;
+    int hd = 0;
+    root->hd = hd;
+    q.push(root);
  
-//     cout << "The top view of the tree is : \n";
+    cout << "The top view of the tree is : \n";
  
-//     while (q.size()) {
-//         hd = root->hd;
-//         if (m.count(hd) == 0)
-//             m[hd] = root->data;
-//         if (root->left) {
-//             root->left->hd = hd - 1;
-//             q.push(root->left);
-//         }
-//         if (root->right) {
-//             root->right->hd = hd + 1;
-//             q.push(root->right);
-//         }
-//         q.pop();
-//         root = q.front();
-//     }
+    while (q.size()) {
+        hd = root->hd;
+        if (m.count(hd) == 0)
+            m[hd] = root->data;
+        if (root->left) {
+            root->left->hd = hd - 1;
+            q.push(root->left);
+        }
+        if (root->right) {
+            root->right->hd = hd + 1;
+            q.push(root->right);
+        }
+        q.pop();
+        root = q.front();
+    }
  
-//     for (auto i = m.begin(); i != m.end(); i++) {
-//         cout << i->second << " ";
-//     }
-// } 
+    for (auto i = m.begin(); i != m.end(); i++) {
+        cout << i->second << " ";
+    }
+} 
 
 
 // Bottom view of a Binary Tree
@@ -652,36 +652,37 @@ struct node * newNode(int data) {
 // Vertical Order Traversal of Binary Tree
 
 
-struct node * root = newNode(1);
-  root -> left = newNode(2);
-  root -> left -> left = newNode(4);
-  root -> left -> right = newNode(10);
-  root -> left -> left -> right = newNode(5);
-  root -> left -> left -> right -> right = newNode(6);
-  root -> right = newNode(3);
-  root -> right -> left = newNode(9);
-  root -> right -> right = newNode(10);
+// struct node * root = newNode(1);
+//   root -> left = newNode(2);
+//   root -> left -> left = newNode(4);
+//   root -> left -> right = newNode(10);
+//   root -> left -> left -> right = newNode(5);
+//   root -> left -> left -> right -> right = newNode(6);
+//   root -> right = newNode(3);
+//   root -> right -> left = newNode(9);
+//   root -> right -> right = newNode(10);
 
-  vector < vector < int > > verticalTraversal;
-  verticalTraversal = findVertical(root);
+//   vector < vector < int > > verticalTraversal;
+//   verticalTraversal = findVertical(root);
 
-  cout << "The Vertical Traversal is : " << endl;
-  for (auto vertical: verticalTraversal) {
-    for (auto nodeVal: vertical) {
-      cout << nodeVal << " ";
-    }
-    cout << endl;
-  }
+//   cout << "The Vertical Traversal is : " << endl;
+//   for (auto vertical: verticalTraversal) {
+//     for (auto nodeVal: vertical) {
+//       cout << nodeVal << " ";
+//     }
+//     cout << endl;
+//   }
 
 // Top view of a Binary Tree
 
-// Node* root = newNode(1);
-//     root->left = newNode(2);
-//     root->right = newNode(3);
-//     root->left->right = newNode(4);
-//     root->left->right->right = newNode(5);
-//     root->left->right->right->right = newNode(6);
-//     topview(root);
+Node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left=newNode(4);
+    root->left->right = newNode(5);
+    root->left->right->left = newNode(5);
+    root->right->right = newNode(6);
+    topview(root);
 
 // Bottom view of a Binary Tree
 

@@ -1,6 +1,2 @@
-The Vertical Traversal is : 
-4 
-2 5 
-1 9 10 6 
-3 
-10 
+The top view of the tree is : 
+4 2 1 3 6 
