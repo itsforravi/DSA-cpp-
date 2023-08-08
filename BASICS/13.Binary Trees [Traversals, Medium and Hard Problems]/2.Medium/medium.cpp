@@ -357,68 +357,69 @@ using namespace std;
 
 
 // // Vertical Order Traversal of Binary Tree
-// struct node {
-//   int data;
-//   struct node * left, * right;
-// };
 
-// vector < vector < int >> findVertical(node * root) {
-//   map < int, map < int, multiset < int >>> nodes;
-//   queue < pair < node * , pair < int, int >>> todo;
-//   todo.push({
-//     root,
-//     {
-//       0,
-//       0
-//     }
-//   }); //initial vertical and level
-//   while (!todo.empty()) {
-//     auto p = todo.front();
-//     todo.pop();
-//     node * temp = p.first;
+struct node {
+  int data;
+  struct node * left, * right;
+};
 
-//     //x -> vertical , y->level
-//     int x = p.second.first, y = p.second.second;
-//     nodes[x][y].insert(temp -> data); //inserting to multiset
+vector < vector < int >> findVertical(node * root) {
+  map < int, map < int, multiset < int >>> nodes;
+  queue < pair < node * , pair < int, int >>> todo;
+  todo.push({
+    root,
+    {
+      0,
+      0
+    }
+  }); //initial vertical and level
+  while (!todo.empty()) {
+    auto p = todo.front();
+    todo.pop();
+    node * temp = p.first;
 
-//     if (temp -> left) {
-//       todo.push({
-//         temp -> left,
-//         {
-//           x - 1,
-//           y + 1
-//         }
-//       });
-//     }
-//     if (temp -> right) {
-//       todo.push({
-//         temp -> right,
-//         {
-//           x + 1,
-//           y + 1
-//         }
-//       });
-//     }
-//   }
-//   vector < vector < int >> ans;
-//   for (auto p: nodes) {
-//     vector < int > col;
-//     for (auto q: p.second) {
-//       col.insert(col.end(), q.second.begin(), q.second.end());
-//     }
-//     ans.push_back(col);
-//   }
-//   return ans;
-// }
+    //x -> vertical , y->level
+    int x = p.second.first, y = p.second.second;
+    nodes[x][y].insert(temp -> data); //inserting to multiset
 
-// struct node * newNode(int data) {
-//   struct node * node = (struct node * ) malloc(sizeof(struct node));
-//   node -> data = data;
-//   node -> left = NULL;
-//   node -> right = NULL;
+    if (temp -> left) {
+      todo.push({
+        temp -> left,
+        {
+          x - 1,
+          y + 1
+        }
+      });
+    }
+    if (temp -> right) {
+      todo.push({
+        temp -> right,
+        {
+          x + 1,
+          y + 1
+        }
+      });
+    }
+  }
+  vector < vector < int >> ans;
+  for (auto p: nodes) {
+    vector < int > col;
+    for (auto q: p.second) {
+      col.insert(col.end(), q.second.begin(), q.second.end());
+    }
+    ans.push_back(col);
+  }
+  return ans;
+}
 
-//   return (node);
-// }
+struct node * newNode(int data) {
+  struct node * node = (struct node * ) malloc(sizeof(struct node));
+  node -> data = data;
+  node -> left = NULL;
+  node -> right = NULL;
+
+  return (node);
+}
 
 
 //Top view of a Binary Tree
@@ -472,51 +473,51 @@ using namespace std;
 
 
 // Bottom view of a Binary Tree
-struct Node
-{
-    int data;
-    int hd; 
-    Node *left, *right; 
-    Node(int key)
-    {
-        data = key;
-        hd = INT_MAX;
-        left = right = NULL;
-    }
-};
+// struct Node
+// {
+//     int data;
+//     int hd; 
+//     Node *left, *right; 
+//     Node(int key)
+//     {
+//         data = key;
+//         hd = INT_MAX;
+//         left = right = NULL;
+//     }
+// };
  
-void bottomView(Node *root)
-{
-    if (root == NULL)
-        return;
+// void bottomView(Node *root)
+// {
+//     if (root == NULL)
+//         return;
  
-    int hd = 0;
+//     int hd = 0;
  
-    map<int, int> m;
+//     map<int, int> m;
  
-    queue<Node *> q;
+//     queue<Node *> q;
  
-    root->hd = hd;
-    q.push(root);  
+//     root->hd = hd;
+//     q.push(root);  
  
-    while (!q.empty())
-    {
-        Node *temp = q.front();
-        q.pop();   
-        hd = temp->hd;
-        m[hd] = temp->data;
-        if (temp->left != NULL)
-        {
-            temp->left->hd = hd-1;
-            q.push(temp->left);
-        }
+//     while (!q.empty())
+//     {
+//         Node *temp = q.front();
+//         q.pop();   
+//         hd = temp->hd;
+//         m[hd] = temp->data;
+//         if (temp->left != NULL)
+//         {
+//             temp->left->hd = hd-1;
+//             q.push(temp->left);
+//         }
  
-        if (temp->right != NULL)
+//         if (temp->right != NULL)
         
-            temp->right->hd = hd+1;
-            q.push(temp->right);
-        }
-    }
+//             temp->right->hd = hd+1;
+//             q.push(temp->right);
+//         }
+//     }
  
     // for (auto i = m.begin(); i != m.end(); ++i)
     //     cout << i->second << " ";
@@ -651,26 +652,26 @@ void bottomView(Node *root)
 // Vertical Order Traversal of Binary Tree
 
 
-// struct node * root = newNode(1);
-//   root -> left = newNode(2);
-//   root -> left -> left = newNode(4);
-//   root -> left -> right = newNode(10);
-//   root -> left -> left -> right = newNode(5);
-//   root -> left -> left -> right -> right = newNode(6);
-//   root -> right = newNode(3);
-//   root -> right -> left = newNode(9);
-//   root -> right -> right = newNode(10);
+struct node * root = newNode(1);
+  root -> left = newNode(2);
+  root -> left -> left = newNode(4);
+  root -> left -> right = newNode(10);
+  root -> left -> left -> right = newNode(5);
+  root -> left -> left -> right -> right = newNode(6);
+  root -> right = newNode(3);
+  root -> right -> left = newNode(9);
+  root -> right -> right = newNode(10);
 
-//   vector < vector < int > > verticalTraversal;
-//   verticalTraversal = findVertical(root);
+  vector < vector < int > > verticalTraversal;
+  verticalTraversal = findVertical(root);
 
-//   cout << "The Vertical Traversal is : " << endl;
-//   for (auto vertical: verticalTraversal) {
-//     for (auto nodeVal: vertical) {
-//       cout << nodeVal << " ";
-//     }
-//     cout << endl;
-//   }
+  cout << "The Vertical Traversal is : " << endl;
+  for (auto vertical: verticalTraversal) {
+    for (auto nodeVal: vertical) {
+      cout << nodeVal << " ";
+    }
+    cout << endl;
+  }
 
 // Top view of a Binary Tree
 
@@ -684,17 +685,17 @@ void bottomView(Node *root)
 
 // Bottom view of a Binary Tree
 
-Node *root = new Node(20);
-    root->left = new Node(8);
-    root->right = new Node(22);
-    root->left->left = new Node(5);
-    root->left->right = new Node(3);
-    root->right->left = new Node(4);
-    root->right->right = new Node(15);
-    root->left->right->left = new Node(10);
-    root->left->right->right = new Node(14);
-    cout << "Bottom view of the given binary tree :\n";
-    bottomView(root);
+// Node *root = new Node(20);
+//     root->left = new Node(8);
+//     root->right = new Node(22);
+//     root->left->left = new Node(5);
+//     root->left->right = new Node(3);
+//     root->right->left = new Node(4);
+//     root->right->right = new Node(15);
+//     root->left->right->left = new Node(10);
+//     root->left->right->right = new Node(14);
+//     cout << "Bottom view of the given binary tree :\n";
+//     bottomView(root);
 
     return 0;
 }
