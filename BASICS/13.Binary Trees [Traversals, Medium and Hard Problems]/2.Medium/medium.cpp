@@ -589,27 +589,27 @@ using namespace std;
      
 // Check for Symmetrical Binary Tree
 
-struct node{
-    int data;
-    struct node *left,*right;
-};
-bool isSymmetric(node * root1,node * root2) {
-    if(root1==NULL || root2==NULL)
-    return root1==root2;
-    return (root1->data==root2->data) && isSymmetric(root1->left,root2->right) && isSymmetric(root1->right,root2->left);
-}
-bool isSymmetric1(node * root){
-    if(!root) return true;
-    return isSymmetric(root->left,root->right);
-}
-struct node *newNode(int data){
-    struct node * node=( struct node *)malloc(sizeof(struct node ));
-     node->data=data;
-     node->left=NULL;
-     node->right=NULL;
-     return (node);
+// struct node{
+//     int data;
+//     struct node *left,*right;
+// };
+// bool isSymmetric(node * root1,node * root2) {
+//     if(root1==NULL || root2==NULL)
+//     return root1==root2;
+//     return (root1->data==root2->data) && isSymmetric(root1->left,root2->right) && isSymmetric(root1->right,root2->left);
+// }
+// bool isSymmetric1(node * root){
+//     if(!root) return true;
+//     return isSymmetric(root->left,root->right);
+// }
+// struct node *newNode(int data){
+//     struct node * node=( struct node *)malloc(sizeof(struct node ));
+//      node->data=data;
+//      node->left=NULL;
+//      node->right=NULL;
+//      return (node);
 
-}
+// }
 
  
 
@@ -799,20 +799,20 @@ struct node *newNode(int data){
 
 
 // Check for Symmetrical Binary Tree
-struct node *root=newNode(1);
-root->left=newNode(2);
-root->right=newNode(3);
-root->left->left=newNode(4);
-root->left->right=newNode(5);
-root->left->right->left=newNode(8);
-root->left->right->right=newNode(9);
-root->right->left=newNode(6);
-root->right->right=newNode(7);
-bool res;
-res=isSymmetric1(root);
-if(res)
-cout<<"The tree is Symmetrical ";
-else cout<<" The tree is NOT symmetrical ";
+// struct node *root=newNode(1);
+// root->left=newNode(2);
+// root->right=newNode(3);
+// root->left->left=newNode(4);
+// root->left->right=newNode(5);
+// root->left->right->left=newNode(8);
+// root->left->right->right=newNode(9);
+// root->right->left=newNode(6);
+// root->right->right=newNode(7);
+// bool res;
+// res=isSymmetric1(root);
+// if(res)
+// cout<<"The tree is Symmetrical ";
+// else cout<<" The tree is NOT symmetrical ";
 
     return 0;
 }
