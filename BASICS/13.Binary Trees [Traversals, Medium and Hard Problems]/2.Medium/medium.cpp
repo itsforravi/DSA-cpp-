@@ -518,8 +518,9 @@ void bottomView(Node *root)
         }
     }
  
-    for (auto i = m.begin(); i != m.end(); ++i)
-        cout << i->second << " ";
+    // for (auto i = m.begin(); i != m.end(); ++i)
+    //     cout << i->second << " ";
+
 
         
  
@@ -689,7 +690,7 @@ Node *root = new Node(20);
     root->left->left = new Node(5);
     root->left->right = new Node(3);
     root->right->left = new Node(4);
-    root->right->right = new Node(25);
+    root->right->right = new Node(15);
     root->left->right->left = new Node(10);
     root->left->right->right = new Node(14);
     cout << "Bottom view of the given binary tree :\n";
