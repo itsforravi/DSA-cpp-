@@ -556,36 +556,61 @@ using namespace std;
 
 
 // Right view of binary tree
-struct Node{
+// struct Node{
+//     int data;
+//     struct Node *left,*right;
+// };
+
+// void leftview(struct Node* root,int level, int* max_level){
+//   if(root==NULL)
+//   return ;
+//   if(*max_level<level){
+//     cout<<root->data<<" ";
+//     *max_level=level;
+//   }
+//   leftview(root->right,level+1,max_level);
+//   leftview(root->left,level+1,max_level);
+
+// }
+
+// void leftview1(struct Node* root){
+//     int max_level=0;
+//     leftview(root,1,&max_level);
+// }
+
+// struct Node* newNode(int data){
+//     struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+// }
+
+     
+// Check for Symmetrical Binary Tree
+
+struct node{
     int data;
-    struct Node *left,*right;
+    struct node *left,*right;
 };
-
-void leftview(struct Node* root,int level, int* max_level){
-  if(root==NULL)
-  return ;
-  if(*max_level<level){
-    cout<<root->data<<" ";
-    *max_level=level;
-  }
-  leftview(root->right,level+1,max_level);
-  leftview(root->left,level+1,max_level);
+bool isSymmetric(node * root1,node * root2) {
+    if(root1==NULL || root2==NULL)
+    return root1==root2;
+    return (root1->data==root2->data) && isSymmetric(root1->left,root2->right) && isSymmetric(root1->right,root2->left);
+}
+bool isSymmetric1(node * root){
+    if(!root) return true;
+    return isSymmetric(root->left,root->right);
+}
+struct node *newNode(int data){
+    struct node * node=( struct node *)malloc(sizeof(struct node ));
+     node->data=data;
+     node->left=NULL;
+     node->right=NULL;
+     return (node);
 
 }
 
-void leftview1(struct Node* root){
-    int max_level=0;
-    leftview(root,1,&max_level);
-}
-
-struct Node* newNode(int data){
-    struct Node *node=(struct Node *)malloc(sizeof(struct Node ));
-    node->data=data;
-    node->left=NULL;
-    node->right=NULL;
-    return (node);
-}
-        
  
 
 
@@ -762,15 +787,32 @@ struct Node* newNode(int data){
 
 
 // Right/Left view of binary tree
-Node* root=newNode(1);
+// Node* root=newNode(1);
+// root->left=newNode(2);
+// root->right=newNode(3);
+// root->left->left=newNode(4);
+// root->left->right=newNode(5);
+// root->left->right->left=newNode(6);
+// root->right->right=newNode(7);
+// cout<<"Right/Left view of binary tree :\n";
+// leftview1(root);
+
+
+// Check for Symmetrical Binary Tree
+struct node *root=newNode(1);
 root->left=newNode(2);
 root->right=newNode(3);
 root->left->left=newNode(4);
 root->left->right=newNode(5);
-root->left->right->left=newNode(6);
+root->left->right->left=newNode(8);
+root->left->right->right=newNode(9);
+root->right->left=newNode(6);
 root->right->right=newNode(7);
-cout<<"Right/Left view of binary tree :\n";
-leftview1(root);
+bool res;
+res=isSymmetric1(root);
+if(res)
+cout<<"The tree is Symmetrical ";
+else cout<<" The tree is NOT symmetrical ";
 
     return 0;
 }
