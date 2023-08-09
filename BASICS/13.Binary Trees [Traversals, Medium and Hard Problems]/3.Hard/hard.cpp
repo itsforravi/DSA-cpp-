@@ -81,63 +81,102 @@ using namespace std;
 
 
 // Maximum Width of a Binary Tree
+// struct node{
+//     int data;
+//     struct node *left,*right;
+
+// };
+
+// int widthOfBinaryTree(node * root){
+//     if(!root)
+//     return 0;
+//     int ans=0;
+//     queue<pair<node * ,int >> q;
+//     q.push({
+//         root,
+//     0
+//     });
+
+//     while (!q.empty())
+//     {
+//        int size=q.size();
+//        int curMin=q.front().second;
+//        int leftMost,rightMost;
+//        for(int i=0;i<size;i++){
+//         int cur_id=q.front().second - curMin;
+//         node* temp=q.front().first;
+//         q.pop();
+//         if(i==0) leftMost=cur_id;;
+//         if(i==size-1) rightMost=cur_id;
+//         if(temp->left)
+//         q.push({
+//             temp->left,
+//             cur_id * 2 + 1
+//         });
+//         if(temp->right)
+//         q.push({
+//             temp->right,
+//             cur_id * 2 + 2
+//         });
+
+//         }
+//         ans=max(ans,rightMost-leftMost + 1);
+
+       
+
+//     }
+//     return ans;
+    
+// } 
+
+// struct node* newNode(int data){
+//     struct node *node=(struct node* )malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+// }
+
+// Check for Children Sum Property in a Binary Tree
 struct node{
     int data;
     struct node *left,*right;
 
 };
 
-int widthOfBinaryTree(node * root){
-    if(!root)
-    return 0;
-    int ans=0;
-    queue<pair<node * ,int >> q;
-    q.push({
-        root,
-    0
-    });
-
-    while (!q.empty())
-    {
-       int size=q.size();
-       int curMin=q.front().second;
-       int leftMost,rightMost;
-       for(int i=0;i<size;i++){
-        int cur_id=q.front().second - curMin;
-        node* temp=q.front().first;
-        q.pop();
-        if(i==0) leftMost=cur_id;;
-        if(i==size-1) rightMost=cur_id;
-        if(temp->left)
-        q.push({
-            temp->left,
-            cur_id * 2 + 1
-        });
-        if(temp->right)
-        q.push({
-            temp->right,
-            cur_id * 2 + 2
-        });
-
-        }
-        ans=max(ans,rightMost-leftMost + 1);
-
-       
+void reorder(node * root){
+    if(root==NULL) return;
+    int child=0;
+    if(root->left) {
+        child+=root->left->data;
+        
+    }
+    if(root->right) {
+        child+=root->right->data;
 
     }
-    return ans;
-    
-} 
+    if(child < root->data){
+        if(root->left) root->left->data=root->data;
+        else if(root->right) root->right->data=root->data;
+    }
+    reorder(root->left);
+    reorder(root->right);
+    int tot=0;
+    if(root->left) tot+=root->left->data;
+    if(root->right) tot+=root->right->data;
+    if(root->left || root->right) root->data=tot;
+}
+void changeTree(node * root){
+    reorder(root);
+}
 
-struct node* newNode(int data){
-    struct node *node=(struct node* )malloc(sizeof(struct node));
+struct node *newNode(int data){
+    struct node *node=(struct node *)malloc(sizeof(struct node));
     node->data=data;
     node->left=NULL;
     node->right=NULL;
-    return (node);
+    return node;
 }
-
-
 
 
 
@@ -188,15 +227,28 @@ int main(){
 //     cout << "\nLCA(2, 4) = " << findLCA(root, 2, 4);
 
 // Maximum Width of a Binary Tree
-struct node *root=newNode(1);
-root->left=newNode(3);
-root->left->left=newNode(5);
-root->left->left->left=newNode(7);
-root->right=newNode(2);
-root->right->right=newNode(4);
-root->right->right->right=newNode(6);
-int maxWidth=widthOfBinaryTree(root);
-cout<<" The maximum width of the binary tree : "<<maxWidth;
+// struct node *root=newNode(1);
+// root->left=newNode(3);
+// root->left->left=newNode(5);
+// root->left->left->left=newNode(7);
+// root->right=newNode(2);
+// root->right->right=newNode(4);
+// root->right->right->right=newNode(6);
+// int maxWidth=widthOfBinaryTree(root);
+// cout<<" The maximum width of the binary tree : "<<maxWidth;
+
+
+// Check for Children Sum Property in a Binary Tree
+struct node *root=newNode(2);
+root->left=newNode(35);
+root->left->left=newNode(2);
+root->left->right=newNode(3);
+root->right=newNode(10);
+root->right->left=newNode(5);
+root->right->right=newNode(2);
+cout<<"The sum of the children in the binary tree : " ;
+changeTree(root);
+
 
 
 

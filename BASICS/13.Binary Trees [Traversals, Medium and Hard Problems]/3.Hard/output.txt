@@ -1,1 +1,1 @@
- The maximum width of the binary tree : 8
+The sum of the children in the binary tree : 
