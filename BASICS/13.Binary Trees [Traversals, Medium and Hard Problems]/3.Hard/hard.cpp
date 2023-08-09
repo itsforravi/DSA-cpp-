@@ -34,52 +34,108 @@ using namespace std;
 // }
 
 // // Lowest Common Ancestor for two given Nodes
-struct Node {
-    int key;
-    struct Node *left, *right;
-};
+// struct Node {
+//     int key;
+//     struct Node *left, *right;
+// };
  
-Node* newNode(int k)
-{
-    Node* temp = new Node;
-    temp->key = k;
-    temp->left = temp->right = NULL;
-    return temp;
-}
-bool findPath(Node* root, vector<int>& path, int k)
-{
+// Node* newNode(int k)
+// {
+//     Node* temp = new Node;
+//     temp->key = k;
+//     temp->left = temp->right = NULL;
+//     return temp;
+// }
+// bool findPath(Node* root, vector<int>& path, int k)
+// {
     
-    if (root == NULL)
-        return false;
-    path.push_back(root->key);
+//     if (root == NULL)
+//         return false;
+//     path.push_back(root->key);
  
-    if (root->key == k)
-        return true;
+//     if (root->key == k)
+//         return true;
 
-    if ((root->left && findPath(root->left, path, k))
-        || (root->right && findPath(root->right, path, k)))
-        return true;
+//     if ((root->left && findPath(root->left, path, k))
+//         || (root->right && findPath(root->right, path, k)))
+//         return true;
  
-    path.pop_back();
-    return false;
+//     path.pop_back();
+//     return false;
+// }
+ 
+// int findLCA(Node* root, int n1, int n2)
+// {
+//     vector<int> path1, path2;
+ 
+//     if (!findPath(root, path1, n1)
+//         || !findPath(root, path2, n2))
+//         return -1;
+ 
+//     int i;
+//     for (i = 0; i < path1.size() && i < path2.size(); i++)
+//         if (path1[i] != path2[i])
+//             break;
+//     return path1[i - 1];
+// }
+
+
+// Maximum Width of a Binary Tree
+struct node{
+    int data;
+    struct node *left,*right;
+
+};
+
+int widthOfBinaryTree(node * root){
+    if(!root)
+    return 0;
+    int ans=0;
+    queue<pair<node * ,int >> q;
+    q.push({
+        root,
+    0
+    });
+
+    while (!q.empty())
+    {
+       int size=q.size();
+       int curMin=q.front().second;
+       int leftMost,rightMost;
+       for(int i=0;i<size;i++){
+        int cur_id=q.front().second - curMin;
+        node* temp=q.front().first;
+        q.pop();
+        if(i==0) leftMost=cur_id;;
+        if(i==size-1) rightMost=cur_id;
+        if(temp->left)
+        q.push({
+            temp->left,
+            cur_id * 2 + 1
+        });
+        if(temp->right)
+        q.push({
+            temp->right,
+            cur_id * 2 + 2
+        });
+
+        }
+        ans=max(ans,rightMost-leftMost + 1);
+
+       
+
+    }
+    return ans;
+    
+} 
+
+struct node* newNode(int data){
+    struct node *node=(struct node* )malloc(sizeof(struct node));
+    node->data=data;
+    node->left=NULL;
+    node->right=NULL;
+    return (node);
 }
- 
-int findLCA(Node* root, int n1, int n2)
-{
-    vector<int> path1, path2;
- 
-    if (!findPath(root, path1, n1)
-        || !findPath(root, path2, n2))
-        return -1;
- 
-    int i;
-    for (i = 0; i < path1.size() && i < path2.size(); i++)
-        if (path1[i] != path2[i])
-            break;
-    return path1[i - 1];
-}
-
-
 
 
 
@@ -119,17 +175,29 @@ int main(){
 
 
 // Lowest Common Ancestor for two given Nodes
-Node* root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(5);
-    root->right->left = newNode(6);
-    root->right->right = newNode(7);
-    cout << "LCA(4, 5) = " << findLCA(root, 4, 5);
-    cout << "\nLCA(4, 6) = " << findLCA(root, 4, 6);
-    cout << "\nLCA(3, 4) = " << findLCA(root, 3, 4);
-    cout << "\nLCA(2, 4) = " << findLCA(root, 2, 4);
+// Node* root = newNode(1);
+//     root->left = newNode(2);
+//     root->right = newNode(3);
+//     root->left->left = newNode(4);
+//     root->left->right = newNode(5);
+//     root->right->left = newNode(6);
+//     root->right->right = newNode(7);
+//     cout << "LCA(4, 5) = " << findLCA(root, 4, 5);
+//     cout << "\nLCA(4, 6) = " << findLCA(root, 4, 6);
+//     cout << "\nLCA(3, 4) = " << findLCA(root, 3, 4);
+//     cout << "\nLCA(2, 4) = " << findLCA(root, 2, 4);
+
+// Maximum Width of a Binary Tree
+struct node *root=newNode(1);
+root->left=newNode(3);
+root->left->left=newNode(5);
+root->left->left->left=newNode(7);
+root->right=newNode(2);
+root->right->right=newNode(4);
+root->right->right->right=newNode(6);
+int maxWidth=widthOfBinaryTree(root);
+cout<<" The maximum width of the binary tree : "<<maxWidth;
+
 
 
 
