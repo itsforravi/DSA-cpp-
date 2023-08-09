@@ -59,7 +59,7 @@ root->left->right->right=newNode(7);
 
 vector<int> ans;
 bool res;
-res=getPath(root,ans,7);
+res=getPath(root,ans,6);
 cout<<"The Path is ";
 for(auto it :ans){
 cout<< it<<" ";
