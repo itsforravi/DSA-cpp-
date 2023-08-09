@@ -182,69 +182,103 @@ using namespace std;
 
 
 //Print all nodes at distance k from a given node
-struct Node{
-	int data;
-	Node* left;
-	Node* right;
-};
+// struct Node{
+// 	int data;
+// 	Node* left;
+// 	Node* right;
+// };
 
-void printkdistanceNodeDown(Node* root, int k){
+// void printkdistanceNodeDown(Node* root, int k){
 	
-	if (root == NULL || k < 0) return;
-	if (k==0){
-		cout<< root->data<<endl;
-		return;
-	}
-	printkdistanceNodeDown(root->left, k-1);
-	printkdistanceNodeDown(root->right, k-1);
-}
+// 	if (root == NULL || k < 0) return;
+// 	if (k==0){
+// 		cout<< root->data<<endl;
+// 		return;
+// 	}
+// 	printkdistanceNodeDown(root->left, k-1);
+// 	printkdistanceNodeDown(root->right, k-1);
+// }
 
-int printkdistanceNode(Node* root, Node* target , int k){
+// int printkdistanceNode(Node* root, Node* target , int k){
 
-	if (root == NULL) return -1;
+// 	if (root == NULL) return -1;
 
-	if (root == target){
-		printkdistanceNodeDown(root, k);
-		return 0;
-	}
+// 	if (root == target){
+// 		printkdistanceNodeDown(root, k);
+// 		return 0;
+// 	}
 
-	int dl = printkdistanceNode(root->left, target, k);
+// 	int dl = printkdistanceNode(root->left, target, k);
 
-	if (dl != -1){
+// 	if (dl != -1){
 		
-		if (dl + 1 == k)
-			cout<<root->data<<endl;
+// 		if (dl + 1 == k)
+// 			cout<<root->data<<endl;
 
 		
-		else
-			printkdistanceNodeDown(root->right, k-dl-2);
+// 		else
+// 			printkdistanceNodeDown(root->right, k-dl-2);
 
-		return 1 + dl;
-	}
+// 		return 1 + dl;
+// 	}
 
 
-	int dr = printkdistanceNode(root->right, target, k);
-	if (dr != -1){
-		if (dr + 1 == k)
-			cout<<root->data<<endl;
-		else
-			printkdistanceNodeDown(root->left, k-dr-2);
-		return 1 + dr;
-	}
+// 	int dr = printkdistanceNode(root->right, target, k);
+// 	if (dr != -1){
+// 		if (dr + 1 == k)
+// 			cout<<root->data<<endl;
+// 		else
+// 			printkdistanceNodeDown(root->left, k-dr-2);
+// 		return 1 + dr;
+// 	}
 
-	return -1;
+// 	return -1;
+// }
+
+// Node* newNode(int data){
+// 	Node* temp = new Node();
+// 	temp->data = data;
+// 	temp->left = temp->right = NULL;
+// 	return temp;
+// }
+
+
+// minimum time taken to burn the binary tree from a node
+struct Node {
+    int key;
+    struct Node* left;
+    struct Node* right;
+    Node(int k)
+    {
+        key = k;
+        left = right = NULL;
+    }
+};
+ 
+int res = 0;
+
+int burnTime(Node* root, int leaf, int& dist)
+{
+    if (root == NULL)
+        return 0;
+    if (root->key == leaf) {
+        dist = 0;
+        return 1;
+    }
+    int ldist = -1, rdist = -1;
+    int lh = burnTime(root->left, leaf, ldist);
+    int rh = burnTime(root->right, leaf, rdist);
+ 
+    if (ldist != -1) {
+        dist = ldist + 1;
+        res = max(res, dist + rh);
+    }
+    else if (rdist != -1) {
+        dist = rdist + 1;
+        res = max(res, dist + lh);
+    }
+    return max(lh, rh) + 1;
 }
-
-Node* newNode(int data){
-	Node* temp = new Node();
-	temp->data = data;
-	temp->left = temp->right = NULL;
-	return temp;
-}
-
-
-
-
 
 
 
@@ -319,16 +353,32 @@ int main(){
 
 
 //Print all nodes at distance k from a given node
-	Node* root = newNode(20);
-	root->left = newNode(8);
-	root->right = newNode(22);
-	root->left->left = newNode(4);
-	root->left->right = newNode(12);
-	root->left->right->left = newNode(10);
-	root->left->right->right = newNode(14);
-	Node* target = root->left->right;
-	printkdistanceNode(root, target, 2);
+	// Node* root = newNode(20);
+	// root->left = newNode(8);
+	// root->right = newNode(22);
+	// root->left->left = newNode(4);
+	// root->left->right = newNode(12);
+	// root->left->right->left = newNode(10);
+	// root->left->right->right = newNode(14);
+	// Node* target = root->left->right;
+	// printkdistanceNode(root, target, 2);
 
+// minimum time taken to burn the binary tree from a node
+
+Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->right->left = new Node(6);
+    root->left->left->left = new Node(8);
+    root->left->right->left = new Node(9);
+    root->left->right->right = new Node(10);
+    root->left->right->left->left = new Node(11);
+    int dist = -1;
+    int target = 11;
+    burnTime(root, target, dist);
+    cout << res;
 
 
     return 0;
