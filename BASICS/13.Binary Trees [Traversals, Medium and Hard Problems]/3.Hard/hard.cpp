@@ -137,46 +137,113 @@ using namespace std;
 //     return (node);
 // }
 
-// Check for Children Sum Property in a Binary Tree
-struct node{
-    int data;
-    struct node *left,*right;
+// // Check for Children Sum Property in a Binary Tree
+// struct node{
+//     int data;
+//     struct node *left,*right;
 
+// };
+
+// void reorder(node * root){
+//     if(root==NULL) return;
+//     int child=0;
+//     if(root->left) {
+//         child+=root->left->data;
+        
+//     }
+//     if(root->right) {
+//         child+=root->right->data;
+
+//     }
+//     if(child < root->data){
+//         if(root->left) root->left->data=root->data;
+//         else if(root->right) root->right->data=root->data;
+//     }
+//     reorder(root->left);
+//     reorder(root->right);
+//     int tot=0;
+//     if(root->left) tot+=root->left->data;
+//     if(root->right) tot+=root->right->data;
+//     if(root->left || root->right) root->data=tot;
+// }
+// void changeTree(node * root){
+//     reorder(root);
+// }
+
+// struct node *newNode(int data){
+//     struct node *node=(struct node *)malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return node;
+// }
+
+
+
+
+//Print all nodes at distance k from a given node
+struct Node{
+	int data;
+	Node* left;
+	Node* right;
 };
 
-void reorder(node * root){
-    if(root==NULL) return;
-    int child=0;
-    if(root->left) {
-        child+=root->left->data;
-        
-    }
-    if(root->right) {
-        child+=root->right->data;
-
-    }
-    if(child < root->data){
-        if(root->left) root->left->data=root->data;
-        else if(root->right) root->right->data=root->data;
-    }
-    reorder(root->left);
-    reorder(root->right);
-    int tot=0;
-    if(root->left) tot+=root->left->data;
-    if(root->right) tot+=root->right->data;
-    if(root->left || root->right) root->data=tot;
-}
-void changeTree(node * root){
-    reorder(root);
+void printkdistanceNodeDown(Node* root, int k){
+	
+	if (root == NULL || k < 0) return;
+	if (k==0){
+		cout<< root->data<<endl;
+		return;
+	}
+	printkdistanceNodeDown(root->left, k-1);
+	printkdistanceNodeDown(root->right, k-1);
 }
 
-struct node *newNode(int data){
-    struct node *node=(struct node *)malloc(sizeof(struct node));
-    node->data=data;
-    node->left=NULL;
-    node->right=NULL;
-    return node;
+int printkdistanceNode(Node* root, Node* target , int k){
+
+	if (root == NULL) return -1;
+
+	if (root == target){
+		printkdistanceNodeDown(root, k);
+		return 0;
+	}
+
+	int dl = printkdistanceNode(root->left, target, k);
+
+	if (dl != -1){
+		
+		if (dl + 1 == k)
+			cout<<root->data<<endl;
+
+		
+		else
+			printkdistanceNodeDown(root->right, k-dl-2);
+
+		return 1 + dl;
+	}
+
+
+	int dr = printkdistanceNode(root->right, target, k);
+	if (dr != -1){
+		if (dr + 1 == k)
+			cout<<root->data<<endl;
+		else
+			printkdistanceNodeDown(root->left, k-dr-2);
+		return 1 + dr;
+	}
+
+	return -1;
 }
+
+Node* newNode(int data){
+	Node* temp = new Node();
+	temp->data = data;
+	temp->left = temp->right = NULL;
+	return temp;
+}
+
+
+
 
 
 
@@ -239,18 +306,28 @@ int main(){
 
 
 // Check for Children Sum Property in a Binary Tree
-struct node *root=newNode(2);
-root->left=newNode(35);
-root->left->left=newNode(2);
-root->left->right=newNode(3);
-root->right=newNode(10);
-root->right->left=newNode(5);
-root->right->right=newNode(2);
-cout<<"The sum of the children in the binary tree : " ;
-changeTree(root);
+// struct node *root=newNode(2);
+// root->left=newNode(35);
+// root->left->left=newNode(2);
+// root->left->right=newNode(3);
+// root->right=newNode(10);
+// root->right->left=newNode(5);
+// root->right->right=newNode(2);
+// cout<<"The sum of the children in the binary tree : " ;
+// changeTree(root);
 
 
 
+//Print all nodes at distance k from a given node
+	Node* root = newNode(20);
+	root->left = newNode(8);
+	root->right = newNode(22);
+	root->left->left = newNode(4);
+	root->left->right = newNode(12);
+	root->left->right->left = newNode(10);
+	root->left->right->right = newNode(14);
+	Node* target = root->left->right;
+	printkdistanceNode(root, target, 2);
 
 
 

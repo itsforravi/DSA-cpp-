@@ -1,1 +1,2 @@
-The sum of the children in the binary tree : 
+4
+20
