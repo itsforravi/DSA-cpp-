@@ -337,6 +337,7 @@ using namespace std;
 //  }
 
 
+// Construct Binary Tree from Inorder and PostOrder Traversal
 struct node {
   int data;
   struct node * left, * right;
@@ -503,6 +504,8 @@ int main(){
 // cout<<" Convert inorder to preorder : ";
 // struct node *root=buildTree(preorder,inorder);
 
+
+// Construct Binary Tree from Inorder and PostOrder Traversal
 vector<int> postorder{40,50,20,60,30,10};
   vector<int> inorder{40,20,50,10,60,30};
   node * root = buildTree(postorder, inorder);
