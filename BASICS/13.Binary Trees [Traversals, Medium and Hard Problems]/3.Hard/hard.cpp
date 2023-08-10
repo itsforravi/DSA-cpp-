@@ -304,40 +304,79 @@ using namespace std;
 // }
 
 // Construct A Binary Tree from Inorder and Preorder Traversal
-struct node{
-    int data;
-    struct node *left,*right;
-};
+// struct node{
+//     int data;
+//     struct node *left,*right;
+// };
  
- struct node *newnode(int data){
-    struct node *node=(struct node*)malloc(sizeof(struct node));
-    node->data=data;
-    node->left=NULL;
-    node->right=NULL;
-    return (node);
- }
+//  struct node *newnode(int data){
+//     struct node *node=(struct node*)malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+//  }
 
- node * constructTree(vector<int> &preorder,int preStart,int preEnd,vector<int>& inorder,int inStart,int inEnd,map<int,int> &mp){
-    if(preStart>preEnd || inStart >inEnd) return NULL;
-    node *root =newnode(preorder[preStart]);
-    int elem=mp[root->data];
-    int nElem=elem-inStart;
-    root->left=constructTree(preorder,preStart+1,preStart+nElem,inorder,inStart,elem-1,mp);
-    root->right=constructTree(preorder,preStart+nElem+1,preEnd,inorder,elem+1,inEnd,mp);
-return root;
- }
- node * buildTree(vector<int> &preorder,vector<int> &inorder){
-    int preStart=0,preEnd=preorder.size()-1;
-    int inStart=0,inEnd=inorder.size()-1;
-    map<int,int>mp;
-    for(int  i=inStart;i<=inEnd;i++){
-        mp[inorder[i]]=i;
-    }
-    return constructTree(preorder,preStart,preEnd,inorder,inStart,inEnd,mp);
- }
+//  node * constructTree(vector<int> &preorder,int preStart,int preEnd,vector<int>& inorder,int inStart,int inEnd,map<int,int> &mp){
+//     if(preStart>preEnd || inStart >inEnd) return NULL;
+//     node *root =newnode(preorder[preStart]);
+//     int elem=mp[root->data];
+//     int nElem=elem-inStart;
+//     root->left=constructTree(preorder,preStart+1,preStart+nElem,inorder,inStart,elem-1,mp);
+//     root->right=constructTree(preorder,preStart+nElem+1,preEnd,inorder,elem+1,inEnd,mp);
+// return root;
+//  }
+//  node * buildTree(vector<int> &preorder,vector<int> &inorder){
+//     int preStart=0,preEnd=preorder.size()-1;
+//     int inStart=0,inEnd=inorder.size()-1;
+//     map<int,int>mp;
+//     for(int  i=inStart;i<=inEnd;i++){
+//         mp[inorder[i]]=i;
+//     }
+//     return constructTree(preorder,preStart,preEnd,inorder,inStart,inEnd,mp);
+//  }
 
 
+struct node {
+  int data;
+  struct node * left, * right;
+};
 
+struct node * newNode(int data) {
+  struct node * node = (struct node * ) malloc(sizeof(struct node));
+  node -> data = data;
+  node -> left = NULL;
+  node -> right = NULL;
+
+  return (node);
+}
+node * constructTree(vector < int > & postorder, int postStart, int postEnd, 
+vector < int > & inorder, int inStart, int inEnd, map < int, int > & mp) {
+  if (postStart > postEnd || inStart > inEnd) return NULL;
+
+  node * root = newNode(postorder[postEnd]);
+  int elem = mp[root -> data];
+  int nElem = elem - inStart;
+
+  root -> left = constructTree(postorder, postStart, postStart + nElem - 1, 
+  inorder, inStart, elem - 1, mp);
+  root -> right = constructTree(postorder, postStart + nElem, postEnd-1, inorder,
+  elem + 1, inEnd, mp);
+
+  return root;
+}
+
+node * buildTree(vector < int > & postorder, vector < int > & inorder) {
+  int postStart = 0, postEnd = postorder.size() - 1;
+  int inStart = 0, inEnd = inorder.size() - 1;
+
+  map < int, int > mp;
+  for (int i = inStart; i <= inEnd; i++) {
+    mp[inorder[i]] = i;
+  }
+
+  return constructTree(postorder, postStart, postEnd, inorder, inStart, inEnd, mp);
+}
 
 
 
@@ -459,10 +498,14 @@ int main(){
 
 // Construct A Binary Tree from Inorder and Preorder Traversal
 
-vector<int>preorder{10,20,40,50,30,60};
-vector<int>inorder{40,20,50,10,60,30};
-cout<<" Convert inorder to preorder : ";
-struct node *root=buildTree(preorder,inorder);
+// vector<int>preorder{10,20,40,50,30,60};
+// vector<int>inorder{40,20,50,10,60,30};
+// cout<<" Convert inorder to preorder : ";
+// struct node *root=buildTree(preorder,inorder);
+
+vector<int> postorder{40,50,20,60,30,10};
+  vector<int> inorder{40,20,50,10,60,30};
+  node * root = buildTree(postorder, inorder);
 
     return 0;
 }
