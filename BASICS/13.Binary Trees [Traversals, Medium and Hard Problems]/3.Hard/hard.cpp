@@ -338,47 +338,91 @@ using namespace std;
 
 
 // Construct Binary Tree from Inorder and PostOrder Traversal
-struct node {
-  int data;
-  struct node * left, * right;
+// struct node {
+//   int data;
+//   struct node * left, * right;
+// };
+
+// struct node * newNode(int data) {
+//   struct node * node = (struct node * ) malloc(sizeof(struct node));
+//   node -> data = data;
+//   node -> left = NULL;
+//   node -> right = NULL;
+
+//   return (node);
+// }
+// node * constructTree(vector < int > & postorder, int postStart, int postEnd, 
+// vector < int > & inorder, int inStart, int inEnd, map < int, int > & mp) {
+//   if (postStart > postEnd || inStart > inEnd) return NULL;
+
+//   node * root = newNode(postorder[postEnd]);
+//   int elem = mp[root -> data];
+//   int nElem = elem - inStart;
+
+//   root -> left = constructTree(postorder, postStart, postStart + nElem - 1, 
+//   inorder, inStart, elem - 1, mp);
+//   root -> right = constructTree(postorder, postStart + nElem, postEnd-1, inorder,
+//   elem + 1, inEnd, mp);
+
+//   return root;
+// }
+
+// node * buildTree(vector < int > & postorder, vector < int > & inorder) {
+//   int postStart = 0, postEnd = postorder.size() - 1;
+//   int inStart = 0, inEnd = inorder.size() - 1;
+
+//   map < int, int > mp;
+//   for (int i = inStart; i <= inEnd; i++) {
+//     mp[inorder[i]] = i;
+//   }
+
+//   return constructTree(postorder, postStart, postEnd, inorder, inStart, inEnd, mp);
+// }
+
+// Serialize And Deserialize a Binary Tree
+struct Node {
+    int key;
+    struct Node *left, *right;
 };
-
-struct node * newNode(int data) {
-  struct node * node = (struct node * ) malloc(sizeof(struct node));
-  node -> data = data;
-  node -> left = NULL;
-  node -> right = NULL;
-
-  return (node);
+struct Node* newNode(int key)
+{
+    struct Node* temp = new Node();
+    temp->key = key;
+    temp->left = temp->right = NULL;
+    return (temp);
 }
-node * constructTree(vector < int > & postorder, int postStart, int postEnd, 
-vector < int > & inorder, int inStart, int inEnd, map < int, int > & mp) {
-  if (postStart > postEnd || inStart > inEnd) return NULL;
+void serialize(Node* root, FILE* fp)
+{
+    if (root == NULL) {
+        fprintf(fp, "%d ", -1);
+        return;
+    }
 
-  node * root = newNode(postorder[postEnd]);
-  int elem = mp[root -> data];
-  int nElem = elem - inStart;
-
-  root -> left = constructTree(postorder, postStart, postStart + nElem - 1, 
-  inorder, inStart, elem - 1, mp);
-  root -> right = constructTree(postorder, postStart + nElem, postEnd-1, inorder,
-  elem + 1, inEnd, mp);
-
-  return root;
+    fprintf(fp, "%d ", root->key);
+    serialize(root->left, fp);
+    serialize(root->right, fp);
 }
-
-node * buildTree(vector < int > & postorder, vector < int > & inorder) {
-  int postStart = 0, postEnd = postorder.size() - 1;
-  int inStart = 0, inEnd = inorder.size() - 1;
-
-  map < int, int > mp;
-  for (int i = inStart; i <= inEnd; i++) {
-    mp[inorder[i]] = i;
-  }
-
-  return constructTree(postorder, postStart, postEnd, inorder, inStart, inEnd, mp);
+ 
+void deSerialize(Node*& root, FILE* fp)
+{
+ 
+    int val;
+    if (!fscanf(fp, "%d ", &val) || val == -1)
+        return;
+ 
+    root = newNode(val);
+    deSerialize(root->left, fp);
+    deSerialize(root->right, fp);
 }
 
+void inorder(Node* root)
+{
+    if (root) {
+        inorder(root->left);
+        printf("%d ", root->key);
+        inorder(root->right);
+    }
+}
 
 
 
@@ -506,9 +550,34 @@ int main(){
 
 
 // Construct Binary Tree from Inorder and PostOrder Traversal
-vector<int> postorder{40,50,20,60,30,10};
-  vector<int> inorder{40,20,50,10,60,30};
-  node * root = buildTree(postorder, inorder);
+// vector<int> postorder{40,50,20,60,30,10};
+//   vector<int> inorder{40,20,50,10,60,30};
+//   node * root = buildTree(postorder, inorder);
+
+// Serialize And Deserialize a Binary Tree
+struct Node* root = newNode(20);
+    root->left = newNode(8);
+    root->right = newNode(22);
+    root->left->left = newNode(4);
+    root->left->right = newNode(12);
+    root->left->right->left = newNode(10);
+    root->left->right->right = newNode(14);
+
+    FILE* fp = fopen("tree.txt", "w");
+    if (fp == NULL) {
+        puts("Could not open file");
+        return 0;
+    }
+    serialize(root, fp);
+    fclose(fp);
+ 
+    Node* root1 = NULL;
+    fp = fopen("tree.txt", "r");
+    deSerialize(root1, fp);
+ 
+    printf("Inorder Traversal of the tree constructed from "
+           "file:\n");
+    inorder(root1);
 
     return 0;
 }
