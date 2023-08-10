@@ -244,42 +244,64 @@ using namespace std;
 
 
 // minimum time taken to burn the binary tree from a node
-struct Node {
-    int key;
-    struct Node* left;
-    struct Node* right;
-    Node(int k)
-    {
-        key = k;
-        left = right = NULL;
-    }
+// struct Node {
+//     int key;
+//     struct Node* left;
+//     struct Node* right;
+//     Node(int k)
+//     {
+//         key = k;
+//         left = right = NULL;
+//     }
+// };
+ 
+// int res = 0;
+
+// int burnTime(Node* root, int leaf, int& dist)
+// {
+//     if (root == NULL)
+//         return 0;
+//     if (root->key == leaf) {
+//         dist = 0;
+//         return 1;
+//     }
+//     int ldist = -1, rdist = -1;
+//     int lh = burnTime(root->left, leaf, ldist);
+//     int rh = burnTime(root->right, leaf, rdist);
+ 
+//     if (ldist != -1) {
+//         dist = ldist + 1;
+//         res = max(res, dist + rh);
+//     }
+//     else if (rdist != -1) {
+//         dist = rdist + 1;
+//         res = max(res, dist + lh);
+//     }
+//     return max(lh, rh) + 1;
+// }
+
+// Count Number of Nodes in a Binary Tree
+struct node{
+    int data;
+    struct node *left ,*right;
+
 };
- 
-int res = 0;
+void inorderTraversal(node * curr,int &count){
+    if(curr==NULL) return ;
+    count++;
+    inorderTraversal(curr->left,count);
+    inorderTraversal(curr->right,count);
+    
 
-int burnTime(Node* root, int leaf, int& dist)
-{
-    if (root == NULL)
-        return 0;
-    if (root->key == leaf) {
-        dist = 0;
-        return 1;
-    }
-    int ldist = -1, rdist = -1;
-    int lh = burnTime(root->left, leaf, ldist);
-    int rh = burnTime(root->right, leaf, rdist);
- 
-    if (ldist != -1) {
-        dist = ldist + 1;
-        res = max(res, dist + rh);
-    }
-    else if (rdist != -1) {
-        dist = rdist + 1;
-        res = max(res, dist + lh);
-    }
-    return max(lh, rh) + 1;
+
 }
-
+struct node *newNode(int data){
+    struct node *node=(struct node* )malloc(sizeof(struct node));
+    node->data=data;
+    node->left=NULL;
+    node->right=NULL;
+    return (node);
+}
 
 
 
@@ -365,21 +387,38 @@ int main(){
 
 // minimum time taken to burn the binary tree from a node
 
-Node* root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->left->left->left = new Node(8);
-    root->left->right->left = new Node(9);
-    root->left->right->right = new Node(10);
-    root->left->right->left->left = new Node(11);
-    int dist = -1;
-    int target = 11;
-    burnTime(root, target, dist);
-    cout << res;
+// Node* root = new Node(1);
+//     root->left = new Node(2);
+//     root->right = new Node(3);
+//     root->left->left = new Node(4);
+//     root->left->right = new Node(5);
+//     root->right->left = new Node(6);
+//     root->left->left->left = new Node(8);
+//     root->left->right->left = new Node(9);
+//     root->left->right->right = new Node(10);
+//     root->left->right->left->left = new Node(11);
+//     int dist = -1;
+//     int target = 11;
+//     burnTime(root, target, dist);
+//     cout << res;
 
+
+// 
+// Count Number of Nodes in a Binary Tree
+struct node *root=newNode(1);
+root->left=newNode(2);
+root->left->left=newNode(4);
+root->left->right=newNode(5);
+root->left->left->left=newNode(8);
+root->left->left->right=newNode(9);
+root->left->right->left=newNode(10);
+root->left->right->right=newNode(11);
+root->right=newNode(3);
+root->right->left=newNode(6);
+root->right->right=newNode(7);
+int count=0;
+inorderTraversal(root,count);
+cout<<"The total number of nodes in the given complete binary tree are: "<<count;
 
     return 0;
 }
