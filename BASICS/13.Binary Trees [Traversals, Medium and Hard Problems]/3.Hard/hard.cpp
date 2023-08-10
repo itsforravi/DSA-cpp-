@@ -466,46 +466,81 @@ using namespace std;
 // }
 
 // Morris Inorder Traversal of a Binary Tree
-struct node{
-    int data ;
-    struct node * left,*right;
+// struct node{
+//     int data ;
+//     struct node * left,*right;
+
+// };
+// vector<int>InorderTraversal(node *root){
+//     vector<int> inorder;
+//     node * cur=root;
+//     while(cur!=NULL){
+//         if(cur->left==NULL){
+//             inorder.push_back(cur->data);
+//             cur=cur->right;
+//         }
+//         else{
+//             node *prev=cur->left;
+//             while(prev->right !=NULL && prev->right !=cur){
+//                 prev=prev->right;
+//             }
+//             if(prev->right==NULL){
+//                 prev->right=cur;
+                
+//                 cur=cur->left;
+//             }
+//             else{
+//                 prev->right=NULL;
+//                 inorder.push_back(cur->data);
+//                 cur=cur->right;
+//             }
+//         }
+//     }
+//     return inorder;
+// }
+
+// struct node *newNode(int data){
+//     struct node *node=(struct node*)malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return node;
+// }
+
+
+// Flatten Binary Tree to Linked List
+struct node {
+  int data;
+  struct node * left, * right;
+};
+
+class Solution {
+  node * prev = NULL;
+  public:
+    void flatten(node * root) {
+      if (root == NULL) return;
+
+      flatten(root -> right);
+      flatten(root -> left);
+
+      root -> right = prev;
+      root -> left = NULL;
+      prev = root;
+    }
 
 };
-vector<int>InorderTraversal(node *root){
-    vector<int> inorder;
-    node * cur=root;
-    while(cur!=NULL){
-        if(cur->left==NULL){
-            inorder.push_back(cur->data);
-            cur=cur->right;
-        }
-        else{
-            node *prev=cur->left;
-            while(prev->right !=NULL && prev->right !=cur){
-                prev=prev->right;
-            }
-            if(prev->right==NULL){
-                prev->right=cur;
-                
-                cur=cur->left;
-            }
-            else{
-                prev->right=NULL;
-                inorder.push_back(cur->data);
-                cur=cur->right;
-            }
-        }
-    }
-    return inorder;
+
+struct node * newNode(int data) {
+  struct node * node = (struct node * ) malloc(sizeof(struct node));
+  node -> data = data;
+  node -> left = NULL;
+  node -> right = NULL;
+
+  return (node);
 }
 
-struct node *newNode(int data){
-    struct node *node=(struct node*)malloc(sizeof(struct node));
-    node->data=data;
-    node->left=NULL;
-    node->right=NULL;
-    return node;
-}
+
+
 
 
 int main(){
@@ -680,20 +715,40 @@ int main(){
 
 
 // Morris Inorder Traversal of a Binary Tree
-  struct node * root = newNode(1);
+//   struct node * root = newNode(1);
+//   root -> left = newNode(2);
+//   root -> right = newNode(3);
+//   root -> left -> left = newNode(4);
+//   root -> left -> right = newNode(5);
+//   root -> left -> right -> right = newNode(6);
+
+// vector<int> inorder;
+// inorder=InorderTraversal(root);
+// cout<<"The Inorder Traversal is : ";
+// for(int i=0;i<inorder.size();i++){
+//     cout<<inorder[i]<<" ";
+
+// }
+
+// Flatten Binary Tree to Linked List
+struct node * root = newNode(1);
   root -> left = newNode(2);
-  root -> right = newNode(3);
-  root -> left -> left = newNode(4);
-  root -> left -> right = newNode(5);
-  root -> left -> right -> right = newNode(6);
+  root -> left -> left = newNode(3);
+  root -> left -> right = newNode(4);
+  root -> right = newNode(5);
+  root -> right -> right = newNode(6);
+  root -> right -> right -> left = newNode(7);
 
-vector<int> inorder;
-inorder=InorderTraversal(root);
-cout<<"The Inorder Traversal is : ";
-for(int i=0;i<inorder.size();i++){
-    cout<<inorder[i]<<" ";
+  Solution obj;
 
-}
+  obj.flatten(root);
+  while(root->right!=NULL)
+  {
+      cout<<root->data<<"->";
+      root=root->right;
+  }
+cout<<root->data;
+
     return 0;
 }
 
