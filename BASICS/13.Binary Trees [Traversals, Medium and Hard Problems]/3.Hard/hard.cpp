@@ -281,28 +281,60 @@ using namespace std;
 // }
 
 // Count Number of Nodes in a Binary Tree
-struct node{
-    int data;
-    struct node *left ,*right;
+// struct node{
+//     int data;
+//     struct node *left ,*right;
 
-};
-void inorderTraversal(node * curr,int &count){
-    if(curr==NULL) return ;
-    count++;
-    inorderTraversal(curr->left,count);
-    inorderTraversal(curr->right,count);
+// };
+// void inorderTraversal(node * curr,int &count){
+//     if(curr==NULL) return ;
+//     count++;
+//     inorderTraversal(curr->left,count);
+//     inorderTraversal(curr->right,count);
     
 
 
-}
-struct node *newNode(int data){
-    struct node *node=(struct node* )malloc(sizeof(struct node));
+// }
+// struct node *newNode(int data){
+//     struct node *node=(struct node* )malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+// }
+
+// Construct A Binary Tree from Inorder and Preorder Traversal
+struct node{
+    int data;
+    struct node *left,*right;
+};
+ 
+ struct node *newnode(int data){
+    struct node *node=(struct node*)malloc(sizeof(struct node));
     node->data=data;
     node->left=NULL;
     node->right=NULL;
     return (node);
-}
+ }
 
+ node * constructTree(vector<int> &preorder,int preStart,int preEnd,vector<int>& inorder,int inStart,int inEnd,map<int,int> &mp){
+    if(preStart>preEnd || inStart >inEnd) return NULL;
+    node *root =newnode(preorder[preStart]);
+    int elem=mp[root->data];
+    int nElem=elem-inStart;
+    root->left=constructTree(preorder,preStart+1,preStart+nElem,inorder,inStart,elem-1,mp);
+    root->right=constructTree(preorder,preStart+nElem+1,preEnd,inorder,elem+1,inEnd,mp);
+return root;
+ }
+ node * buildTree(vector<int> &preorder,vector<int> &inorder){
+    int preStart=0,preEnd=preorder.size()-1;
+    int inStart=0,inEnd=inorder.size()-1;
+    map<int,int>mp;
+    for(int  i=inStart;i<=inEnd;i++){
+        mp[inorder[i]]=i;
+    }
+    return constructTree(preorder,preStart,preEnd,inorder,inStart,inEnd,mp);
+ }
 
 
 
@@ -405,21 +437,29 @@ int main(){
 
 // 
 // Count Number of Nodes in a Binary Tree
-struct node *root=newNode(1);
-root->left=newNode(2);
-root->left->left=newNode(4);
-root->left->right=newNode(5);
-root->left->left->left=newNode(8);
-root->left->left->right=newNode(9);
-root->left->right->left=newNode(10);
-root->left->right->right=newNode(11);
-root->right=newNode(3);
-root->right->left=newNode(6);
-root->right->right=newNode(7);
-int count=0;
-inorderTraversal(root,count);
-cout<<"The total number of nodes in the given complete binary tree are: "<<count;
+// struct node *root=newNode(1);
+// root->left=newNode(2);
+// root->left->left=newNode(4);
+// root->left->right=newNode(5);
+// root->left->left->left=newNode(8);
+// root->left->left->right=newNode(9);
+// root->left->right->left=newNode(10);
+// root->left->right->right=newNode(11);
+// root->right=newNode(3);
+// root->right->left=newNode(6);
+// root->right->right=newNode(7);
+// int count=0;
+// inorderTraversal(root,count);
+// cout<<"The total number of nodes in the given complete binary tree are: "<<count;
 
+
+// Construct A Binary Tree from Inorder and Preorder Traversal
+
+vector<int>preorder{10,20,40,50,30,60};
+vector<int>inorder{40,20,50,10,60,30};
+cout<<" Convert inorder to preorder : ";
+node *root=buildTree(preorder,inorder);
+buildTree(preorder,inorder);
     return 0;
 }
 
