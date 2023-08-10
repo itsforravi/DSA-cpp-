@@ -340,6 +340,10 @@ return root;
 
 
 
+
+
+
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -458,8 +462,8 @@ int main(){
 vector<int>preorder{10,20,40,50,30,60};
 vector<int>inorder{40,20,50,10,60,30};
 cout<<" Convert inorder to preorder : ";
-node *root=buildTree(preorder,inorder);
-buildTree(preorder,inorder);
+struct node *root=buildTree(preorder,inorder);
+
     return 0;
 }
 
