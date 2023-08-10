@@ -1,1 +1,1 @@
-The Preorder Traversal is : 1 2 4 5 6 3 
+The Inorder Traversal is : 4 2 5 6 1 3 
