@@ -380,52 +380,90 @@ using namespace std;
 // }
 
 // Serialize And Deserialize a Binary Tree
-struct Node {
-    int key;
-    struct Node *left, *right;
+// struct Node {
+//     int key;
+//     struct Node *left, *right;
+// };
+// struct Node* newNode(int key)
+// {
+//     struct Node* temp = new Node();
+//     temp->key = key;
+//     temp->left = temp->right = NULL;
+//     return (temp);
+// }
+// void serialize(Node* root, FILE* fp)
+// {
+//     if (root == NULL) {
+//         fprintf(fp, "%d ", -1);
+//         return;
+//     }
+
+//     fprintf(fp, "%d ", root->key);
+//     serialize(root->left, fp);
+//     serialize(root->right, fp);
+// }
+ 
+// void deSerialize(Node*& root, FILE* fp)
+// {
+ 
+//     int val;
+//     if (!fscanf(fp, "%d ", &val) || val == -1)
+//         return;
+ 
+//     root = newNode(val);
+//     deSerialize(root->left, fp);
+//     deSerialize(root->right, fp);
+// }
+
+// void inorder(Node* root)
+// {
+//     if (root) {
+//         inorder(root->left);
+//         printf("%d ", root->key);
+//         inorder(root->right);
+//     }
+// }
+
+// Morris Preorder Traversal of a Binary Tree
+struct node{
+    int data ;
+    struct node * left,*right;
+
 };
-struct Node* newNode(int key)
-{
-    struct Node* temp = new Node();
-    temp->key = key;
-    temp->left = temp->right = NULL;
-    return (temp);
-}
-void serialize(Node* root, FILE* fp)
-{
-    if (root == NULL) {
-        fprintf(fp, "%d ", -1);
-        return;
+vector<int>preorderTraversal(node *root){
+    vector<int> preorder;
+    node * cur=root;
+    while(cur!=NULL){
+        if(cur->left==NULL){
+            preorder.push_back(cur->data);
+            cur=cur->right;
+        }
+        else{
+            node *prev=cur->left;
+            while(prev->right !=NULL && prev->right !=cur){
+                prev=prev->right;
+            }
+            if(prev->right==NULL){
+                prev->right=cur;
+                preorder.push_back(cur->data);
+                cur=cur->left;
+            }
+            else{
+                prev->right=NULL;
+                cur=cur->right;
+            }
+        }
     }
-
-    fprintf(fp, "%d ", root->key);
-    serialize(root->left, fp);
-    serialize(root->right, fp);
-}
- 
-void deSerialize(Node*& root, FILE* fp)
-{
- 
-    int val;
-    if (!fscanf(fp, "%d ", &val) || val == -1)
-        return;
- 
-    root = newNode(val);
-    deSerialize(root->left, fp);
-    deSerialize(root->right, fp);
+    return preorder;
 }
 
-void inorder(Node* root)
-{
-    if (root) {
-        inorder(root->left);
-        printf("%d ", root->key);
-        inorder(root->right);
-    }
+struct node *newNode(int data){
+    struct node *node=(struct node*)malloc(sizeof(struct node));
+    node->data=data;
+    node->left=NULL;
+    node->right=NULL;
+    return node;
 }
-
-
-
 
 
 int main(){
@@ -554,31 +592,49 @@ int main(){
 //   vector<int> inorder{40,20,50,10,60,30};
 //   node * root = buildTree(postorder, inorder);
 
+
+
 // Serialize And Deserialize a Binary Tree
-struct Node* root = newNode(20);
-    root->left = newNode(8);
-    root->right = newNode(22);
-    root->left->left = newNode(4);
-    root->left->right = newNode(12);
-    root->left->right->left = newNode(10);
-    root->left->right->right = newNode(14);
+// struct Node* root = newNode(20);
+//     root->left = newNode(8);
+//     root->right = newNode(22);
+//     root->left->left = newNode(4);
+//     root->left->right = newNode(12);
+//     root->left->right->left = newNode(10);
+//     root->left->right->right = newNode(14);
 
-    FILE* fp = fopen("tree.txt", "w");
-    if (fp == NULL) {
-        puts("Could not open file");
-        return 0;
-    }
-    serialize(root, fp);
-    fclose(fp);
+//     FILE* fp = fopen("tree.txt", "w");
+//     if (fp == NULL) {
+//         puts("Could not open file");
+//         return 0;
+//     }
+//     serialize(root, fp);
+//     fclose(fp);
  
-    Node* root1 = NULL;
-    fp = fopen("tree.txt", "r");
-    deSerialize(root1, fp);
+//     Node* root1 = NULL;
+//     fp = fopen("tree.txt", "r");
+//     deSerialize(root1, fp);
  
-    printf("Inorder Traversal of the tree constructed from "
-           "file:\n");
-    inorder(root1);
+//     printf("Inorder Traversal of the tree constructed from "
+//            "file:\n");
+//     inorder(root1);
 
+
+// Morris Preorder Traversal of a Binary Tree
+  struct node * root = newNode(1);
+  root -> left = newNode(2);
+  root -> right = newNode(3);
+  root -> left -> left = newNode(4);
+  root -> left -> right = newNode(5);
+  root -> left -> right -> right = newNode(6);
+
+vector<int> preorder;
+preorder=preorderTraversal(root);
+cout<<"The Preorder Traversal is : ";
+for(int i=0;i<preorder.size();i++){
+    cout<<preorder[i]<<" ";
+
+}
     return 0;
 }
 

@@ -1,2 +1,1 @@
-Inorder Traversal of the tree constructed from file:
-4 8 10 12 14 20 22 
+The Preorder Traversal is : 1 2 4 5 6 3 
