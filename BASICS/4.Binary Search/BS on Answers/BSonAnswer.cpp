@@ -283,6 +283,7 @@ int findPages(vector<int>& arr, int n, int m) {
 
 
 // Split array - Largest Sum
+
 // int isPossible(vector<int> &arr,int number){
 //        int count=0,tempsum=0,n=arr.size();
 //        for(int i=0;i<n;i++){
@@ -357,36 +358,79 @@ int findPages(vector<int>& arr, int n, int m) {
 
 
 
-int countPainters(vector<int> &boards,int time){
-    int n=boards.size();
-    int painters=1;
-    long long boardsPainter=0;
-    for(int i=0;i<n;i++){
-    if(boardsPainter+boards[i]<=time){
-        boardsPainter+=boards[i];
+// int countPainters(vector<int> &boards,int time){
+//     int n=boards.size();
+//     int painters=1;
+//     long long boardsPainter=0;
+//     for(int i=0;i<n;i++){
+//     if(boardsPainter+boards[i]<=time){
+//         boardsPainter+=boards[i];
+//     }
+//     else{
+//         painters++;
+//         boardsPainter=boards[i];
+//     }
+//     }
+//     return painters;
+// }
+// int largestMiniDistance(vector<int> &boards,int k){
+//     int low=*max_element(boards.begin(),boards.end());
+//     int high=accumulate(boards.begin(),boards.end(),0);
+//     while(low<= high){
+//         int mid=(low+high)/2;
+//         int partitions=countPainters(boards,mid);
+//         if(partitions>k){
+//             low=mid+1;
+//         }
+//         else{
+//             high=mid-1;
+//         }
+//     }
+//    return low;
+// }
+
+
+// Minimise Maximum Distance between Gas Stations
+
+int numberofgasStation(long double dist, vector<int> & arr){
+    int n=arr.size();
+    int cnt=0;
+    for(int i=1;i<n;i++){
+        int numberInBetween=((arr[i]-arr[i-1])/dist);
+        if((arr[i]-arr[i-1])==(dist*numberInBetween)){
+            numberInBetween--;
+
+        }
+        cnt+=numberInBetween;
     }
-    else{
-        painters++;
-        boardsPainter=boards[i];
-    }
-    }
-    return painters;
+    return cnt;
 }
-int largestMiniDistance(vector<int> &boards,int k){
-    int low=*max_element(boards.begin(),boards.end());
-    int high=accumulate(boards.begin(),boards.end(),0);
-    while(low<= high){
-        int mid=(low+high)/2;
-        int partitions=countPainters(boards,mid);
-        if(partitions>k){
-            low=mid+1;
+long double minimiseMaxDistance(vector<int>& arr,int k){
+    int n=arr.size();
+    long double low=0;
+    long double high=0;
+    for(int i=0;i<n-1;i++){
+        high =max(high,(long double)(arr[i+1]-arr[i]));
+    }
+    long double diff=1e-6;
+    while (high-low>diff){
+        long double mid=(low+high)/(2.0);
+        int cnt=numberofgasStation(mid,arr);
+        if(cnt>k){
+            low=mid;
         }
         else{
-            high=mid-1;
+            high=mid;
         }
     }
-   return low;
+    return high;
+    
+
 }
+
+
+
+
 
 // Median of Two Sorted Arrays of different sizes
 //  float findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -423,62 +467,62 @@ int largestMiniDistance(vector<int> &boards,int k){
 
 // Painter’s Partition Problem
     
-float median(int nums1[],int nums2[],int m,int n) {
-    if(m>n)
-        return median(nums2,nums1,n,m);
-    int low=0,high=m,medianPos=((m+n)+1)/2;
-    while(low<=high) {
-        int cut1 = (low+high)>>1;
-        int cut2 = medianPos - cut1;
+// float median(int nums1[],int nums2[],int m,int n) {
+//     if(m>n)
+//         return median(nums2,nums1,n,m);
+//     int low=0,high=m,medianPos=((m+n)+1)/2;
+//     while(low<=high) {
+//         int cut1 = (low+high)>>1;
+//         int cut2 = medianPos - cut1;
         
-        int l1 = (cut1 == 0)? INT_MIN:nums1[cut1-1];
-        int l2 = (cut2 == 0)? INT_MIN:nums2[cut2-1];
-        int r1 = (cut1 == m)? INT_MAX:nums1[cut1];
-        int r2 = (cut2 == n)? INT_MAX:nums2[cut2];
+//         int l1 = (cut1 == 0)? INT_MIN:nums1[cut1-1];
+//         int l2 = (cut2 == 0)? INT_MIN:nums2[cut2-1];
+//         int r1 = (cut1 == m)? INT_MAX:nums1[cut1];
+//         int r2 = (cut2 == n)? INT_MAX:nums2[cut2];
         
-        if(l1<=r2 && l2<=r1) {
-            if((m+n)%2 != 0)
-                return max(l1,l2);
-            else 
-                return (max(l1,l2)+min(r1,r2))/2.0;
-        }
-        else if(l1>r2) high = cut1-1;
-        else low = cut1+1;
-    }
-    return 0.0;
+//         if(l1<=r2 && l2<=r1) {
+//             if((m+n)%2 != 0)
+//                 return max(l1,l2);
+//             else 
+//                 return (max(l1,l2)+min(r1,r2))/2.0;
+//         }
+//         else if(l1>r2) high = cut1-1;
+//         else low = cut1+1;
+//     }
+//     return 0.0;
     
-    }
+//     }
 
 
-// K-th Element of two sorted arrays
-    int kthElement(int arr1[], int arr2[], int n, int m, int k)
-    {
-        if(n>m ){
-            return kthElement(arr1,arr2,n,m,k);
+// // K-th Element of two sorted arrays
+//     int kthElement(int arr1[], int arr2[], int n, int m, int k)
+//     {
+//         if(n>m ){
+//             return kthElement(arr1,arr2,n,m,k);
             
-        }
-        int low=max(0,k-m),high=min(k,n);
-        while(low<=high){
-            int cut1=(low+high)>>1;
-            int cut2=k-cut1;
-            int l1=cut1==0 ? INT_MIN:arr1[cut1-1]; 
-            int l2=cut2==0 ? INT_MIN:arr2[cut2-1]; 
-            int r1=cut1==n ? INT_MAX:arr1[cut1]; 
-            int r2=cut2==m ? INT_MAX:arr2[cut2]; 
-            if(l1<=r2 && l2<=r1){
-                return max(l1,l2);
-            }
-            else if(l1>l2){
-                high=cut1-1;
-            }
-            else{
-                low=cut1+1;
-            }
-        }
+//         }
+//         int low=max(0,k-m),high=min(k,n);
+//         while(low<=high){
+//             int cut1=(low+high)>>1;
+//             int cut2=k-cut1;
+//             int l1=cut1==0 ? INT_MIN:arr1[cut1-1]; 
+//             int l2=cut2==0 ? INT_MIN:arr2[cut2-1]; 
+//             int r1=cut1==n ? INT_MAX:arr1[cut1]; 
+//             int r2=cut2==m ? INT_MAX:arr2[cut2]; 
+//             if(l1<=r2 && l2<=r1){
+//                 return max(l1,l2);
+//             }
+//             else if(l1>l2){
+//                 high=cut1-1;
+//             }
+//             else{
+//                 low=cut1+1;
+//             }
+//         }
         
     
-    return 1;
-    }
+//     return 1;
+//     }
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -595,10 +639,17 @@ int main(){
 
 // Painter’s Partition Problem
 
-vector<int> boards={10,20,30,40};
-int k=2;
-int ans=largestMiniDistance(boards,k);
-cout<<" The answer is : "<<ans<<"\n";
+// vector<int> boards={10,20,30,40};
+// int k=2;
+// int ans=largestMiniDistance(boards,k);
+// cout<<" The answer is : "<<ans<<"\n";
+
+
+// Minimise Maximum Distance between Gas Stations
+vector<int> arr={1,13,17,23};
+int k=5;
+long double ans=minimiseMaxDistance(arr,k);
+cout<<"The answer is : "<<ans <<"\n";
 
 
 
