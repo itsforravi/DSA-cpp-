@@ -283,45 +283,76 @@ int findPages(vector<int>& arr, int n, int m) {
 
 
 // Split array - Largest Sum
-int isPossible(vector<int> &arr,int number){
-       int count=0,tempsum=0,n=arr.size();
-       for(int i=0;i<n;i++){
-           if(arr[i]+tempsum<=number){
-               tempsum+=arr[i];
+// int isPossible(vector<int> &arr,int number){
+//        int count=0,tempsum=0,n=arr.size();
+//        for(int i=0;i<n;i++){
+//            if(arr[i]+tempsum<=number){
+//                tempsum+=arr[i];
 
-           }
-           else{
-               count ++;
-               tempsum=arr[i];
+//            }
+//            else{
+//                count ++;
+//                tempsum=arr[i];
 
-           }
-       }
-       count++;
-       return count;
-   }
+//            }
+//        }
+//        count++;
+//        return count;
+//    }
    
   
-int splitArray(vector<int>& nums, int k) {
-        int n=nums.size();
-        int low=0,high=n-1;
-        int asw=0;
-        for(int i=0;i<n;i++){
-            low=max(low,nums[i]);
-            high+=nums[i];}
-            while(low<=high){
+// int splitArray(vector<int>& nums, int k) {
+//         int n=nums.size();
+//         int low=0,high=n-1;
+//         int asw=0;
+//         for(int i=0;i<n;i++){
+//             low=max(low,nums[i]);
+//             high+=nums[i];}
+//             while(low<=high){
            
-            int mid=(low+high)/2;
-            int count=isPossible(nums,mid);
-            if(count<=k){
-                 asw=mid;
-                high=mid-1;
-            }
-            else{
-                low=mid+1;
-            }
-        }
-        return asw;
+//             int mid=(low+high)/2;
+//             int count=isPossible(nums,mid);
+//             if(count<=k){
+//                  asw=mid;
+//                 high=mid-1;
+//             }
+//             else{
+//                 low=mid+1;
+//             }
+//         }
+//         return asw;
+//     }
+
+int countPartition(vector<int> &a,int maxSum){
+    int n=a.size();
+    int partitions=1;
+    long long subarraySum=0;
+    for(int i=0;i<n;i++){
+    if(subarraySum+a[i]<=maxSum){
+        subarraySum+=a[i];
     }
+    else{
+        partitions++;
+        subarraySum=a[i];
+    }
+    }
+    return partitions;
+}
+int largestSubarraySumMinimized(vector<int> &a,int k){
+    int low=*max_element(a.begin(),a.end());
+    int high=accumulate(a.begin(),a.end(),0);
+    while(low<= high){
+        int mid=(low+high)/2;
+        int partitions=countPartition(a,mid);
+        if(partitions>k){
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+   return low;
+}
 
 // Median of Two Sorted Arrays of different sizes
 //  float findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -518,6 +549,14 @@ int main(){
 // vector<int> arr1 = {1,4,7,10,12};
 // vector<int> arr2= {2,3,6,15};
 
+vector<int >a={10,20,30,40};
+int k=2;
+int ans=largestSubarraySumMinimized(a,k);
+cout<<" The answer is : "<< ans<<"\n";
+
+
+
+
 // cout<<"Median of array: "<<findMedianSortedArrays(arr1,arr2)<<" ";
 
 
@@ -532,14 +571,14 @@ int main(){
 
 // K-th Element of two sorted arrays
 
-int nums1[] = {1,4,7,10,12};
-    int nums2[] = {2,3,6,15};
-    int n = sizeof(nums1)/sizeof(nums1[0]);
-    int m = sizeof(nums2)/sizeof(nums2[0]);
-    int k;
-    cin>>k;
-    int ans=kthElement(nums1,nums2,m,n,k);
-    cout<<"K-th Element of two sorted arrays : "<<ans<<" ";
+// int nums1[] = {1,4,7,10,12};
+//     int nums2[] = {2,3,6,15};
+//     int n = sizeof(nums1)/sizeof(nums1[0]);
+//     int m = sizeof(nums2)/sizeof(nums2[0]);
+//     int k;
+//     cin>>k;
+//     int ans=kthElement(nums1,nums2,m,n,k);
+//     cout<<"K-th Element of two sorted arrays : "<<ans<<" ";
 
 
 
