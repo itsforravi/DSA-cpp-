@@ -323,27 +323,61 @@ int findPages(vector<int>& arr, int n, int m) {
 //         return asw;
 //     }
 
-int countPartition(vector<int> &a,int maxSum){
-    int n=a.size();
-    int partitions=1;
-    long long subarraySum=0;
+// int countPartition(vector<int> &a,int maxSum){
+//     int n=a.size();
+//     int partitions=1;
+//     long long subarraySum=0;
+//     for(int i=0;i<n;i++){
+//     if(subarraySum+a[i]<=maxSum){
+//         subarraySum+=a[i];
+//     }
+//     else{
+//         partitions++;
+//         subarraySum=a[i];
+//     }
+//     }
+//     return partitions;
+// }
+// int largestSubarraySumMinimized(vector<int> &a,int k){
+//     int low=*max_element(a.begin(),a.end());
+//     int high=accumulate(a.begin(),a.end(),0);
+//     while(low<= high){
+//         int mid=(low+high)/2;
+//         int partitions=countPartition(a,mid);
+//         if(partitions>k){
+//             low=mid+1;
+//         }
+//         else{
+//             high=mid-1;
+//         }
+//     }
+//    return low;
+// }
+
+
+
+
+int countPainters(vector<int> &boards,int time){
+    int n=boards.size();
+    int painters=1;
+    long long boardsPainter=0;
     for(int i=0;i<n;i++){
-    if(subarraySum+a[i]<=maxSum){
-        subarraySum+=a[i];
+    if(boardsPainter+boards[i]<=time){
+        boardsPainter+=boards[i];
     }
     else{
-        partitions++;
-        subarraySum=a[i];
+        painters++;
+        boardsPainter=boards[i];
     }
     }
-    return partitions;
+    return painters;
 }
-int largestSubarraySumMinimized(vector<int> &a,int k){
-    int low=*max_element(a.begin(),a.end());
-    int high=accumulate(a.begin(),a.end(),0);
+int largestMiniDistance(vector<int> &boards,int k){
+    int low=*max_element(boards.begin(),boards.end());
+    int high=accumulate(boards.begin(),boards.end(),0);
     while(low<= high){
         int mid=(low+high)/2;
-        int partitions=countPartition(a,mid);
+        int partitions=countPainters(boards,mid);
         if(partitions>k){
             low=mid+1;
         }
@@ -387,6 +421,7 @@ int largestSubarraySumMinimized(vector<int> &a,int k){
 //     }
     
 
+// Painter’s Partition Problem
     
 float median(int nums1[],int nums2[],int m,int n) {
     if(m>n)
@@ -549,11 +584,21 @@ int main(){
 // vector<int> arr1 = {1,4,7,10,12};
 // vector<int> arr2= {2,3,6,15};
 
-vector<int >a={10,20,30,40};
-int k=2;
-int ans=largestSubarraySumMinimized(a,k);
-cout<<" The answer is : "<< ans<<"\n";
 
+
+
+// vector<int >a={10,20,30,40};
+// int k=2;
+// int ans=largestSubarraySumMinimized(a,k);
+// cout<<" The answer is : "<< ans<<"\n";
+
+
+// Painter’s Partition Problem
+
+vector<int> boards={10,20,30,40};
+int k=2;
+int ans=largestMiniDistance(boards,k);
+cout<<" The answer is : "<<ans<<"\n";
 
 
 
