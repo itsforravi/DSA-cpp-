@@ -17,7 +17,7 @@ class node {
 };
 int findceil(node *root , int key)
 {
-  int ceil =0;
+  int ceil =-1;
   while(root){
     if(root->data==key){
         ceil=root->data;
