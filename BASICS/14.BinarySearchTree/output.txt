@@ -1,2 +1,2 @@
 Maximum element is 11
-Maximum element is 9
+Minimum element is 9
