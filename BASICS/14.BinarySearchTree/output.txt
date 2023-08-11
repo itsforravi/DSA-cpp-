@@ -1,2 +1,1 @@
-Maximum element is 11
-Minimum element is 9
+ Ceil value of tree : 1
