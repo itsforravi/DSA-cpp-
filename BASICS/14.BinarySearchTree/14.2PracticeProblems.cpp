@@ -115,33 +115,33 @@ class Node {
 //     }
 // }
 
-void insert(Node*& root, int key)
-{
-    Node* node = new Node(key);
-    if (!root) {
-        root = node;
-        return;
-    }
-    Node* prev = NULL;
-    Node* temp = root;
-    while (temp) {
-        if (temp->val > key) {
-            prev = temp;
-            temp = temp->left;
-        }
-        else if (temp->val < key) {
-            prev = temp;
-            temp = temp->right;
-        }
-    }
-    if (prev->val > key)
-        prev->left = node;
-    else
-        prev->right = node;
-}
+// void insert(Node*& root, int key)
+// {
+//     Node* node = new Node(key);
+//     if (!root) {
+//         root = node;
+//         return;
+//     }
+//     Node* prev = NULL;
+//     Node* temp = root;
+//     while (temp) {
+//         if (temp->val > key) {
+//             prev = temp;
+//             temp = temp->left;
+//         }
+//         else if (temp->val < key) {
+//             prev = temp;
+//             temp = temp->right;
+//         }
+//     }
+//     if (prev->val > key)
+//         prev->left = node;
+//     else
+//         prev->right = node;
+// }
  
-void inorder(Node* root)
-{
+// void inorder(Node* root)
+// {
     // Node* temp = root;
     // stack<Node*> st;
     // while (temp != NULL || !st.empty()) {
@@ -156,7 +156,89 @@ void inorder(Node* root)
     //         temp = temp->right;
     //     }
     // }
-    if (root == NULL)
+
+
+    // Other function calls in insert bst
+//     if (root == NULL)
+//         return;
+//     else {
+//         inorder(root->left);
+//         cout << root->val << " ";
+//         inorder(root->right);
+//     }
+// }
+
+
+
+// Delete a Node in Binary Search Tree
+
+
+class TreeNode {
+    public:
+    int val;
+   TreeNode *left,*right;
+   TreeNode(int val){
+        this->val=val;
+        this->left=NULL;
+        this->right=NULL;
+
+    }
+};
+
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if (root == NULL) {
+            return NULL;
+        }
+        if (root->val == key) {
+            return helper(root);
+        }
+        TreeNode *dummy = root;
+        while (root != NULL) {
+            if (root->val > key) {
+                if (root->left != NULL && root->left->val == key) {
+                    root->left = helper(root->left);
+                    break;
+                } else {
+                    root = root->left;
+                }
+            } else {
+                if (root->right != NULL && root->right->val == key) {
+                    root->right = helper(root->right);
+                    break;
+                } else {
+                    root = root->right;
+                }
+            }
+        }
+        return dummy;
+    }
+    
+    TreeNode* helper(TreeNode* root) {
+            if (root->left == NULL) 
+            {
+                return root->right;
+            } 
+            else if (root->right == NULL)
+            {
+                return root->left;
+            } 
+            TreeNode* rightChild = root->right;
+            TreeNode* lastRight = findLastRight(root->left);
+            lastRight->right = rightChild;
+            return root->left;
+    }
+    TreeNode* findLastRight(TreeNode* root) {
+        if (root->right == NULL) {
+            return root;
+        }
+        return findLastRight(root->right);
+    }
+};
+
+void inorder(Node* root){
+      if (root == NULL)
         return;
     else {
         inorder(root->left);
@@ -164,6 +246,7 @@ void inorder(Node* root)
         inorder(root->right);
     }
 }
+
 
 
 int main(){
@@ -201,17 +284,38 @@ int main(){
 //     cout<<" Ceil value of tree : "<<findfloorInBST(root,10);
 
 // Insert Into A Binary Search Tree
-Node* root = NULL;
+// Node* root = NULL;
 
-     insert(root,50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
- cout<<"Insert data in the BST :->"<<endl;
-    // Print inorder traversal of the BST
-    inorder(root);
+//      insert(root,50);
+//     insert(root, 30);
+//     insert(root, 20);
+//     insert(root, 40);
+//     insert(root, 70);
+//     insert(root, 60);
+//     insert(root, 80);
+//  cout<<"Insert data in the BST :->"<<endl;
+//     // Print inorder traversal of the BST
+//     inorder(root);
+
+
+
+// Delete a Node in Binary Search Tree
+// TreeNode* root = NULL;
+// delete(root,10);
+//      insert(root,50);
+//     insert(root, 30);
+//     insert(root, 20);
+//     insert(root, 40);
+//     insert(root, 70);
+//     insert(root, 60);
+//     insert(root, 80);
+// cout<<"delete the node is -> ";
+
+// inorder(root);
+
+
+
+
+
     return 0;
 }
