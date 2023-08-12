@@ -35,39 +35,128 @@ using namespace std;
 // }
 
 
-	// Floor in a Binary Search Tree
+// Floor in a Binary Search Tree
 
-    class treenode{
-        public:
-        int val;
-        treenode *left,*right;
-     treenode(int val){
+    // class treenode{
+    //     public:
+    //     int val;
+    //     treenode *left,*right;
+    //  treenode(int val){
+    //     this->val=val;
+    //     this->left=NULL;
+    //     this->right=NULL;
+    //  }
+    // };
+    // int findfloorInBST(treenode *root,int key){
+    // int floor=-1;
+    // while(root){
+    //     if(root->val==key){
+    //         floor=root->val;
+    //         return floor;
+    //     }
+    //     if(key>root->val){
+    //         floor=root->val;
+    //         root=root->right;
+    //     }
+    //     else{
+    //         root= root->left;
+    //     }
+    // }
+    // return floor;
+    // }
+
+// Insert Into A Binary Search Tree
+class Node {
+    public:
+    int val;
+    Node *left,*right;
+    Node(int val){
         this->val=val;
         this->left=NULL;
         this->right=NULL;
-     }
-    };
-    int findfloorInBST(treenode *root,int key){
-    int floor=-1;
-    while(root){
-        if(root->val==key){
-            floor=root->val;
-            return floor;
+
+    }
+};
+// class solution{
+//     public:
+
+// node *insert(node * root,int val){
+//      if(root==NULL) return new node(val);
+//      node * cur=root;
+//      while(true){
+//         if(cur->val<=val){
+//             if(cur->right!=NULL ) cur=cur->right;
+        
+//         else{
+//             cur->right=new node(val);
+//             break;
+//         }
+
+//      }
+//      else{
+//         if(cur->left!=NULL) cur=cur->left;
+//         else{
+//             cur->left=new node(val);
+//         }
+//      }}
+// return root;
+// }
+// };
+
+
+// void Inorder(node* root)
+// {
+//     if (root == NULL)
+//         return;
+//     else {
+//         Inorder(root->left);
+//         cout << root->val << " ";
+//         Inorder(root->right);
+//     }
+// }
+
+void insert(Node*& root, int key)
+{
+    Node* node = new Node(key);
+    if (!root) {
+        root = node;
+        return;
+    }
+    Node* prev = NULL;
+    Node* temp = root;
+    while (temp) {
+        if (temp->val > key) {
+            prev = temp;
+            temp = temp->left;
         }
-        if(key>root->val){
-            floor=root->val;
-            root=root->right;
-        }
-        else{
-            root= root->left;
+        else if (temp->val < key) {
+            prev = temp;
+            temp = temp->right;
         }
     }
-    return floor;
+    if (prev->val > key)
+        prev->left = node;
+    else
+        prev->right = node;
+}
+ 
+void inorder(Node* root)
+{
+    Node* temp = root;
+    stack<Node*> st;
+    while (temp != NULL || !st.empty()) {
+        if (temp != NULL) {
+            st.push(temp);
+            temp = temp->left;
+        }
+        else {
+            temp = st.top();
+            st.pop();
+            cout << temp->val << " ";
+            temp = temp->right;
+        }
     }
-
-
-
-
+}
 
 
 int main(){
@@ -93,18 +182,29 @@ int main(){
 
 
 // 	Floor in a Binary Search Tree
-treenode* NewRoot = NULL;
-    treenode* root = new treenode(2);
-    root->left = new treenode(7);
-    root->right = new treenode(5);
-    root->left->right = new treenode(8);
-    root->left->right->left = new treenode(1);
-    root->left->right->right = new treenode(11);
-    root->right->right = new treenode(9);
-    root->right->right->left = new treenode(4);
-    cout<<" Ceil value of tree : "<<findfloorInBST(root,10);
+// treenode* NewRoot = NULL;
+//     treenode* root = new treenode(2);
+//     root->left = new treenode(7);
+//     root->right = new treenode(5);
+//     root->left->right = new treenode(8);
+//     root->left->right->left = new treenode(1);
+//     root->left->right->right = new treenode(11);
+//     root->right->right = new treenode(9);
+//     root->right->right->left = new treenode(4);
+//     cout<<" Ceil value of tree : "<<findfloorInBST(root,10);
 
+// Insert Into A Binary Search Tree
+Node* root = NULL;
 
-
+     insert(root,50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+ cout<<"Insert data in the BST :->"<<endl;
+    // Print inorder traversal of the BST
+    inorder(root);
     return 0;
 }
