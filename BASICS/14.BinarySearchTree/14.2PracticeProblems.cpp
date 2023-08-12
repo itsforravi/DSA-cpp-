@@ -142,19 +142,26 @@ void insert(Node*& root, int key)
  
 void inorder(Node* root)
 {
-    Node* temp = root;
-    stack<Node*> st;
-    while (temp != NULL || !st.empty()) {
-        if (temp != NULL) {
-            st.push(temp);
-            temp = temp->left;
-        }
-        else {
-            temp = st.top();
-            st.pop();
-            cout << temp->val << " ";
-            temp = temp->right;
-        }
+    // Node* temp = root;
+    // stack<Node*> st;
+    // while (temp != NULL || !st.empty()) {
+    //     if (temp != NULL) {
+    //         st.push(temp);
+    //         temp = temp->left;
+    //     }
+    //     else {
+    //         temp = st.top();
+    //         st.pop();
+    //         cout << temp->val << " ";
+    //         temp = temp->right;
+    //     }
+    // }
+    if (root == NULL)
+        return;
+    else {
+        inorder(root->left);
+        cout << root->val << " ";
+        inorder(root->right);
     }
 }
 
