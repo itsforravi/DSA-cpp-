@@ -250,89 +250,140 @@ using namespace std;
 
 // Other solution
 
-struct Node {
-    int key;
-    struct Node *left, *right;
-};
+// struct Node {
+//     int key;
+//     struct Node *left, *right;
+// };
  
-Node* newNode(int item)
-{
-    Node* temp = new Node;
-    temp->key = item;
-    temp->left = temp->right = NULL;
-    return temp;
-}
+// Node* newNode(int item)
+// {
+//     Node* temp = new Node;
+//     temp->key = item;
+//     temp->left = temp->right = NULL;
+//     return temp;
+// }
  
-void inorder(Node* root)
-{
-    if (root != NULL) {
-        inorder(root->left);
-        printf("%d ", root->key);
-        inorder(root->right);
+// void inorder(Node* root)
+// {
+//     if (root != NULL) {
+//         inorder(root->left);
+//         printf("%d ", root->key);
+//         inorder(root->right);
+//     }
+// }
+
+// Node* insert(Node* node, int key)
+// {
+//     if (node == NULL)
+//         return newNode(key);
+ 
+//     if (key < node->key)
+//         node->left = insert(node->left, key);
+//     else
+//         node->right = insert(node->right, key);
+ 
+//     return node;
+// }
+ 
+// Node* deleteNode(Node* root, int k)
+// {
+//     if (root == NULL)
+//         return root;
+ 
+//     if (root->key > k) {
+//         root->left = deleteNode(root->left, k);
+//         return root;
+//     }
+//     else if (root->key < k) {
+//         root->right = deleteNode(root->right, k);
+//         return root;
+//     }
+ 
+   
+//     if (root->left == NULL) {
+//         Node* temp = root->right;
+//         delete root;
+//         return temp;
+//     }
+//     else if (root->right == NULL) {
+//         Node* temp = root->left;
+//         delete root;
+//         return temp;
+//     }
+ 
+//     else {
+ 
+//         Node* succParent = root;
+ 
+//         Node* succ = root->right;
+//         while (succ->left != NULL) {
+//             succParent = succ;
+//             succ = succ->left;
+//         }
+ 
+   
+//         if (succParent != root)
+//             succParent->left = succ->right;
+//         else
+//             succParent->right = succ->right;
+ 
+//         root->key = succ->key;
+ 
+//         delete succ;
+//         return root;
+//     }
+// }
+
+
+//K-th smallest/largest element in the BST
+struct node{
+    int data;
+    node *left,*right;
+    node(int val){
+        data=val;
+        left=NULL;
+        right=NULL;
     }
+};
+
+node* insertBST(node *root,int val){
+    if(root==NULL){
+        return new node(val);
+    }
+    if(val<root->data){
+     root->left=insertBST(root->left,val);
+    }
+    else{
+        root->right=insertBST(root->right,val);
+    }
+    return root;
 }
 
-Node* insert(Node* node, int key)
-{
-    if (node == NULL)
-        return newNode(key);
- 
-    if (key < node->key)
-        node->left = insert(node->left, key);
-    else
-        node->right = insert(node->right, key);
- 
-    return node;
-}
- 
-Node* deleteNode(Node* root, int k)
-{
-    if (root == NULL)
+
+node *kthlargest(node *root,int &k){
+    if (root==NULL){
+        return NULL;}
+        node *right=kthlargest(root->right,k);
+        if(right!=NULL)
+        return right;
+        k--;
+        if(k==0)
         return root;
- 
-    if (root->key > k) {
-        root->left = deleteNode(root->left, k);
+        return kthlargest(root->left,k);
+    }
+
+node *kthsmallest(node *root,int &k){
+    if (root==NULL){
+        return NULL;}
+        node *left=kthlargest(root->left,k);
+        if(left!=NULL)
+        return left;
+        k--;
+        if(k==0)
         return root;
+        return kthsmallest(root->right,k);
     }
-    else if (root->key < k) {
-        root->right = deleteNode(root->right, k);
-        return root;
-    }
- 
-   
-    if (root->left == NULL) {
-        Node* temp = root->right;
-        delete root;
-        return temp;
-    }
-    else if (root->right == NULL) {
-        Node* temp = root->left;
-        delete root;
-        return temp;
-    }
- 
-    else {
- 
-        Node* succParent = root;
- 
-        Node* succ = root->right;
-        while (succ->left != NULL) {
-            succParent = succ;
-            succ = succ->left;
-        }
- 
-   
-        if (succParent != root)
-            succParent->left = succ->right;
-        else
-            succParent->right = succ->right;
- 
-        root->key = succ->key;
- 
-        delete succ;
-        return root;
-    }
-}
+
 
 
 
@@ -400,23 +451,50 @@ int main(){
 
 // inorder(root);
 
- Node* root = NULL;
-    root = insert(root, 50);
-    root = insert(root, 30);
-    root = insert(root, 20);
-    root = insert(root, 40);
-    root = insert(root, 70);
-    root = insert(root, 60);
+//  Node* root = NULL;
+//     root = insert(root, 50);
+//     root = insert(root, 30);
+//     root = insert(root, 20);
+//     root = insert(root, 40);
+//     root = insert(root, 70);
+//     root = insert(root, 60);
  
-    printf("Original BST: ");
-    inorder(root);
+//     printf("Original BST: ");
+//     inorder(root);
    
    
-    root = deleteNode(root,30 );
-     printf("\n\nDelete a Leaf Node:30\n");
-    printf("Modified BST tree after deleting Leaf Node:\n");
-    inorder(root);
- 
+//     root = deleteNode(root,30 );
+//      printf("\n\nDelete a Leaf Node:30\n");
+//     printf("Modified BST tree after deleting Leaf Node:\n");
+//     inorder(root);
+
+// K-th largest/smallast element in the BST
+
+ int arr[]={10,40,45,20,25,30,50},i;
+ int k=3;
+ node * root=NULL;
+ for(i=0;i<7;i++){
+    root=insertBST(root,arr[i]);
+
+ }
+ cout<<"\n";
+ int p=k;
+ node * large=kthlargest(root,k);
+ k=p;
+ node * small=kthsmallest(root,k);
+
+ if(large==NULL){
+    cout<<"Invalid input"<<"\n";
+ }
+ else{
+    cout<<"K-th largest element is "<<large->data<<"\n";
+ }
+ if(small==NULL){
+    cout<<"Invalid input"<<"\n";
+ }
+ else{
+    cout<<"K-th small element is "<<small->data<<"\n";
+ }
 
 
 

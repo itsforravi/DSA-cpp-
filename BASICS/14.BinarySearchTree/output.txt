@@ -1,5 +1,3 @@
-Original BST: 20 30 40 50 60 70 
 
-Delete a Leaf Node:30
-Modified BST tree after deleting Leaf Node:
-20 40 50 60 70 
+K-th largest element is 40
+K-th small element is 25
