@@ -336,53 +336,94 @@ using namespace std;
 
 
 //K-th smallest/largest element in the BST
-struct node{
-    int data;
-    node *left,*right;
-    node(int val){
-        data=val;
-        left=NULL;
-        right=NULL;
-    }
+// struct node{
+//     int data;
+//     node *left,*right;
+//     node(int val){
+//         data=val;
+//         left=NULL;
+//         right=NULL;
+//     }
+// };
+
+// node* insertBST(node *root,int val){
+//     if(root==NULL){
+//         return new node(val);
+//     }
+//     if(val<root->data){
+//      root->left=insertBST(root->left,val);
+//     }
+//     else{
+//         root->right=insertBST(root->right,val);
+//     }
+//     return root;
+// }
+
+
+// node *kthlargest(node *root,int &k){
+//     if (root==NULL){
+//         return NULL;}
+//         node *right=kthlargest(root->right,k);
+//         if(right!=NULL)
+//         return right;
+//         k--;
+//         if(k==0)
+//         return root;
+//         return kthlargest(root->left,k);
+//     }
+
+// node *kthsmallest(node *root,int &k){
+//     if (root==NULL){
+//         return NULL;}
+//         node *left=kthlargest(root->left,k);
+//         if(left!=NULL)
+//         return left;
+//         k--;
+//         if(k==0)
+//         return root;
+//         return kthsmallest(root->right,k);
+//     }
+
+
+// A program to check if a Binary Tree is BST or not
+
+/* A binary tree node has data,
+pointer to left child and
+a pointer to right child */
+class node {
+public:
+	int data;
+	node* left;
+	node* right;
+	node(int data)
+	{
+		this->data = data;
+		this->left = NULL;
+		this->right = NULL;
+	}
 };
 
-node* insertBST(node *root,int val){
-    if(root==NULL){
-        return new node(val);
-    }
-    if(val<root->data){
-     root->left=insertBST(root->left,val);
-    }
-    else{
-        root->right=insertBST(root->right,val);
-    }
-    return root;
+int isBSTUtil(node* node, int min, int max);
+
+
+int isBST(node* node)
+{
+	return (isBSTUtil(node, INT_MIN, INT_MAX));
 }
 
 
-node *kthlargest(node *root,int &k){
-    if (root==NULL){
-        return NULL;}
-        node *right=kthlargest(root->right,k);
-        if(right!=NULL)
-        return right;
-        k--;
-        if(k==0)
-        return root;
-        return kthlargest(root->left,k);
-    }
+int isBSTUtil(node* node, int min, int max)
+{
+	if (node == NULL)
+		return 1;
+	if (node->data < min || node->data > max)
+		return 0;
+	return isBSTUtil(node->left, min, node->data - 1)
+		&& 
+		isBSTUtil(node->right, node->data + 1,
+					max); 
+}
 
-node *kthsmallest(node *root,int &k){
-    if (root==NULL){
-        return NULL;}
-        node *left=kthlargest(root->left,k);
-        if(left!=NULL)
-        return left;
-        k--;
-        if(k==0)
-        return root;
-        return kthsmallest(root->right,k);
-    }
 
 
 
@@ -470,33 +511,46 @@ int main(){
 
 // K-th largest/smallast element in the BST
 
- int arr[]={10,40,45,20,25,30,50},i;
- int k=3;
- node * root=NULL;
- for(i=0;i<7;i++){
-    root=insertBST(root,arr[i]);
+//  int arr[]={10,40,45,20,25,30,50},i;
+//  int k=3;
+//  node * root=NULL;
+//  for(i=0;i<7;i++){
+//     root=insertBST(root,arr[i]);
 
- }
- cout<<"\n";
- int p=k;
- node * large=kthlargest(root,k);
- k=p;
- node * small=kthsmallest(root,k);
+//  }
+//  cout<<"\n";
+//  int p=k;
+//  node * large=kthlargest(root,k);
+//  k=p;
+//  node * small=kthsmallest(root,k);
 
- if(large==NULL){
-    cout<<"Invalid input"<<"\n";
- }
- else{
-    cout<<"K-th largest element is "<<large->data<<"\n";
- }
- if(small==NULL){
-    cout<<"Invalid input"<<"\n";
- }
- else{
-    cout<<"K-th small element is "<<small->data<<"\n";
- }
+//  if(large==NULL){
+//     cout<<"Invalid input"<<"\n";
+//  }
+//  else{
+//     cout<<"K-th largest element is "<<large->data<<"\n";
+//  }
+//  if(small==NULL){
+//     cout<<"Invalid input"<<"\n";
+//  }
+//  else{
+//     cout<<"K-th small element is "<<small->data<<"\n";
+//  }
 
 
+// A program to check if a Binary Tree is BST or not
+
+node* root = new node(4);
+	root->left = new node(2);
+	root->right = new node(5);
+	root->left->left = new node(1);
+	root->left->right = new node(3);
+
+	
+	if (isBST(root))
+		cout << "BST ";
+	else
+		cout << "Not a BST or May be BT";
 
     return 0;
 }

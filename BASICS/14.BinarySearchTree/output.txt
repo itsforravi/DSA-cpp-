@@ -1,3 +1,1 @@
-
-K-th largest element is 40
-K-th small element is 25
+BST 
