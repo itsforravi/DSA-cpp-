@@ -387,42 +387,72 @@ using namespace std;
 
 // A program to check if a Binary Tree is BST or not
 
-/* A binary tree node has data,
-pointer to left child and
-a pointer to right child */
+// class node {
+// public:
+// 	int data;
+// 	node* left;
+// 	node* right;
+// 	node(int data)
+// 	{
+// 		this->data = data;
+// 		this->left = NULL;
+// 		this->right = NULL;
+// 	}
+// };
+
+// int isBSTUtil(node* node, int min, int max);
+
+
+// int isBST(node* node)
+// {
+// 	return (isBSTUtil(node, INT_MIN, INT_MAX));
+// }
+
+
+// int isBSTUtil(node* node, int min, int max)
+// {
+// 	if (node == NULL)
+// 		return 1;
+// 	if (node->data < min || node->data > max)
+// 		return 0;
+// 	return isBSTUtil(node->left, min, node->data - 1)
+// 		&& 
+// 		isBSTUtil(node->right, node->data + 1,
+// 					max); 
+// }
+
+
+//  LCA in Binary Search Tree
+
 class node {
 public:
-	int data;
-	node* left;
-	node* right;
-	node(int data)
-	{
-		this->data = data;
-		this->left = NULL;
-		this->right = NULL;
-	}
+    int data;
+    node *left, *right;
 };
 
-int isBSTUtil(node* node, int min, int max);
-
-
-int isBST(node* node)
+node* lca(node* root, int p, int q)
 {
-	return (isBSTUtil(node, INT_MIN, INT_MAX));
+    if (root == NULL)
+        return NULL;
+ 
+   
+    if (root->data > p && root->data > q)
+        return lca(root->left, p,q);
+ 
+    if (root->data < p && root->data < q)
+        return lca(root->right, p,q);
+ 
+    return root;
 }
-
-
-int isBSTUtil(node* node, int min, int max)
+ 
+node* newNode(int data)
 {
-	if (node == NULL)
-		return 1;
-	if (node->data < min || node->data > max)
-		return 0;
-	return isBSTUtil(node->left, min, node->data - 1)
-		&& 
-		isBSTUtil(node->right, node->data + 1,
-					max); 
+    node* Node = new node();
+    Node->data = data;
+    Node->left = Node->right = NULL;
+    return (Node);
 }
+ 
 
 
 
@@ -540,17 +570,33 @@ int main(){
 
 // A program to check if a Binary Tree is BST or not
 
-node* root = new node(4);
-	root->left = new node(2);
-	root->right = new node(5);
-	root->left->left = new node(1);
-	root->left->right = new node(3);
+// node* root = new node(4);
+// 	root->left = new node(2);
+// 	root->right = new node(5);
+// 	root->left->left = new node(1);
+// 	root->left->right = new node(3);
 
 	
-	if (isBST(root))
-		cout << "BST ";
-	else
-		cout << "Not a BST or May be BT";
+// 	if (isBST(root))
+// 		cout << "BST ";
+// 	else
+// 		cout << "Not a BST or May be BT";
+
+
+//  LCA in Binary Search Tree
+node* root = newNode(20);
+    root->left = newNode(8);
+    root->right = newNode(22);
+    root->left->left = newNode(4);
+    root->left->right = newNode(12);
+    root->left->right->left = newNode(10);
+    root->left->right->right = newNode(14);
+ 
+      // Function calls
+    int p = 10, q = 14;
+    node* t = lca(root,p,q);
+    cout << "LCA of (" << p << "," << q << ") is "
+         << t->data << endl;
 
     return 0;
 }
