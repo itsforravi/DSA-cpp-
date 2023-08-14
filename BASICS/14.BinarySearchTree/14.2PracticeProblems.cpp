@@ -567,57 +567,114 @@ using namespace std;
 
 // Inorder Successor/Predecessor in BST
 
-struct node{
-    int key;
-    struct node *left,*right;
+// struct node{
+//     int key;
+//     struct node *left,*right;
 
+// };
+// void findpresucc(node* root,node* & pre,node * &suc,int key){
+//     if(root==NULL) return ;
+//     if(root->key==key){
+//         if(root->left!=NULL){
+//             node * tmp=root->left;
+//             while(tmp->right)
+//             tmp=tmp->right;
+//             pre=tmp;
+//         }
+//         if(root-> right !=NULL){
+//             node *tmp=root->right;
+//             while (tmp->left)
+//                tmp=tmp->left;
+//                suc=tmp;            
+//         }
+//         return;
+//     }
+//   if(root->key>key){
+//     suc=root;
+//     findpresucc(root->left,pre,suc,key);
+//   }
+//   else{
+//     pre=root;
+//     findpresucc(root->right,pre,suc,key);
+//   }
+// }
+
+
+// node *newnode(int data){
+//     node * temp=new node;
+//     temp->key=data;
+//     temp->left=temp->right=NULL;
+//     return temp;
+// }
+
+// node *insert(node * node ,int key){
+//     if(node==NULL) return newnode(key);
+//     if(key<node->key){
+//         node ->left=insert(node->left,key);
+//     }
+//     else{
+//         node ->right=insert(node->right,key);
+//     }
+//     return node;
+// }
+ 
+
+
+
+// Binary Search Tree Iterator(merge 2 BST)
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
 };
-void findpresucc(node* root,node* & pre,node * &suc,int key){
-    if(root==NULL) return ;
-    if(root->key==key){
-        if(root->left!=NULL){
-            node * tmp=root->left;
-            while(tmp->right)
-            tmp=tmp->right;
-            pre=tmp;
-        }
-        if(root-> right !=NULL){
-            node *tmp=root->right;
-            while (tmp->left)
-               tmp=tmp->left;
-               suc=tmp;            
-        }
-        return;
-    }
-  if(root->key>key){
-    suc=root;
-    findpresucc(root->left,pre,suc,key);
-  }
-  else{
-    pre=root;
-    findpresucc(root->right,pre,suc,key);
-  }
-}
-
-
-node *newnode(int data){
-    node * temp=new node;
-    temp->key=data;
-    temp->left=temp->right=NULL;
-    return temp;
-}
-
-node *insert(node * node ,int key){
-    if(node==NULL) return newnode(key);
-    if(key<node->key){
-        node ->left=insert(node->left,key);
-    }
-    else{
-        node ->right=insert(node->right,key);
-    }
+ 
+Node* newNode(int data)
+{
+    Node* node = new Node;
+    node->data = data;
+    node->left = node->right = NULL;
     return node;
 }
+
+class InorderIterator {
+private:
+    stack<Node*> traversal;
  
+public:
+    InorderIterator(Node* root)
+    {
+        moveLeft(root);
+    }
+ 
+    void moveLeft(Node* current)
+    {
+        while (current) {
+            traversal.push(current);
+            current = current->left;
+        }
+    }
+ 
+    bool hasNext()
+    {
+        return !traversal.empty();
+    }
+ 
+    Node* next()
+    {
+        if (!hasNext())
+            throw "No such element Exists";
+ 
+        Node* current = traversal.top();
+        traversal.pop();
+ 
+        if (current->right)
+            moveLeft(current->right);
+ 
+        return current;
+    }
+};
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -782,26 +839,50 @@ int main(){
 
 
 // Inorder Successor/Predecessor in BST
- int key=55;
-   node *root = NULL;
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
+//  int key=55;
+//    node *root = NULL;
+//     root = insert(root, 50);
+//     insert(root, 30);
+//     insert(root, 20);
+//     insert(root, 40);
+//     insert(root, 70);
+//     insert(root, 60);
+//     insert(root, 80);
 
-    node *pre=NULL,*suc=NULL;
-    findpresucc(root,pre,suc,key);
-    if(pre!=NULL)
-    cout<<"Predecessor is "<<pre->key<<endl;
-    else
-    cout<<"No Predecessor ";
-    if(suc !=NULL)
-    cout<<"Successor is "<<suc->key;
-    else
-    cout<<" No Successor";
- 
+//     node *pre=NULL,*suc=NULL;
+//     findpresucc(root,pre,suc,key);
+//     if(pre!=NULL)
+//     cout<<"Predecessor is "<<pre->key<<endl;
+//     else
+//     cout<<"No Predecessor ";
+//     if(suc !=NULL)
+//     cout<<"Successor is "<<suc->key;
+//     else
+//     cout<<" No Successor";
+
+
+    // Binary Search Tree Iterator(merge 2 BST)
+   Node* root = newNode(8);
+    root->right = newNode(9);
+    root->left = newNode(3);
+    root->left->left = newNode(2);
+    root->left->right = newNode(4);
+    root->left->right->right = newNode(5);
+     cout<<"Binary Search Tree Iterator(merge 2 BST): ";
+    InorderIterator itr(root);
+    try {
+        cout << itr.next()->data << " ";
+        cout << itr.hasNext() << " ";
+        cout << itr.next()->data << " ";
+        cout << itr.next()->data << " ";
+        cout << itr.next()->data << " ";
+        cout << itr.hasNext() << " ";
+        cout << itr.next()->data << " ";
+        cout << itr.next()->data << " ";
+        cout << itr.hasNext() << " ";
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
     return 0;
 }
