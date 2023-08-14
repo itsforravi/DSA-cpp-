@@ -1,3 +1,2 @@
-BST from a preorder traversal 
- & TC->O(n) : 
-1 5 7 10 40 50 
+Predecessor is 50
+Successor is 60
