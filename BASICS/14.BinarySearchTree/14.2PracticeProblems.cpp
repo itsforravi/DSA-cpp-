@@ -456,42 +456,111 @@ using namespace std;
 
 //  Construct a BST from a preorder traversal( Using Recursion)
  
-class Node {
+// class Node {
+// public:
+//     int data;
+//     Node* left;
+//     Node* right;
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->left = this->right = NULL;
+//     }
+// };
+
+// static Node* node;
+// Node* createNode(Node* node, int data)
+// {
+//     if (node == NULL)
+//         node = new Node(data);
+ 
+//     if (node->data > data)
+//         node->left = createNode(node->left, data);
+//     if (node->data < data)
+//         node->right = createNode(node->right, data);
+ 
+//     return node;
+// }
+ 
+
+// void create(int data) { node = createNode(node, data); }
+
+// void inorderRec(Node* root)
+// {
+//     if (root != NULL) {
+//         inorderRec(root->left);
+//         cout << root->data << " ";
+//         inorderRec(root->right);
+//     }
+// }
+
+
+
+
+//  Other Methods (The trick is to set a range {min .. max} for every node. )
+class node {
 public:
     int data;
-    Node* left;
-    Node* right;
-    Node(int data)
-    {
-        this->data = data;
-        this->left = this->right = NULL;
-    }
+    node* left;
+    node* right;
 };
-
-static Node* node;
-Node* createNode(Node* node, int data)
+ 
+node* newNode(int data)
 {
-    if (node == NULL)
-        node = new Node(data);
+    node* temp = new node();
  
-    if (node->data > data)
-        node->left = createNode(node->left, data);
-    if (node->data < data)
-        node->right = createNode(node->right, data);
+    temp->data = data;
+    temp->left = temp->right = NULL;
  
-    return node;
+    return temp;
 }
  
 
-void create(int data) { node = createNode(node, data); }
-
-void inorderRec(Node* root)
+node* constructTreeUtil(int pre[], int* preIndex, int key,
+                        int min, int max, int size)
 {
-    if (root != NULL) {
-        inorderRec(root->left);
-        cout << root->data << " ";
-        inorderRec(root->right);
+    
+    if (*preIndex >= size)
+        return NULL;
+ 
+    node* root = NULL;
+ 
+   
+    if (key > min && key < max) {
+    
+        root = newNode(key);
+        *preIndex = *preIndex + 1;
+ 
+        if (*preIndex < size) {
+            
+            root->left = constructTreeUtil(pre, preIndex,
+                                           pre[*preIndex],
+                                           min, key, size);
+        }
+        if (*preIndex < size) {
+            
+            root->right = constructTreeUtil(pre, preIndex,
+                                            pre[*preIndex],
+                                            key, max, size);
+        }
     }
+ 
+    return root;
+}
+ 
+node* constructTree(int pre[], int size)
+{
+    int preIndex = 0;
+    return constructTreeUtil(pre, &preIndex, pre[0],
+                             INT_MIN, INT_MAX, size);
+}
+void printInorder(node* node)
+{
+    if (node == NULL)
+        return;
+    printInorder(node->left);
+    cout << node->data << " ";
+    printInorder(node->right);
 }
 
 
@@ -639,14 +708,25 @@ int main(){
 
 
 //  Construct a BST from a preorder traversal
- vector<int> nodeData = { 10, 5, 1, 7, 40, 50 };
+//  vector<int> nodeData = { 10, 5, 1, 7, 40, 50 };
  
- cout<<"BST from a preorder traversal "<<endl;
-    for (int i = 0; i < nodeData.size(); i++) {
+//  cout<<"BST from a preorder traversal & TC->O(nlogn)"<<endl;
+//     for (int i = 0; i < nodeData.size(); i++) {
          
-        create(nodeData[i]);
-    }
-    inorderRec(node);
+//         create(nodeData[i]);
+//     }
+//     inorderRec(node);
+
+//  Other Methods (The trick is to set a range {min .. max} for every node. )
+
+ int pre[] = { 10, 5, 1, 7, 40, 50 };
+    int size = sizeof(pre) / sizeof(pre[0]);
+  cout<<"BST from a preorder traversal \n & TC->O(n) : "<<endl;
+
+    node* root = constructTree(pre, size);
+ 
+    printInorder(root);
+ 
 
     return 0;
 }

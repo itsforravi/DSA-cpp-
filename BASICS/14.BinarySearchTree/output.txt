@@ -1,2 +1,3 @@
 BST from a preorder traversal 
+ & TC->O(n) : 
 1 5 7 10 40 50 
