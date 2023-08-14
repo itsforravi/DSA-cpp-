@@ -424,39 +424,78 @@ using namespace std;
 
 //  LCA in Binary Search Tree
 
-class node {
-public:
-    int data;
-    node *left, *right;
-};
+// class node {
+// public:
+//     int data;
+//     node *left, *right;
+// };
 
-node* lca(node* root, int p, int q)
-{
-    if (root == NULL)
-        return NULL;
+// node* lca(node* root, int p, int q)
+// {
+//     if (root == NULL)
+//         return NULL;
  
    
-    if (root->data > p && root->data > q)
-        return lca(root->left, p,q);
+//     if (root->data > p && root->data > q)
+//         return lca(root->left, p,q);
  
-    if (root->data < p && root->data < q)
-        return lca(root->right, p,q);
+//     if (root->data < p && root->data < q)
+//         return lca(root->right, p,q);
  
-    return root;
-}
+//     return root;
+// }
  
-node* newNode(int data)
+// node* newNode(int data)
+// {
+//     node* Node = new node();
+//     Node->data = data;
+//     Node->left = Node->right = NULL;
+//     return (Node);
+// }
+ 
+
+//  Construct a BST from a preorder traversal( Using Recursion)
+ 
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+    Node(int data)
+    {
+        this->data = data;
+        this->left = this->right = NULL;
+    }
+};
+
+static Node* node;
+Node* createNode(Node* node, int data)
 {
-    node* Node = new node();
-    Node->data = data;
-    Node->left = Node->right = NULL;
-    return (Node);
+    if (node == NULL)
+        node = new Node(data);
+ 
+    if (node->data > data)
+        node->left = createNode(node->left, data);
+    if (node->data < data)
+        node->right = createNode(node->right, data);
+ 
+    return node;
 }
  
 
+void create(int data) { node = createNode(node, data); }
+
+void inorderRec(Node* root)
+{
+    if (root != NULL) {
+        inorderRec(root->left);
+        cout << root->data << " ";
+        inorderRec(root->right);
+    }
+}
 
 
-
+ 
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -584,19 +623,30 @@ int main(){
 
 
 //  LCA in Binary Search Tree
-node* root = newNode(20);
-    root->left = newNode(8);
-    root->right = newNode(22);
-    root->left->left = newNode(4);
-    root->left->right = newNode(12);
-    root->left->right->left = newNode(10);
-    root->left->right->right = newNode(14);
+// node* root = newNode(20);
+//     root->left = newNode(8);
+//     root->right = newNode(22);
+//     root->left->left = newNode(4);
+//     root->left->right = newNode(12);
+//     root->left->right->left = newNode(10);
+//     root->left->right->right = newNode(14);
  
-      // Function calls
-    int p = 10, q = 14;
-    node* t = lca(root,p,q);
-    cout << "LCA of (" << p << "," << q << ") is "
-         << t->data << endl;
+ 
+//     int p = 10, q = 14;
+//     node* t = lca(root,p,q);
+//     cout << "LCA of (" << p << "," << q << ") is "
+//          << t->data << endl;
+
+
+//  Construct a BST from a preorder traversal
+ vector<int> nodeData = { 10, 5, 1, 7, 40, 50 };
+ 
+ cout<<"BST from a preorder traversal "<<endl;
+    for (int i = 0; i < nodeData.size(); i++) {
+         
+        create(nodeData[i]);
+    }
+    inorderRec(node);
 
     return 0;
 }

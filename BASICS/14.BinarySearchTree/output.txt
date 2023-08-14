@@ -1,1 +1,2 @@
-LCA of (10,14) is 12
+BST from a preorder traversal 
+1 5 7 10 40 50 
