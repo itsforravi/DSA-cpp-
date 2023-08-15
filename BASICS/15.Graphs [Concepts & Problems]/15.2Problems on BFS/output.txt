@@ -1,2 +1,0 @@
-Size of the largest BST is 1
- 
