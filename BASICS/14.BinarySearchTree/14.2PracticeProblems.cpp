@@ -784,64 +784,107 @@ using namespace std;
 // }
 
 // Recover BST | Correct BST with two nodes swapped
-struct node{
+// struct node{
+//     int data;
+//     struct node *left,*right;
+// };
+// void swap(int *a,int *b ){
+//     int t=*a;
+//     *a=*b;
+//     *b=t;
+// }
+
+// struct node *newNode(int data){
+//     struct node *node=(struct node * )malloc(sizeof(struct node));
+//     node->data=data;
+//     node->left=NULL;
+//     node->right=NULL;
+//     return (node);
+   
+// }
+
+// void correctBSTUtill(struct node *root,struct node **first,struct node **middle,struct node **last,struct node **prev){
+// if(root){
+// correctBSTUtill(root->left,first,middle,last,prev);
+// if(*prev && root->data < (*prev)->data){
+// if(!*first){
+//     *first=*prev;
+//     *middle=root;
+// }
+// else
+// *last=root;
+// }
+// *prev=root;
+// correctBSTUtill(root->right,first,middle,last,prev);
+
+// }
+// }
+// void correctBST(struct node *root){
+//     struct node *first,*middle,*last,*prev;
+//     first=middle=last=prev=NULL;
+//     correctBSTUtill(root,&first,&middle,&last,&prev);
+
+//     if(first&& last)
+//     swap(&(first->data),&(last->data));
+//     else
+//      swap(&(first->data),&(middle->data));
+   
+// }
+
+
+// void printInroder(struct node *node){
+//     if(node==NULL)
+//     return;
+//     printInroder(node->left);
+//     cout<<" "<<node->data;
+//     printInroder(node->right);
+// }
+
+
+// Largest BST in Binary Tree
+struct Node{
     int data;
-    struct node *left,*right;
+    struct Node *left,*right;
 };
-void swap(int *a,int *b ){
-    int t=*a;
-    *a=*b;
-    *b=t;
-}
 
-struct node *newNode(int data){
-    struct node *node=(struct node * )malloc(sizeof(struct node));
+struct Node *newNode(int data){
+    struct Node *node=new Node;
     node->data=data;
-    node->left=NULL;
-    node->right=NULL;
+    node->left=node->right=NULL;
     return (node);
-   
 }
+struct Info{
+    int sz;
+    int max;
+    int min;
+    int ans;
+    bool isBST;
+};
 
-void correctBSTUtill(struct node *root,struct node **first,struct node **middle,struct node **last,struct node **prev){
-if(root){
-correctBSTUtill(root->left,first,middle,last,prev);
-if(*prev && root->data < (*prev)->data){
-if(!*first){
-    *first=*prev;
-    *middle=root;
+Info largeBSTBT( Node *root){
+    if(root==NULL)
+    return {0,INT_MIN,INT_MAX,0,true};
+    if(root->left==NULL && root->right==NULL)
+     return {1,root->data,root->data,1,true};
+
+ Info l=largeBSTBT(root->left);
+ Info r=largeBSTBT(root->right);
+  
+  Info ret;
+  ret.sz=(1+l.sz+r.sz);
+  if(l.isBST && r.isBST && l.max< root->data &&r.min> root->data){
+    ret.min=min(l.min,root->data);
+    ret.max=max(r.max,root->data);
+   ret.ans=l.ans+r.ans+1;
+   ret.isBST=true;
+  }
+  ret.ans=max(l.ans,r.ans);
+  ret.isBST=false;
+  return ret;
+
+
+
 }
-else
-*last=root;
-}
-*prev=root;
-correctBSTUtill(root->right,first,middle,last,prev);
-
-}
-}
-void correctBST(struct node *root){
-    struct node *first,*middle,*last,*prev;
-    first=middle=last=prev=NULL;
-    correctBSTUtill(root,&first,&middle,&last,&prev);
-
-    if(first&& last)
-    swap(&(first->data),&(last->data));
-    else
-     swap(&(first->data),&(middle->data));
-   
-}
-
-
-void printInroder(struct node *node){
-    if(node==NULL)
-    return;
-    printInroder(node->left);
-    cout<<" "<<node->data;
-    printInroder(node->right);
-}
-
-
-
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -1071,18 +1114,29 @@ int main(){
 //         cout << "\nNo such values are found\n";
 
 // Recover BST | Correct BST with two nodes swapped
-struct node *root = newNode(6);
-    root->left        = newNode(10);
-    root->right       = newNode(2);
-    root->left->left  = newNode(1);
+// struct node *root = newNode(6);
+//     root->left        = newNode(10);
+//     root->right       = newNode(2);
+//     root->left->left  = newNode(1);
+//     root->left->right = newNode(3);
+//     root->right->right = newNode(12);
+//     root->right->left = newNode(7);
+//     cout<<"Original BST \n";
+//     printInroder(root);
+//     correctBST(root);
+//     cout<< "\n Inorder travesal of the fixed tree \n";
+//     printInroder(root);   
+
+
+// Largest BST in Binary Tree
+ struct Node* root = newNode(5);
+    root->left = newNode(2);
+    root->right = newNode(4);
+    root->left->left = newNode(1);
     root->left->right = newNode(3);
-    root->right->right = newNode(12);
-    root->right->left = newNode(7);
-    cout<<"Original BST \n";
-    printInroder(root);
-    correctBST(root);
-    cout<< "\n Inorder travesal of the fixed tree \n";
-    printInroder(root);   
+
+    printf("Size of the largest BST is %d\n ",largeBSTBT(root).ans);
+
 
     return 0;
 }

@@ -1,4 +1,2 @@
-Original BST 
- 1 10 3 6 7 2 12
- Inorder travesal of the fixed tree 
- 1 2 3 6 7 10 12
+Size of the largest BST is 1
+ 
