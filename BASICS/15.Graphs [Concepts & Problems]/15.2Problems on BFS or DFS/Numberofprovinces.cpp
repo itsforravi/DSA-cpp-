@@ -108,8 +108,10 @@ int main(){
 // cout<<"The Nuber of Provinces Is -> "<<obj.numProvinces(adj,3);
 
 // Number of connected components in Matrix
-//  Solution obj;
-//     cout <<obj.numIslands();
+ vector<vector<int>> v{ {2,1,1} , {1,1,0} , {0,1,1} } ;
+ Solution obj;
+        int ans = obj.numIslands(v);
+        cout<<"Minimum Number of Minutes Required "<<ans<<endl;
  
 
 
