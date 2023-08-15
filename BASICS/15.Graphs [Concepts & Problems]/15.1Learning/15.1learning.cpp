@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 typedef unsigned long long int ll;
 using namespace std;
+
+// Breadth First Search (BFS): Level Order Traversal
 class Solution{
 public:
 vector<int> BFS(int V,vector<int>adj[]){
@@ -49,7 +51,9 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-vector<int>adj[6];
+
+    // Breadth First Search (BFS): Level Order Traversal
+    vector<int>adj[6];
    addEdge(adj,0,1);
    addEdge(adj,1,2);
    addEdge(adj,1,3);
