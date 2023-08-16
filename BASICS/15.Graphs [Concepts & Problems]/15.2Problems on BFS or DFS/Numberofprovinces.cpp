@@ -91,38 +91,70 @@ using namespace std;
 
 
 // Rotten Oranges : Min time to rot all oranges : BFS
-int orangesRotting(vector<vector<int>> &grid){
-    if(grid.empty()) return 0;
-    int m=grid.size(),n=grid[0].size(),days=0,tot=0,cnt=0;
-    queue<pair<int,int>> rotten;
-    for(int i=0;i<m;i++){
-        for(int j=0;j<n;j++){
-            if(grid[i][j]!=0) tot++;
-            if(grid[i][j]==2) rotten.push({i,j});
+// int orangesRotting(vector<vector<int>> &grid){
+//     if(grid.empty()) return 0;
+//     int m=grid.size(),n=grid[0].size(),days=0,tot=0,cnt=0;
+//     queue<pair<int,int>> rotten;
+//     for(int i=0;i<m;i++){
+//         for(int j=0;j<n;j++){
+//             if(grid[i][j]!=0) tot++;
+//             if(grid[i][j]==2) rotten.push({i,j});
 
-        }
-    }
-    int dx[4]={0,0,1,-1};
-    int dy[4]={1,-1,0,0};
-    while(!rotten.empty()){
-        int k=rotten.size();
-        cnt+=k;
-        while(k--){
-            int x=rotten.front().first,y=rotten.front().second;
-            rotten.pop();
-            for(int i=0;i<4;i++){
-                int nx=x+dx[i],ny=y+dy[i];
-                if(nx<0 || ny<0 || nx>=m|| ny>=n|| grid[nx][ny]!=1) continue;
-                grid[nx][ny]=2;
-                rotten.push({nx,ny});
+//         }
+//     }
+//     int dx[4]={0,0,1,-1};
+//     int dy[4]={1,-1,0,0};
+//     while(!rotten.empty()){
+//         int k=rotten.size();
+//         cnt+=k;
+//         while(k--){
+//             int x=rotten.front().first,y=rotten.front().second;
+//             rotten.pop();
+//             for(int i=0;i<4;i++){
+//                 int nx=x+dx[i],ny=y+dy[i];
+//                 if(nx<0 || ny<0 || nx>=m|| ny>=n|| grid[nx][ny]!=1) continue;
+//                 grid[nx][ny]=2;
+//                 rotten.push({nx,ny});
+//             }
+//         }
+//         if(!rotten.empty()) days++;
+
+//     }
+//     return tot==cnt ? days:-1;
+// }
+
+
+// Flood Fill Algorithm – Graphs
+
+class Solution{
+    private:
+    void dfs(int row,int col,vector<vector<int>> & ans,
+    vector<vector<int>> &image,int newColor,int delRow[],int delCol[],int iniColor){
+        ans[row][col]=newColor;
+        int n=image.size();
+        int m=image[0].size();
+        for(int i=0;i<4;i++){
+            int nrow=row+delRow[i];
+            int ncol=col+delCol[i];
+            if(nrow>=0 && nrow<n && ncol<m && ncol>=0 && image[nrow][ncol]==iniColor&& ans[nrow][ncol]!=newColor){
+                dfs(nrow,ncol,ans,image,newColor,delRow,delCol,iniColor);
             }
         }
-        if(!rotten.empty()) days++;
-
     }
-    return tot==cnt ? days:-1;
-}
+        public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, 
+    int sr, int sc, int newColor) {
+        // get initial color
+        int iniColor = image[sr][sc]; 
+        vector<vector<int>> ans = image; 
+        // delta row and delta column for neighbours
+        int delRow[] = {-1, 0, +1, 0};
+        int delCol[] = {0, +1, 0, -1}; 
+        dfs(sr, sc, ans, image, newColor, delRow, delCol, iniColor); 
+        return ans; 
+    }
 
+};
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -152,10 +184,25 @@ int main(){
 
 // Rotten Oranges : Min time to rot all oranges : BFS
  
-vector<vector<int>> v{{2,1,1},{1,1,0},{0,1,1}};
-int rottening=orangesRotting(v);
-cout<<"Minimum Numbers of Minntes Required : "<<rottening<<endl;
+// vector<vector<int>> v{{2,1,1},{1,1,0},{0,1,1}};
+// int rottening=orangesRotting(v);
+// cout<<"Minimum Numbers of Minntes Required : "<<rottening<<endl;
 
 
+// Flood Fill Algorithm – Graphs
+	vector<vector<int>>image{
+	    {1,1,1},
+	    {1,1,0},
+	    {1,0,1}
+	};
+	
+// sr = 1, sc = 1, newColor = 2  	
+	Solution obj;
+	vector<vector<int>> ans = obj.floodFill(image, 1, 1, 2);
+	for(auto i: ans){
+		for(auto j: i)
+			cout << j << " ";
+		cout << "\n";
+	}
    return 0;
 }

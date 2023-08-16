@@ -1,1 +1,3 @@
-Minimum Numbers of Minntes Required : 4
+2 2 2 
+2 2 0 
+2 0 1 
