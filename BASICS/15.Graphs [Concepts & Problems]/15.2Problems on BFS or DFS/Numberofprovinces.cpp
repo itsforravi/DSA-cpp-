@@ -257,7 +257,13 @@ int main(){
 
 
 // Detect Cycle in an Undirected Graph (using BFS)
-
+  vector<int> adj[4] = {{}, {2}, {1, 3}, {2}};
+    Solution obj;
+    bool ans = obj.isCycle(4, adj);
+    if (ans)
+        cout << "1\n";
+    else
+        cout << "0\n";
 
    return 0;
 }
