@@ -340,56 +340,88 @@ using namespace std;
 
 
 // Number of Enclaves
+// class Solution{
+//     public:
+//     int numberofclaves(vector<vector<int>>&grid){
+//      queue<pair<int,int>>q;
+//      int n=grid.size();
+//      int m=grid[0].size();
+//      int vis[n][m]={0};
+//      for(int i=0;i<n;i++){
+//         for(int j=0;j<m;j++){
+//       if(i==0|| j==0|i==n-1||j==m-1){
+//         if(grid[i][j]==1){
+//             q.push({i,j});
+//             vis[i][j]=1;
+//         }
+//       }
+//         }
+//      }
+
+
+//      int delrow[]={-1,0,+1,0};
+//      int delcol[]={0,+1,0,-1};
+
+//      while (!q.empty())
+//      {
+//         int row=q.front().first;
+//         int col=q.front().second;
+//    q.pop();
+// for(int i=0;i<4;i++){
+//     int nrow=row+delrow[i];
+//     int ncol=col+delcol[i];
+
+//     if(nrow>=0&&nrow<n&&ncol>=0&&ncol<m && vis[nrow][ncol]==0 &&grid[nrow][ncol]==1){
+//         q.push({nrow,ncol});
+//         vis[nrow][ncol]=1;
+//     }
+// }
+
+//      }
+//      int cnt=0;
+//      for(int i=0;i<n;i++){
+//         for(int j=0;j<m;j++){
+//             if(grid[i][j]==1 & vis[i][j]==0)
+//             cnt++;
+//         }
+//      }
+     
+//     return cnt;
+//     }
+// };
+
+
+// Word Ladder – I : G-29
 class Solution{
     public:
-    int numberofclaves(vector<vector<int>>&grid){
-     queue<pair<int,int>>q;
-     int n=grid.size();
-     int m=grid[0].size();
-     int vis[n][m]={0};
-     for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-      if(i==0|| j==0|i==n-1||j==m-1){
-        if(grid[i][j]==1){
-            q.push({i,j});
-            vis[i][j]=1;
+    int wordadderLength(string startWord,string targetWord,vector<string> &wordList){
+        queue<pair<string,int>>q;
+        q.push({startWord,1});
+        unordered_set<string> st(wordList.begin(),wordList.end());
+        st.erase(startWord);
+        while(!q.empty()){
+            string word=q.front().first;
+            int steps=q.front().second;
+            q.pop();
+        if(word==targetWord)
+        return steps;
+        for(int i=0;i<word.size();i++){
+            char original=word[i];
+            for(char ch='a';ch<'z';ch++){
+                word[i]=ch;
+                if(st.find(word)!=st.end()){
+                    st.erase(word);
+                    q.push({word,steps+1});
+                }
+            }
+            word[i]=original;
         }
-      }
+        
         }
-     }
+        return 0;
 
-
-     int delrow[]={-1,0,+1,0};
-     int delcol[]={0,+1,0,-1};
-
-     while (!q.empty())
-     {
-        int row=q.front().first;
-        int col=q.front().second;
-   q.pop();
-for(int i=0;i<4;i++){
-    int nrow=row+delrow[i];
-    int ncol=col+delcol[i];
-
-    if(nrow>=0&&nrow<n&&ncol>=0&&ncol<m && vis[nrow][ncol]==0 &&grid[nrow][ncol]==1){
-        q.push({nrow,ncol});
-        vis[nrow][ncol]=1;
-    }
-}
-
-     }
-     int cnt=0;
-     for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grid[i][j]==1 & vis[i][j]==0)
-            cnt++;
-        }
-     }
-     
-    return cnt;
     }
 };
-
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -499,15 +531,24 @@ int main(){
 
 
 // Number of Enclaves
-vector<vector<int>> grid{
-    {0,0,0,0},
-    {1,0,1,0},
-    {0,1,1,0},
-    {0,0,0,0},
+// vector<vector<int>> grid{
+//     {0,0,0,0},
+//     {1,0,1,0},
+//     {0,1,1,0},
+//     {0,0,0,0},
 
-};
-Solution intt;
-cout<<" Number of enclaves->"<<intt.numberofclaves(grid);
+// };
+// Solution intt;
+// cout<<" Number of enclaves->"<<intt.numberofclaves(grid);
+
+
+// Word Ladder – I : G-29
+vector<string>wordList={"des","der","dfr","dgt","dfs"};
+string startWord="der",targetWord="dfs";
+Solution ob;
+int ans=ob.wordadderLength(startWord,targetWord,wordList);
+cout<<ans;
+cout<<endl;
 
 
    return 0;
