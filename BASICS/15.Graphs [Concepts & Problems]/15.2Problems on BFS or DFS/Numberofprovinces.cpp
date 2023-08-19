@@ -392,36 +392,101 @@ using namespace std;
 
 
 // Word Ladder – I : G-29
-class Solution{
-    public:
-    int wordadderLength(string startWord,string targetWord,vector<string> &wordList){
-        queue<pair<string,int>>q;
-        q.push({startWord,1});
-        unordered_set<string> st(wordList.begin(),wordList.end());
-        st.erase(startWord);
-        while(!q.empty()){
-            string word=q.front().first;
-            int steps=q.front().second;
-            q.pop();
-        if(word==targetWord)
-        return steps;
-        for(int i=0;i<word.size();i++){
-            char original=word[i];
-            for(char ch='a';ch<'z';ch++){
-                word[i]=ch;
-                if(st.find(word)!=st.end()){
-                    st.erase(word);
-                    q.push({word,steps+1});
-                }
-            }
-            word[i]=original;
-        }
+// class Solution{
+//     public:
+//     int wordadderLength(string startWord,string targetWord,vector<string> &wordList){
+//         queue<pair<string,int>>q;
+//         q.push({startWord,1});
+//         unordered_set<string> st(wordList.begin(),wordList.end());
+//         st.erase(startWord);
+//         while(!q.empty()){
+//             string word=q.front().first;
+//             int steps=q.front().second;
+//             q.pop();
+//         if(word==targetWord)
+//         return steps;
+//         for(int i=0;i<word.size();i++){
+//             char original=word[i];
+//             for(char ch='a';ch<'z';ch++){
+//                 word[i]=ch;
+//                 if(st.find(word)!=st.end()){
+//                     st.erase(word);
+//                     q.push({word,steps+1});
+//                 }
+//             }
+//             word[i]=original;
+//         }
         
-        }
-        return 0;
+//         }
+//         return 0;
 
+//     }
+// };
+
+
+//  Word Ladder-II
+class solution{
+ public:
+ vector<vector<string>>findsequence(string beginWord,string endWord,vector<string> & wordList){
+    unordered_set<string> st(wordList.begin(),wordList.end());
+  queue<vector<string>>q;
+  q.push({beginWord});
+  vector<string>usedOnLevel;
+  usedOnLevel.push_back(beginWord);
+  int level=0;
+  vector<vector<string>>ans;
+  while(!q.empty()){
+
+    vector<string>vec=q.front();
+    q.pop();
+
+    if(vec.size()>level){
+        level++;
+        for(auto it:usedOnLevel){
+            st.erase(it);
+        }
     }
+string word=vec.back();
+
+if(word==endWord){
+    if(ans.size()==0){
+        ans.push_back(vec);
+    }
+    else if(ans[0].size()==vec.size()){
+        ans.push_back(vec);
+    }
+}
+for(int i=0;i<word.size();i++){
+    char original=word[i];
+    for(char c='a';c<='z';c++){
+        word[i]=c;
+        if(st.count(word)>0){
+            vec.push_back(word);
+            q.push(vec);
+            usedOnLevel.push_back(word);
+            vec.pop_back();
+        }
+    }
+    word[i]=original;
+}
+
+  }
+
+
+return ans;
+
+ }
+
+
 };
+bool comp(vector<string> a,vector<string>b){
+    string x="",y=" ";
+    for(string i:a)
+    x+=i;
+    for(string i:b)
+    y+=i;
+    return x<y;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -543,13 +608,30 @@ int main(){
 
 
 // Word Ladder – I : G-29
-vector<string>wordList={"des","der","dfr","dgt","dfs"};
-string startWord="der",targetWord="dfs";
-Solution ob;
-int ans=ob.wordadderLength(startWord,targetWord,wordList);
-cout<<ans;
-cout<<endl;
+// vector<string>wordList={"des","der","dfr","dgt","dfs"};
+// string startWord="der",targetWord="dfs";
+// Solution ob;
+// int ans=ob.wordadderLength(startWord,targetWord,wordList);
+// cout<<ans;
+// cout<<endl;
 
+
+//  Word Ladder-II
+ vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
+    string startWord = "der", targetWord = "dfs";
+    solution obj;
+    vector<vector<string>> ans = obj.findsequence(startWord, targetWord, wordList);
+    if(ans.size()==0)
+    cout<<-1<<endl;
+    else{
+        sort(ans.begin(),ans.end(),comp);
+        for(int i=0;i<ans.size();i++){
+            for(int j=0;j<ans[i].size();j++){
+                cout<<ans[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+    }
 
    return 0;
 }
