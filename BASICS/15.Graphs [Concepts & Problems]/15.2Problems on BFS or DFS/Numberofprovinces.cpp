@@ -235,57 +235,111 @@ using namespace std;
 
 
 
-// Distance of Nearest Cell having 1
+// // Distance of Nearest Cell having 1
+// class Solution{
+// public:
+// vector<vector<int>> nearest(vector<vector<int>> &grid){
+//     int n=grid.size();
+//     int m=grid[0].size();
+//     vector<vector<int>> vis(n,vector<int>(m,0));
+//     vector<vector<int>> dis(n,vector<int>(m,0));
+//     queue<pair<pair<int,int>,int>>q;
+//     for(int i=0;i<n;i++){
+//         for(int j=0;j<m;j++){
+//             if(grid[i][j]==1){
+//                 q.push({{i,j},0});
+//                 vis[i][j]=1;
+
+//             }
+//             else{
+//                 vis[i][j]=0;
+//             }
+//         }
+//     }
+//     int delrow[]={-1,0,+1,0};
+//     int delcol[]={0,+1,0,-1};
+
+//     while(!q.empty()){
+//         int row=q.front().first.first;
+//         int col=q.front().first.second;
+//         int steps=q.front().second;
+//         q.pop();
+//         dis[row][col]=steps;
+//  for(int i=0;i<4;i++){
+// int nrow=row+delrow[i];
+// int ncol=col+delrow[i];
+
+// if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0){
+//     vis[nrow][ncol]=1;
+//     q.push({{nrow,ncol},steps+1});
+// }
+//         }
+
+
+//     }
+// return dis;
+// }
+
+
+
+
+// };
+
+// Surrounded Regions | Replace O’s with X’s
 class Solution{
+private:
+void dfs(int row ,int col,vector<vector<int>> &vis,
+vector<vector<char>>&mat,int delrow[],int delcol[]){
+    vis[row][col]=1;
+    int n=mat.size();
+    int m=mat[0].size();
+    for(int i=0;i<4;i++){
+    int nrow=row+delrow[i];
+    int ncol=col+delcol[i];
+    if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && !vis[nrow][ncol]&& mat[nrow][ncol]=='O'){
+        dfs(nrow,ncol,vis,mat,delrow,delcol);
+    }
+    
+    
+    }
+}
+
 public:
-vector<vector<int>> nearest(vector<vector<int>> &grid){
-    int n=grid.size();
-    int m=grid[0].size();
-    vector<vector<int>> vis(n,vector<int>(m,0));
-    vector<vector<int>> dis(n,vector<int>(m,0));
-    queue<pair<pair<int,int>,int>>q;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grid[i][j]==1){
-                q.push({{i,j},0});
-                vis[i][j]=1;
+vector<vector<char>> fill(int n,int m,vector<vector<char>> mat){
+int delrow[]={-1,0,+1,0};
+int delcol[]={0,1,0,-1};
 
-            }
-            else{
-                vis[i][j]=0;
-            }
-        }
+vector<vector<int>> vis(n,vector<int>(m,0));
+for(int j=0;j<m;j++){
+    if(!vis[0][j]&& mat[0][j]=='O'){
+        dfs(0,j,vis,mat,delrow,delcol);
     }
-    int delrow[]={-1,0,+1,0};
-    int delcol[]={0,+1,0,-1};
-
-    while(!q.empty()){
-        int row=q.front().first.first;
-        int col=q.front().first.second;
-        int steps=q.front().second;
-        q.pop();
-        dis[row][col]=steps;
- for(int i=0;i<4;i++){
-int nrow=row+delrow[i];
-int ncol=col+delrow[i];
-
-if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0){
-    vis[nrow][ncol]=1;
-    q.push({{nrow,ncol},steps+1});
+    if(!vis[n-1][j]&& mat[n-1][j]=='O'){
+        dfs(n-1,j,vis,mat,delrow,delcol);
+    }
 }
-        }
-
-
+for(int i=0;i<n;i++){
+    if(!vis[i][0] && mat[i][0]=='O'){
+        dfs(i,0,vis,mat,delrow,delcol);
     }
-return dis;
+    if(!vis[i][m-1] && mat[i][m-1]=='O'){
+        dfs(i,m-1,vis,mat,delrow,delcol);
+    }
 }
 
+for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++){
+        if(!vis[i][j]&& mat[i][j]=='O')
+        mat[i][j]='X';
+    }
+}
+
+return mat;
+}
 
 
 
 };
-
-
 
 
 
@@ -360,22 +414,43 @@ int main(){
 
 
 // Distance of Nearest Cell having 1
-vector<vector<int>> grid{
+// vector<vector<int>> grid{
 
 
-    {0,1,1,0},
-    {1,1,0,0},
-    {0,0,1,1}
-};
-Solution obj;
-vector<vector<int>> ans=obj.nearest(grid);
-for(auto i: ans){
-    for(auto j :i){
-        cout<<j<<" ";
+//     {0,1,1,0},
+//     {1,1,0,0},
+//     {0,0,1,1}
+// };
+// Solution obj;
+// vector<vector<int>> ans=obj.nearest(grid);
+// for(auto i: ans){
+//     for(auto j :i){
+//         cout<<j<<" ";
         
+//     }
+//     cout<<" \n ";
+// }
+
+
+// Surrounded Regions | Replace O’s with X’s
+
+vector<vector<char>> mat{
+    {'X','X','X','X'},
+    {'X','O','X','X'},
+    {'X','O','O','X'},
+    {'X','O','X','X'},
+    {'X','X','O','O'},
+};
+Solution obje;
+vector<vector<char>>  ans=obje.fill(5,4,mat);
+for(int i=0;i<5;i++){
+    for(int j=0;j<4;j++){
+        cout<<ans[i][j]<<" ";
     }
-    cout<<" \n ";
+    cout<<"\n";
 }
+
+
 
    return 0;
 }
