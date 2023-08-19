@@ -286,62 +286,109 @@ using namespace std;
 // };
 
 // Surrounded Regions | Replace O’s with X’s
+// class Solution{
+// private:
+// void dfs(int row ,int col,vector<vector<int>> &vis,
+// vector<vector<char>>&mat,int delrow[],int delcol[]){
+//     vis[row][col]=1;
+//     int n=mat.size();
+//     int m=mat[0].size();
+//     for(int i=0;i<4;i++){
+//     int nrow=row+delrow[i];
+//     int ncol=col+delcol[i];
+//     if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && !vis[nrow][ncol]&& mat[nrow][ncol]=='O'){
+//         dfs(nrow,ncol,vis,mat,delrow,delcol);
+//     }
+    
+    
+//     }
+// }
+
+// public:
+// vector<vector<char>> fill(int n,int m,vector<vector<char>> mat){
+// int delrow[]={-1,0,+1,0};
+// int delcol[]={0,1,0,-1};
+
+// vector<vector<int>> vis(n,vector<int>(m,0));
+// for(int j=0;j<m;j++){
+//     if(!vis[0][j]&& mat[0][j]=='O'){
+//         dfs(0,j,vis,mat,delrow,delcol);
+//     }
+//     if(!vis[n-1][j]&& mat[n-1][j]=='O'){
+//         dfs(n-1,j,vis,mat,delrow,delcol);
+//     }
+// }
+// for(int i=0;i<n;i++){
+//     if(!vis[i][0] && mat[i][0]=='O'){
+//         dfs(i,0,vis,mat,delrow,delcol);
+//     }
+//     if(!vis[i][m-1] && mat[i][m-1]=='O'){
+//         dfs(i,m-1,vis,mat,delrow,delcol);
+//     }
+// }
+
+// for(int i=0;i<n;i++){
+//     for(int j=0;j<m;j++){
+//         if(!vis[i][j]&& mat[i][j]=='O')
+//         mat[i][j]='X';
+//     }
+// }
+
+// return mat;
+// }
+// };
+
+
+// Number of Enclaves
 class Solution{
-private:
-void dfs(int row ,int col,vector<vector<int>> &vis,
-vector<vector<char>>&mat,int delrow[],int delcol[]){
-    vis[row][col]=1;
-    int n=mat.size();
-    int m=mat[0].size();
-    for(int i=0;i<4;i++){
+    public:
+    int numberofclaves(vector<vector<int>>&grid){
+     queue<pair<int,int>>q;
+     int n=grid.size();
+     int m=grid[0].size();
+     int vis[n][m]={0};
+     for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+      if(i==0|| j==0|i==n-1||j==m-1){
+        if(grid[i][j]==1){
+            q.push({i,j});
+            vis[i][j]=1;
+        }
+      }
+        }
+     }
+
+
+     int delrow[]={-1,0,+1,0};
+     int delcol[]={0,+1,0,-1};
+
+     while (!q.empty())
+     {
+        int row=q.front().first;
+        int col=q.front().second;
+   q.pop();
+for(int i=0;i<4;i++){
     int nrow=row+delrow[i];
     int ncol=col+delcol[i];
-    if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && !vis[nrow][ncol]&& mat[nrow][ncol]=='O'){
-        dfs(nrow,ncol,vis,mat,delrow,delcol);
-    }
-    
-    
-    }
-}
 
-public:
-vector<vector<char>> fill(int n,int m,vector<vector<char>> mat){
-int delrow[]={-1,0,+1,0};
-int delcol[]={0,1,0,-1};
-
-vector<vector<int>> vis(n,vector<int>(m,0));
-for(int j=0;j<m;j++){
-    if(!vis[0][j]&& mat[0][j]=='O'){
-        dfs(0,j,vis,mat,delrow,delcol);
-    }
-    if(!vis[n-1][j]&& mat[n-1][j]=='O'){
-        dfs(n-1,j,vis,mat,delrow,delcol);
-    }
-}
-for(int i=0;i<n;i++){
-    if(!vis[i][0] && mat[i][0]=='O'){
-        dfs(i,0,vis,mat,delrow,delcol);
-    }
-    if(!vis[i][m-1] && mat[i][m-1]=='O'){
-        dfs(i,m-1,vis,mat,delrow,delcol);
+    if(nrow>=0&&nrow<n&&ncol>=0&&ncol<m && vis[nrow][ncol]==0 &&grid[nrow][ncol]==1){
+        q.push({nrow,ncol});
+        vis[nrow][ncol]=1;
     }
 }
 
-for(int i=0;i<n;i++){
-    for(int j=0;j<m;j++){
-        if(!vis[i][j]&& mat[i][j]=='O')
-        mat[i][j]='X';
+     }
+     int cnt=0;
+     for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(grid[i][j]==1 & vis[i][j]==0)
+            cnt++;
+        }
+     }
+     
+    return cnt;
     }
-}
-
-return mat;
-}
-
-
-
 };
-
-
 
 
 int main(){
@@ -434,22 +481,33 @@ int main(){
 
 // Surrounded Regions | Replace O’s with X’s
 
-vector<vector<char>> mat{
-    {'X','X','X','X'},
-    {'X','O','X','X'},
-    {'X','O','O','X'},
-    {'X','O','X','X'},
-    {'X','X','O','O'},
-};
-Solution obje;
-vector<vector<char>>  ans=obje.fill(5,4,mat);
-for(int i=0;i<5;i++){
-    for(int j=0;j<4;j++){
-        cout<<ans[i][j]<<" ";
-    }
-    cout<<"\n";
-}
+// vector<vector<char>> mat{
+//     {'X','X','X','X'},
+//     {'X','O','X','X'},
+//     {'X','O','O','X'},
+//     {'X','O','X','X'},
+//     {'X','X','O','O'},
+// };
+// Solution obje;
+// vector<vector<char>>  ans=obje.fill(5,4,mat);
+// for(int i=0;i<5;i++){
+//     for(int j=0;j<4;j++){
+//         cout<<ans[i][j]<<" ";
+//     }
+//     cout<<"\n";
+// }
 
+
+// Number of Enclaves
+vector<vector<int>> grid{
+    {0,0,0,0},
+    {1,0,1,0},
+    {0,1,1,0},
+    {0,0,0,0},
+
+};
+Solution intt;
+cout<<" Number of enclaves->"<<intt.numberofclaves(grid);
 
 
    return 0;
