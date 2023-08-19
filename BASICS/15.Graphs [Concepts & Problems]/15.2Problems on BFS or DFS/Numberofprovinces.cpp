@@ -425,67 +425,105 @@ using namespace std;
 
 
 //  Word Ladder-II
-class solution{
- public:
- vector<vector<string>>findsequence(string beginWord,string endWord,vector<string> & wordList){
-    unordered_set<string> st(wordList.begin(),wordList.end());
-  queue<vector<string>>q;
-  q.push({beginWord});
-  vector<string>usedOnLevel;
-  usedOnLevel.push_back(beginWord);
-  int level=0;
-  vector<vector<string>>ans;
-  while(!q.empty()){
+// class solution{
+//  public:
+//  vector<vector<string>>findsequence(string beginWord,string endWord,vector<string> & wordList){
+//     unordered_set<string> st(wordList.begin(),wordList.end());
+//   queue<vector<string>>q;
+//   q.push({beginWord});
+//   vector<string>usedOnLevel;
+//   usedOnLevel.push_back(beginWord);
+//   int level=0;
+//   vector<vector<string>>ans;
+//   while(!q.empty()){
 
-    vector<string>vec=q.front();
-    q.pop();
+//     vector<string>vec=q.front();
+//     q.pop();
 
-    if(vec.size()>level){
-        level++;
-        for(auto it:usedOnLevel){
-            st.erase(it);
+//     if(vec.size()>level){
+//         level++;
+//         for(auto it:usedOnLevel){
+//             st.erase(it);
+//         }
+//     }
+// string word=vec.back();
+
+// if(word==endWord){
+//     if(ans.size()==0){
+//         ans.push_back(vec);
+//     }
+//     else if(ans[0].size()==vec.size()){
+//         ans.push_back(vec);
+//     }
+// }
+// for(int i=0;i<word.size();i++){
+//     char original=word[i];
+//     for(char c='a';c<='z';c++){
+//         word[i]=c;
+//         if(st.count(word)>0){
+//             vec.push_back(word);
+//             q.push(vec);
+//             usedOnLevel.push_back(word);
+//             vec.pop_back();
+//         }
+//     }
+//     word[i]=original;
+// }
+
+//   }
+
+
+// return ans;
+
+//  }
+
+
+// };
+// bool comp(vector<string> a,vector<string>b){
+//     string x="",y=" ";
+//     for(string i:a)
+//     x+=i;
+//     for(string i:b)
+//     y+=i;
+//     return x<y;
+// }
+
+
+// Bipartite Graph | DFS Implementation
+class Solution{
+    private:
+    bool dfs(int node,int col,int color[],vector<int>adj[]){
+   color[node]=col;
+   for(auto it:adj[node]){
+    if(color[it]==-1){
+        if(dfs(it,!col,color,adj)==false) return false;
+    
+    }
+    else if(color[it]==col){
+        return false;
+    }
+   }
+   return true;
+    }
+
+public:
+bool isBipartite(int v ,vector<int>adj[]){
+    int color[v];
+    for(int i=0;i<v;i++){
+        color[i]=-1;
+    }
+    for(int i=0;i<v;i++){
+        if(color[i]==-1){
+            if(dfs(i,0,color,adj)==false) return false;
         }
     }
-string word=vec.back();
-
-if(word==endWord){
-    if(ans.size()==0){
-        ans.push_back(vec);
-    }
-    else if(ans[0].size()==vec.size()){
-        ans.push_back(vec);
-    }
+    return true;
 }
-for(int i=0;i<word.size();i++){
-    char original=word[i];
-    for(char c='a';c<='z';c++){
-        word[i]=c;
-        if(st.count(word)>0){
-            vec.push_back(word);
-            q.push(vec);
-            usedOnLevel.push_back(word);
-            vec.pop_back();
-        }
-    }
-    word[i]=original;
-}
-
-  }
-
-
-return ans;
-
- }
-
-
 };
-bool comp(vector<string> a,vector<string>b){
-    string x="",y=" ";
-    for(string i:a)
-    x+=i;
-    for(string i:b)
-    y+=i;
-    return x<y;
+
+void addEdge(vector<int> adj[],int u,int v){
+    adj[u].push_back(v);
+    adj[v].push_back(u);
 }
 
 int main(){
@@ -617,21 +655,37 @@ int main(){
 
 
 //  Word Ladder-II
- vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
-    string startWord = "der", targetWord = "dfs";
-    solution obj;
-    vector<vector<string>> ans = obj.findsequence(startWord, targetWord, wordList);
-    if(ans.size()==0)
-    cout<<-1<<endl;
-    else{
-        sort(ans.begin(),ans.end(),comp);
-        for(int i=0;i<ans.size();i++){
-            for(int j=0;j<ans[i].size();j++){
-                cout<<ans[i][j]<<" ";
-            }
-            cout<<endl;
-        }
-    }
+//  vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
+//     string startWord = "der", targetWord = "dfs";
+//     solution obj;
+//     vector<vector<string>> ans = obj.findsequence(startWord, targetWord, wordList);
+//     if(ans.size()==0)
+//     cout<<-1<<endl;
+//     else{
+//         sort(ans.begin(),ans.end(),comp);
+//         for(int i=0;i<ans.size();i++){
+//             for(int j=0;j<ans[i].size();j++){
+//                 cout<<ans[i][j]<<" ";
+//             }
+//             cout<<endl;
+//         }
+//     }
+
+
+// Bipartite Graph | DFS Implementation
+vector<int>adj[4];
+	
+	addEdge(adj, 0, 2);
+   	addEdge(adj, 0, 3);
+	addEdge(adj, 2, 3);
+	addEdge(adj, 3, 1);
+
+	Solution obj;
+	bool ans = obj.isBipartite(4, adj);    
+	if(ans)cout << "1\n";
+	else cout << "0\n";  
+	
+
 
    return 0;
 }
