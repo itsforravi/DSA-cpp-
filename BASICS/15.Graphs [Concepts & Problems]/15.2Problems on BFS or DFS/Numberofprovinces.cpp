@@ -489,42 +489,78 @@ using namespace std;
 // }
 
 
-// Bipartite Graph | DFS Implementation
-class Solution{
-    private:
-    bool dfs(int node,int col,int color[],vector<int>adj[]){
-   color[node]=col;
-   for(auto it:adj[node]){
-    if(color[it]==-1){
-        if(dfs(it,!col,color,adj)==false) return false;
+// // Bipartite Graph | DFS Implementation
+// class Solution{
+//     private:
+//     bool dfs(int node,int col,int color[],vector<int>adj[]){
+//    color[node]=col;
+//    for(auto it:adj[node]){
+//     if(color[it]==-1){
+//         if(dfs(it,!col,color,adj)==false) return false;
     
-    }
-    else if(color[it]==col){
-        return false;
-    }
-   }
-   return true;
-    }
+//     }
+//     else if(color[it]==col){
+//         return false;
+//     }
+//    }
+//    return true;
+//     }
 
-public:
-bool isBipartite(int v ,vector<int>adj[]){
-    int color[v];
-    for(int i=0;i<v;i++){
-        color[i]=-1;
-    }
-    for(int i=0;i<v;i++){
-        if(color[i]==-1){
-            if(dfs(i,0,color,adj)==false) return false;
+// public:
+// bool isBipartite(int v ,vector<int>adj[]){
+//     int color[v];
+//     for(int i=0;i<v;i++){
+//         color[i]=-1;
+//     }
+//     for(int i=0;i<v;i++){
+//         if(color[i]==-1){
+//             if(dfs(i,0,color,adj)==false) return false;
+//         }
+//     }
+//     return true;
+// }
+// };
+
+// void addEdge(vector<int> adj[],int u,int v){
+//     adj[u].push_back(v);
+//     adj[v].push_back(u);
+// }
+
+// Detect cycle in a directed graph (using DFS)
+class solution{
+private:
+bool dfscheak(int node,vector<int> adj[],int vis[],int pathVisit[]){
+    vis[node]=1;
+    pathVisit[node]=1;
+    for(auto it: adj[node]){
+        if(!vis[it]){
+            if(dfscheak(it,adj,vis,pathVisit)==true)
+             return true;
+
+        }
+        else if(pathVisit[it]){
+            return true;
         }
     }
-    return true;
+    pathVisit[node]=0;
+    return false;
 }
+
+public:
+bool isCycle(int V,vector<int>adj[]){
+    int vis[V]={0};
+    int pathVisit[V]={0};
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            if(dfscheak(i,adj,vis,pathVisit)==true) return true;
+        }
+    }
+    return false;
+}
+
+
 };
 
-void addEdge(vector<int> adj[],int u,int v){
-    adj[u].push_back(v);
-    adj[v].push_back(u);
-}
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -673,19 +709,28 @@ int main(){
 
 
 // Bipartite Graph | DFS Implementation
-vector<int>adj[4];
+// vector<int>adj[4];
 	
-	addEdge(adj, 0, 2);
-   	addEdge(adj, 0, 3);
-	addEdge(adj, 2, 3);
-	addEdge(adj, 3, 1);
+// 	addEdge(adj, 0, 2);
+//    	addEdge(adj, 0, 3);
+// 	addEdge(adj, 2, 3);
+// 	addEdge(adj, 3, 1);
 
-	Solution obj;
-	bool ans = obj.isBipartite(4, adj);    
-	if(ans)cout << "1\n";
-	else cout << "0\n";  
+// 	Solution obj;
+// 	bool ans = obj.isBipartite(4, adj);    
+// 	if(ans)cout << "1\n";
+// 	else cout << "0\n";  
 	
+// Detect cycle in a directed graph (using DFS)
+vector<int> adj[11] = {{}, {2}, {3}, {4, 7}, {5}, {6}, {}, {5}, {9}, {10}, {8}};
+	int V = 11;
+	solution obj;
+	bool ans = obj.isCycle(V, adj);
 
+	if (ans)
+		cout << "True\n";
+	else
+		cout << "False\n";
 
    return 0;
 }
