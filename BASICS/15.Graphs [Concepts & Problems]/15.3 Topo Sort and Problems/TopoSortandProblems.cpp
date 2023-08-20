@@ -35,9 +35,42 @@ using namespace std;
 // };
 
 // Kahn’s Algorithm | Topological Sort Algorithm | BFS
+// class Solution{
+//     public:
+//     vector<int>kahan(int V,vector<int> adj[]){
+//         int indegree[V]={0};
+//         for(int i=0;i<V;i++){
+//             for(auto it:adj[i]){
+//                 indegree[it]++;
+//             }
+//         }
+//         queue<int>q;
+//         for(int i=0;i<V;i++){
+//             if(indegree[i]==0){
+//                 q.push(i);
+//             }
+//         }
+//         vector<int> kahan;
+//         while (!q.empty())
+//         {
+//             int node=q.front();
+//             q.pop();
+//             kahan.push_back(node);
+//             for(auto it:adj[node]){
+//                 indegree[it]--;
+//                 if(indegree[it]==0) q.push(it);
+//             }
+//         }
+//         return kahan;
+        
+//     }
+// };
+
+
+// Cycle Detection in Directed Graph using DFS
 class Solution{
     public:
-    vector<int>kahan(int V,vector<int> adj[]){
+    bool isCycle(int V,vector<int> adj[]){
         int indegree[V]={0};
         for(int i=0;i<V;i++){
             for(auto it:adj[i]){
@@ -50,18 +83,19 @@ class Solution{
                 q.push(i);
             }
         }
-        vector<int> kahan;
+        int cnt=0;
         while (!q.empty())
         {
             int node=q.front();
             q.pop();
-            kahan.push_back(node);
+           cnt++;
             for(auto it:adj[node]){
                 indegree[it]--;
                 if(indegree[it]==0) q.push(it);
             }
         }
-        return kahan;
+        if(cnt==V) return false;
+        return  true;
         
     }
 };
@@ -93,13 +127,29 @@ int main(){
 
 
 // Kahn’s Algorithm | Topological Sort Algorithm | BFS
-vector<int> adj[6]={{},{},{3},{1},{0,1},{0,2}};
-int V=6;
+// vector<int> adj[6]={{},{},{3},{1},{0,1},{0,2}};
+// int V=6;
+// Solution obj;
+// vector<int> ans=obj.kahan(V,adj);
+// cout<<"Kahn’s Algorithm is->"<<endl;
+// for(auto it: ans){
+//     cout<<it<<" ";
+// }
+// cout<<endl;
+
+
+
+// Cycle Detection in Directed Graph using DFS
+vector<int> adj[5]={{2},{3},{34,5},{2},{}};
+int V=5;
 Solution obj;
-vector<int> ans=obj.kahan(V,adj);
-cout<<"Kahn’s Algorithm is->"<<endl;
-for(auto it: ans){
-    cout<<it<<" ";
+bool ans=obj.isCycle(V,adj);
+cout<<" Cycle Detection in Directed Graph using DFS->"<<endl;
+if(ans){
+    cout<<"True\n";
+}
+else{
+    cout<<"False\n";
 }
 cout<<endl;
 
