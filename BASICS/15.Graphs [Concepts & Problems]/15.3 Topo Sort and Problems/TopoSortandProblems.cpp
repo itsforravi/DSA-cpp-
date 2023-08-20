@@ -102,6 +102,40 @@ using namespace std;
 
 
 // Course Schedule I and II
+class Solution{
+    public:
+vector<int> findorder(int V,vector<vector<int>> prerequisites){
+    vector<int>adj[V];
+    for(auto it:prerequisites){
+        adj[it[1]].push_back(it[0]);
+    }
+     int indegree[V]={0};
+        for(int i=0;i<V;i++){
+            for(auto it:adj[i]){
+                indegree[it]++;
+            }
+        }
+        queue<int>q;
+        for(int i=0;i<V;i++){
+            if(indegree[i]==0){
+                q.push(i);
+            }
+        }
+        vector<int> kahan;
+        while (!q.empty())
+        {
+            int node=q.front();
+            q.pop();
+            kahan.push_back(node);
+            for(auto it:adj[node]){
+                indegree[it]--;
+                if(indegree[it]==0) q.push(it);
+            }
+        }
+        if(kahan.size()==V) return kahan;
+        return {};
+}
+};
 
 
 
@@ -156,7 +190,26 @@ int main(){
 // cout<<endl;
 
 // Course Schedule I and II
+int N = 4;
+	
 
+	vector<vector<int>> prerequisites(3);
+	prerequisites[0].push_back(0);
+	prerequisites[0].push_back(1);
+
+	prerequisites[1].push_back(1);
+	prerequisites[1].push_back(2);
+
+	prerequisites[2].push_back(2);
+	prerequisites[2].push_back(3);
+
+	Solution obj;
+	vector<int> ans = obj.findorder(N, prerequisites);
+
+	for (auto task : ans) {
+		cout << task << " ";
+	}
+	cout << endl;
 
 
 return 0;
