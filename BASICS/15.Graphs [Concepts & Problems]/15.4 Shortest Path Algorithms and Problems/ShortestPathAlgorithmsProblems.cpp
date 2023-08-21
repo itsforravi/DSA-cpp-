@@ -40,70 +40,113 @@ using namespace std;
 
 
 // Shortest Path in Directed Acyclic Graph Topological Sort
-class Solution{
-    private:
-    void toposort(int node ,vector<pair<int,int>> adj[],int vis[],stack<int> &st)
-{
-    vis[node]=1;
-    for(auto it: adj[node]){
-        int v =it.first;
+// class Solution{
+//     private:
+//     void toposort(int node ,vector<pair<int,int>> adj[],int vis[],stack<int> &st)
+// {
+//     vis[node]=1;
+//     for(auto it: adj[node]){
+//         int v =it.first;
         
-        if(!vis[v]){
-        toposort(v,adj,vis,st);
+//         if(!vis[v]){
+//         toposort(v,adj,vis,st);
+//         }
+//     }
+//     st.push(node);
+// }
+// public:
+// vector<int>shortestPath(int N,int M,vector<vector<int>> & edges){
+//     vector<pair<int,int>> adj[N];
+//     for(int i=0;i<M;i++){
+//         int u=edges[i][0];
+//         int v=edges[i][1];
+//         int wt=edges[i][2];
+//         adj[u].push_back({v,wt});
+
+//     }
+//     int vis[N]={
+//         0
+//     };
+//     stack<int> st;
+//     for(int i=0;i<N;i++){
+//         if(!vis[i]){
+//             toposort(i,adj,vis,st);
+//         }
+//     }
+//     vector<int> dist(N);
+//     for(int i=0;i<N;i++){
+//         dist[i]=1e9;
+//     }
+//     dist[0]=0;
+//     while(!st.empty()){
+
+// int node=st.top();
+// st.pop();
+
+
+// for(auto it:adj[node]){
+//     int v=it.first;
+//     int wt=it.second;
+//     if(dist[node]+wt<dist[v]){
+//         dist[v]=wt+dist[node];
+//     }
+
+
+// }
+
+
+//     }
+
+//     for(int i=0;i<N;i++){
+//         if(dist[i]==1e9) dist[i]=-1;
+//     }
+//     return dist;
+// }
+// };
+
+// Shortest Path in Weighted undirected graph
+class Solution{
+    public:
+    vector<int> shortestPath(int n,int m,vector<vector<int,int>>&edges){
+       vector<pair<int ,int>>adj[n+1];
+        for(auto it: edges){
+            adj[it[0]].push_back({it[1],it[2]});
+            adj[it[1]].push_back({it[0],it[2]});
         }
-    }
-    st.push(node);
-}
-public:
-vector<int>shortestPath(int N,int M,vector<vector<int>> & edges){
-    vector<pair<int,int>> adj[N];
-    for(int i=0;i<M;i++){
-        int u=edges[i][0];
-        int v=edges[i][1];
-        int wt=edges[i][2];
-        adj[u].push_back({v,wt});
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        vector<int>dist(n+1,1e9),parent(n+1);
+        for(int i=1;i<=n;i++) parent[i]=i;
+        dist[1]=0;
+        pq.push({0,1});
+        while(!pq.empty()){
+            auto it=pq.top();
+            int node=it.second;
+            int dis= it.first;
+            pq.pop();
+            for(auto it:adj[node]){
+     int adjNode=it.first;
+     int edm=it.second;
+    
+     if(dis+edm<dist[adjNode]){
+        dist[adjNode]=dis+edm;
+        pq.push({dis+edm,adjNode});
+        parent[adjNode]=node;
+     }
+            }
 
-    }
-    int vis[N]={
-        0
-    };
-    stack<int> st;
-    for(int i=0;i<N;i++){
-        if(!vis[i]){
-            toposort(i,adj,vis,st);
         }
+        if(dist[n]==1e9) return {-1};
+        vector<int> path;
+        int node=n;
+        while(parent[node]!=node){
+            path.push_back(node);
+            node=parent[node];
+        }
+        path.push_back(1);
+        reverse(path.begin(),path.end());
+        return path;
     }
-    vector<int> dist(N);
-    for(int i=0;i<N;i++){
-        dist[i]=1e9;
-    }
-    dist[0]=0;
-    while(!st.empty()){
-
-int node=st.top();
-st.pop();
-
-
-for(auto it:adj[node]){
-    int v=it.first;
-    int wt=it.second;
-    if(dist[node]+wt<dist[v]){
-        dist[v]=wt+dist[node];
-    }
-
-
-}
-
-
-    }
-
-    for(int i=0;i<N;i++){
-        if(dist[i]==1e9) dist[i]=-1;
-    }
-    return dist;
-}
 };
-
 
 
 
@@ -127,8 +170,26 @@ int main(){
 // }
 
 // Shortest Path in Directed Acyclic Graph Topological Sort
+// int N=6,M=7;
+// vector<vector<int>> edges={
+//     {0,1,2},{0,4,1},{4,5,4},{4,2,2},{1,2,3},{2,3,6},{5,3,1}
+//     };
+
+
+
+// Solution obj;
+// vector<int> ans=obj.shortestPath(N,M,edges);
+// cout<<"Shortest Path Between Nodes->"<<endl;
+// for(int i=0;i<ans.size();i++){
+//     cout<<ans[i]<<" ";
+// }
+
+
+// Shortest Path in Weighted undirected graph
 int N=6,M=7;
-vector<vector<int>> edges= {{0,1,2},{0,4,1},{4,5,4},{4,2,2},{1,2,3},{2,3,6},{5,3,1}};
+vector<vector<int>> edges={
+    {0,1,2},{0,4,1},{4,5,4},{4,2,2},{1,2,3},{2,3,6},{5,3,1}
+    };
 
 
 
