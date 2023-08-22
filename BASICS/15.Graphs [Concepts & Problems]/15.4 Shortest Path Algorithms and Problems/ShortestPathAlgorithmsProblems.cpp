@@ -213,46 +213,102 @@ using namespace std;
 // };
 
 
-// Shortest Distance in a Binary Maze
+// // Shortest Distance in a Binary Maze
+// class solution{
+//     public:
+//     int sortestPath(vector<vector<int>> &grid,pair<int,int>source,
+//     pair<int,int>destination){
+// if(source.first==destination.first&& source.second==destination.second) return 0;
+
+// queue<pair<int,pair<int,int>>> q;
+// int n=grid.size();
+// int m=grid[0].size();
+// vector<vector<int>> dist(n,vector<int>(m,1e9));
+// dist[source.first][source.second]=0;
+// q.push({0,{source.first,source.second}});
+
+// int dr[]={-1,0,1,0};
+// int dc[]={0,1,0,-1};
+
+// while(!q.empty()){
+//     auto it=q.front();
+//     q.pop();
+//     int dis=it.first;
+//     int r=it.second.first;
+//     int c=it.second.second;
+//     for(int i=0;i<4;i++){
+//         int newr=r+dr[i];
+//         int newc=c+dc[i];
+//         if(newr>=0 && newr<n && newc>=0 && newc<m 
+//         && grid[newr][newc] ==1 && dis+1<dist[newr][newc]){
+//             dist[newr][newc]=1+dis;
+
+//             if(newr==destination.first &&
+//             newc==destination.second) return dis+1;
+//             q.push({1+dis,{newr,newc}});
+//         }
+//     }
+// }
+
+// return -1;
+
+
+//     }
+// };
+
+
+
+// Path With Minimum Effort
 class solution{
     public:
-    int sortestPath(vector<vector<int>> &grid,pair<int,int>source,
-    pair<int,int>destination){
-if(source.first==destination.first&& source.second==destination.second) return 0;
+    int minimunEffort(vector<vector<int>>& heights){
+      
+        priority_queue<pair<int, pair<int, int>>,
+                       vector<pair<int, pair<int, int>>>,
+                       greater<pair<int, pair<int, int>>>>
+            pq;
 
-queue<pair<int,pair<int,int>>> q;
-int n=grid.size();
-int m=grid[0].size();
-vector<vector<int>> dist(n,vector<int>(m,1e9));
-dist[source.first][source.second]=0;
-q.push({0,{source.first,source.second}});
+        int n = heights.size();
+        int m = heights[0].size();
 
-int dr[]={-1,0,1,0};
-int dc[]={0,1,0,-1};
+        vector<vector<int>> dist(n, vector<int>(m, 1e9));
+        dist[0][0] = 0;
+        pq.push({0, {0, 0}});
 
-while(!q.empty()){
-    auto it=q.front();
-    q.pop();
-    int dis=it.first;
-    int r=it.second.first;
-    int c=it.second.second;
-    for(int i=0;i<4;i++){
-        int newr=r+dr[i];
-        int newc=c+dc[i];
-        if(newr>=0 && newr<n && newc>=0 && newc<m 
-        && grid[newr][newc] ==1 && dis+1<dist[newr][newc]){
-            dist[newr][newc]=1+dis;
+        int dr[] = {-1, 0, 1, 0};
+        int dc[] = {0, 1, 0, -1};
 
-            if(newr==destination.first &&
-            newc==destination.second) return dis+1;
-            q.push({1+dis,{newr,newc}});
+        while (!pq.empty())
+        {
+            auto it = pq.top();
+            pq.pop();
+            int diff = it.first;
+            int row = it.second.first;
+            int col = it.second.second;
+
+         
+            if (row == n - 1 && col == m - 1)
+                return diff;
+           
+            for (int i = 0; i < 4; i++)
+            {
+                int newr = row + dr[i];
+                int newc = col + dc[i];
+
+                if (newr >= 0 && newc >= 0 && newr < n && newc < m)
+                {
+                    
+                    int newEffort = max (abs(heights[row][col] - heights[newr][newc]), diff);
+
+                    if (newEffort < dist[newr][newc])
+                    {
+                        dist[newr][newc] = newEffort;
+                        pq.push({newEffort, {newr, newc}});
+                    }
+                }
+            }
         }
-    }
-}
-
-return -1;
-
-
+        return 0;
     }
 };
 
@@ -355,22 +411,32 @@ int main(){
 
 
 // Shortest Distance in a Binary Maze
-pair<int,int> source,destination;
-source.first=0;
-source.second=1;
-destination.first=2;
-destination.second=2;
-vector<vector<int>> grid={
-    {1,1,1,1},
-    {1,1,0,1},
-    {1,1,1,1},
-    {1,1,0,0},
-    {1,0,0,1},
-};
-solution obj;
-int res=obj.sortestPath(grid,source,destination);
-cout<<res;
-cout<<endl;
+// pair<int,int> source,destination;
+// source.first=0;
+// source.second=1;
+// destination.first=2;
+// destination.second=2;
+// vector<vector<int>> grid={
+//     {1,1,1,1},
+//     {1,1,0,1},
+//     {1,1,1,1},
+//     {1,1,0,0},
+//     {1,0,0,1},
+// };
+// solution obj;
+// int res=obj.sortestPath(grid,source,destination);
+// cout<<res;
+// cout<<endl;
+
+// Path With Minimum Effort
+vector<vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
+
+    solution obj;
+
+    int ans = obj.minimunEffort(heights);
+
+    cout << ans;
+    cout << endl;
     return 0;
 
 }
