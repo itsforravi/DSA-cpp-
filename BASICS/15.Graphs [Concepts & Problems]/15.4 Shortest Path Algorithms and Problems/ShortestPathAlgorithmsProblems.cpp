@@ -175,42 +175,87 @@ using namespace std;
 // };
 
 // Dijkstra’s Algorithm -Using set
-class Solution
-{
-	public:
+// class Solution
+// {
+// 	public:
 	  
-    vector <int> dijkstra1(int V, vector<vector<int>> adj[], int S)
-    {
-        set<pair<int,int>> st; 
+//     vector <int> dijkstra1(int V, vector<vector<int>> adj[], int S)
+//     {
+//         set<pair<int,int>> st; 
 
-        vector<int> dist(V, 1e9); 
+//         vector<int> dist(V, 1e9); 
         
-        st.insert({0, S}); 
-        dist[S] = 0;
+//         st.insert({0, S}); 
+//         dist[S] = 0;
         
-        while(!st.empty()) {
-            auto it = *(st.begin()); 
-            int node = it.second; 
-            int dis = it.first; 
-            st.erase(it); 
+//         while(!st.empty()) {
+//             auto it = *(st.begin()); 
+//             int node = it.second; 
+//             int dis = it.first; 
+//             st.erase(it); 
             
-            for(auto it : adj[node]) {
-                int adjNode = it[0]; 
-                int edgW = it[1]; 
+//             for(auto it : adj[node]) {
+//                 int adjNode = it[0]; 
+//                 int edgW = it[1]; 
                 
-                if(dis + edgW < dist[adjNode]) {
+//                 if(dis + edgW < dist[adjNode]) {
                  
-                    if(dist[adjNode] != 1e9) 
-                        st.erase({dist[adjNode], adjNode}); 
+//                     if(dist[adjNode] != 1e9) 
+//                         st.erase({dist[adjNode], adjNode}); 
                      
-                    dist[adjNode] = dis + edgW; 
-                    st.insert({dist[adjNode], adjNode}); 
-                 }
-            }
+//                     dist[adjNode] = dis + edgW; 
+//                     st.insert({dist[adjNode], adjNode}); 
+//                  }
+//             }
+//         }
+//         return dist; 
+//     }
+// };
+
+
+// Shortest Distance in a Binary Maze
+class solution{
+    public:
+    int sortestPath(vector<vector<int>> &grid,pair<int,int>source,
+    pair<int,int>destination){
+if(source.first==destination.first&& source.second==destination.second) return 0;
+
+queue<pair<int,pair<int,int>>> q;
+int n=grid.size();
+int m=grid[0].size();
+vector<vector<int>> dist(n,vector<int>(m,1e9));
+dist[source.first][source.second]=0;
+q.push({0,{source.first,source.second}});
+
+int dr[]={-1,0,1,0};
+int dc[]={0,1,0,-1};
+
+while(!q.empty()){
+    auto it=q.front();
+    q.pop();
+    int dis=it.first;
+    int r=it.second.first;
+    int c=it.second.second;
+    for(int i=0;i<4;i++){
+        int newr=r+dr[i];
+        int newc=c+dc[i];
+        if(newr>=0 && newr<n && newc>=0 && newc<m 
+        && grid[newr][newc] ==1 && dis+1<dist[newr][newc]){
+            dist[newr][newc]=1+dis;
+
+            if(newr==destination.first &&
+            newc==destination.second) return dis+1;
+            q.push({1+dis,{newr,newc}});
         }
-        return dist; 
+    }
+}
+
+return -1;
+
+
     }
 };
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -287,27 +332,45 @@ int main(){
 
 
 // Dijkstra’s Algorithm -Using set
-   int V = 3, E = 3, S = 2;
-    vector<vector<int>> adj[V];
-    vector<vector<int>> edges;
-    vector<int> v1{1, 1}, v2{2, 6}, v3{2, 3}, v4{0, 1}, v5{1, 3}, v6{0, 6};
-    int i = 0;
-    adj[0].push_back(v1);
-    adj[0].push_back(v2);
-    adj[1].push_back(v3);
-    adj[1].push_back(v4);
-    adj[2].push_back(v5);
-    adj[2].push_back(v6);
+//    int V = 3, E = 3, S = 2;
+//     vector<vector<int>> adj[V];
+//     vector<vector<int>> edges;
+//     vector<int> v1{1, 1}, v2{2, 6}, v3{2, 3}, v4{0, 1}, v5{1, 3}, v6{0, 6};
+//     int i = 0;
+//     adj[0].push_back(v1);
+//     adj[0].push_back(v2);
+//     adj[1].push_back(v3);
+//     adj[1].push_back(v4);
+//     adj[2].push_back(v5);
+//     adj[2].push_back(v6);
 
-    Solution obj;
-    vector<int> res = obj.dijkstra1(V, adj, S);
+//     Solution obj;
+//     vector<int> res = obj.dijkstra1(V, adj, S);
 
-    for (int i = 0; i < V; i++)
-    {
-        cout << res[i] << " ";
-    }
-    cout << endl;
+//     for (int i = 0; i < V; i++)
+//     {
+//         cout << res[i] << " ";
+//     }
+//     cout << endl;
 
+
+// Shortest Distance in a Binary Maze
+pair<int,int> source,destination;
+source.first=0;
+source.second=1;
+destination.first=2;
+destination.second=2;
+vector<vector<int>> grid={
+    {1,1,1,1},
+    {1,1,0,1},
+    {1,1,1,1},
+    {1,1,0,0},
+    {1,0,0,1},
+};
+solution obj;
+int res=obj.sortestPath(grid,source,destination);
+cout<<res;
+cout<<endl;
     return 0;
 
 }
