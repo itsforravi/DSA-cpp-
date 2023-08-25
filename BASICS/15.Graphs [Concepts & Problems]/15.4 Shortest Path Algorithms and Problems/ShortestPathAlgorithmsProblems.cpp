@@ -429,7 +429,7 @@ int main(){
 // cout<<endl;
 
 // Path With Minimum Effort
-vector<vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
+vector<vector<int>> heights = {{1, 1,1}, {3, 8, 2}, {5, 3, 5}};
 
     solution obj;
 
