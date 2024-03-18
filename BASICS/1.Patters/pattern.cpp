@@ -334,27 +334,27 @@ int main(){
 //     fun(0,arr,n);
 //     for(int i=0;i<n;i++) cout<<arr[i]<<" ";
     // Selection_Sort
-int n;
-cin >> n;
-int arr[n];
-for(int i=0;i<n;i++) cin >>arr[i];
+// int n;
+// cin >> n;
+// int arr[n];
+// for(int i=0;i<n;i++) cin >>arr[i];
 
-Selection_Sort(arr,n);
-for(int i=0;i<n;i++) {
-  cout<< arr[i]<<" ";
-}
+// Selection_Sort(arr,n);
+// for(int i=0;i<n;i++) {
+//   cout<< arr[i]<<" ";
+// }
 
 
 //  int t;
 //  cin>>t;
 //  for(int i=0;i<t;i++){
-    // int n;
-    // cin>>n;
+    int n;
+    cin>>n;
     // pattern1(n);
     // pattern2(n);
     //  pattern3(n);
     //   pattern4(n);
-    //    pattern5(n);
+       pattern5(n);
     //   pattern6(n);
     //   pattern7(n);
     //   pattern8(n);
