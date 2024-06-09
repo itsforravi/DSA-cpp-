@@ -500,7 +500,8 @@ public:
     }
 };
 
-int main()
+
+int main();
 {
 
     // Driver Code.
@@ -519,5 +520,5 @@ int main()
 
 
     return 0;
-}
 
+}
